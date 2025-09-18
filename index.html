@@ -6,15 +6,16 @@
   <title>1211Co.,Ltd.</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-b from-slate-50 to-white text-slate-900 antialiased">
+<body class="bg-gradient-to-b from-slate-100 to-slate-50 text-slate-800 antialiased">
+
   <!-- Header -->
   <header class="max-w-6xl mx-auto px-6 py-8 flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <div class="w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-cyan-600 to-teal-400 shadow-md">
-        <span class="text-white font-bold">宿栖</span>
+      <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-slate-500 to-slate-400 shadow-md">
+        <span class="text-white font-bold text-lg">宿栖</span>
       </div>
       <div>
-        <div class="text-lg font-semibold">1211 Co., Ltd.</div>
+        <div class="text-xl font-semibold tracking-wide">1211 Co., Ltd.</div>
         <div class="text-xs text-slate-500">東京の旅をデザインする</div>
       </div>
     </div>
@@ -24,99 +25,114 @@
   <main class="max-w-6xl mx-auto px-6">
     <section class="grid md:grid-cols-2 gap-12 items-center mt-12">
       <div>
-        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight text-slate-700">
           東京の旅をもっと自由に。<br>
           Discover Tokyo with Ease & Style
         </h1>
-        <p class="mt-4 text-lg text-slate-600 leading-relaxed">
+        <p class="mt-6 text-lg text-slate-600 leading-relaxed">
           地元ガイド、オーダーメイドの旅程、写真で残す思い出。<br>
-          Local guides, bespoke itineraries, and photography-led journeys.  
+          Local guides, bespoke itineraries, and photography-led journeys.<br>
           私たちは、あなたの東京滞在をスムーズで特別な体験にします。
         </p>
-        <div class="mt-6 flex gap-3">
-          <a href="#contact" class="px-5 py-3 rounded-lg bg-gradient-to-r from-cyan-600 to-teal-400 text-white font-medium shadow hover:scale-105 transition">お問い合わせ</a>
-          <a href="#services" class="px-5 py-3 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50">サービスを見る</a>
+        <div class="mt-8 flex gap-4">
+          <a href="#contact" class="px-6 py-3 rounded-lg bg-slate-600 text-white font-medium shadow hover:bg-slate-700 transition">
+            お問い合わせ
+          </a>
+          <a href="#services" class="px-6 py-3 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-100">
+            サービスを見る
+          </a>
         </div>
       </div>
       <div class="flex justify-center">
-        <!-- 简约插图 -->
-        <svg viewBox="0 0 600 400" width="320" height="240" class="drop-shadow-lg">
-          <rect width="600" height="400" rx="20" fill="url(#grad)" />
-          <defs>
-            <linearGradient id="grad" x1="0" x2="1">
-              <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.1"/>
-              <stop offset="100%" stop-color="#0ea5a4" stop-opacity="0.05"/>
-            </linearGradient>
-          </defs>
-          <path d="M60 300 L140 150 L220 300 Z" fill="#e0f2fe" stroke="#bae6fd"/>
-          <rect x="400" y="160" width="20" height="120" fill="#fb7185"/>
-          <circle cx="410" cy="140" r="12" fill="#fef3c7"/>
+        <!-- 具象东京插图 -->
+        <svg viewBox="0 0 500 400" width="320" height="240" class="drop-shadow-lg">
+          <!-- 背景 -->
+          <rect width="500" height="400" rx="20" fill="#f3f4f6" />
+          <!-- 东京塔 -->
+          <rect x="240" y="150" width="20" height="180" fill="#9ca3af"/>
+          <polygon points="250,80 230,150 270,150" fill="#d97782"/>
+          <polygon points="240,150 260,150 250,170" fill="#e5e7eb"/>
+          <!-- 晴空塔 -->
+          <rect x="350" y="100" width="10" height="200" fill="#6b7280"/>
+          <circle cx="355" cy="90" r="15" fill="#9ca3af"/>
+          <!-- 浅草寺鸟居 -->
+          <rect x="100" y="230" width="100" height="15" fill="#c4b5a7"/>
+          <rect x="110" y="245" width="10" height="60" fill="#a8a29e"/>
+          <rect x="180" y="245" width="10" height="60" fill="#a8a29e"/>
         </svg>
       </div>
     </section>
 
     <!-- Services -->
     <section id="services" class="mt-20">
-      <h2 class="text-2xl font-semibold">サービス / Services</h2>
-      <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="p-6 bg-white rounded-2xl shadow border">
-          <h3 class="font-semibold">カスタム旅程 / Custom Itineraries</h3>
-          <p class="mt-2 text-slate-600 text-sm">食・文化・隠れスポットを含むオーダーメイドプラン。</p>
+      <h2 class="text-2xl font-semibold text-slate-700">サービス / Services</h2>
+      <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="p-6 bg-white rounded-2xl shadow border border-slate-200 hover:shadow-md">
+          <h3 class="font-semibold text-slate-700">カスタム旅程 / Custom Itineraries</h3>
+          <p class="mt-3 text-slate-600 text-sm leading-relaxed">
+            食・文化・隠れスポットを含むオーダーメイドプラン。
+          </p>
         </div>
-        <div class="p-6 bg-white rounded-2xl shadow border">
-          <h3 class="font-semibold">民泊&旅館 / Private lodgings and inns</h3>
-          <p class="mt-2 text-slate-600 text-sm">東京の各区にある様々なタイプの居住空間。</p>
+        <div class="p-6 bg-white rounded-2xl shadow border border-slate-200 hover:shadow-md">
+          <h3 class="font-semibold text-slate-700">民泊&旅館 / Private lodgings and inns</h3>
+          <p class="mt-3 text-slate-600 text-sm leading-relaxed">
+            東京の各区にある様々なタイプの居住空間。
+          </p>
         </div>
-        <div class="p-6 bg-white rounded-2xl shadow border">
-          <h3 class="font-semibold">フォトジャーニー / Photo Journeys</h3>
-          <p class="mt-2 text-slate-600 text-sm">プロカメラマンと一緒に東京の思い出を残します。</p>
+        <div class="p-6 bg-white rounded-2xl shadow border border-slate-200 hover:shadow-md">
+          <h3 class="font-semibold text-slate-700">フォトジャーニー / Photo Journeys</h3>
+          <p class="mt-3 text-slate-600 text-sm leading-relaxed">
+            プロカメラマンと一緒に東京の思い出を残します。
+          </p>
         </div>
       </div>
     </section>
 
     <!-- QR Codes -->
     <section class="mt-20">
-      <h2 class="text-2xl font-semibold">公式アカウント / Official Accounts</h2>
-      <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-6">
+      <h2 class="text-2xl font-semibold text-slate-700">公式アカウント / Official Accounts</h2>
+      <div class="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-8">
         <div class="text-center">
-          <img src="WechatIMG47.png" alt="WeChat QR" class="w-32 h-39 mx-auto border rounded-lg shadow" />
-          <p class="mt-2 text-sm">WeChat</p>
+          <img src="WechatIMG47.png" alt="WeChat QR" class="w-32 h-32 mx-auto border rounded-lg shadow-sm" />
+          <p class="mt-3 text-sm text-slate-600">WeChat</p>
         </div>
         <div class="text-center">
-          <img src="xiaohongshu.png" alt="小红书 QR" class="w-32 h-39 mx-auto border rounded-lg shadow" />
-          <p class="mt-2 text-sm">小红书</p>
+          <img src="xiaohongshu.png" alt="小红书 QR" class="w-32 h-32 mx-auto border rounded-lg shadow-sm" />
+          <p class="mt-3 text-sm text-slate-600">小红书</p>
         </div>
         <div class="text-center">
-          <img src="douyin.png" alt="抖音 QR" class="w-32 h-39 mx-auto border rounded-lg shadow" />
-          <p class="mt-2 text-sm">抖音</p>
+          <img src="douyin.png" alt="抖音 QR" class="w-32 h-32 mx-auto border rounded-lg shadow-sm" />
+          <p class="mt-3 text-sm text-slate-600">抖音</p>
         </div>
       </div>
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="mt-20 bg-white border rounded-2xl p-6 shadow-sm">
-      <h2 class="text-xl font-semibold">お問い合わせ / Contact</h2>
+    <section id="contact" class="mt-20 bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+      <h2 class="text-xl font-semibold text-slate-700">お問い合わせ / Contact</h2>
       <p class="mt-2 text-slate-600">ご予約・ご質問・メディア取材などお気軽にどうぞ。</p>
-      <form class="mt-4 space-y-4">
-        <input class="w-full rounded-lg border px-3 py-2 text-sm" placeholder="お名前 / Your Name" />
-        <input class="w-full rounded-lg border px-3 py-2 text-sm" placeholder="メールアドレス / Email" />
-        <textarea rows="4" class="w-full rounded-lg border px-3 py-2 text-sm" placeholder="メッセージ / Message"></textarea>
-        <button class="px-4 py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700">送信 / Send</button>
+      <form class="mt-6 space-y-4">
+        <input class="w-full rounded-lg border border-slate-300 px-4 py-2 text-sm" placeholder="お名前 / Your Name" />
+        <input class="w-full rounded-lg border border-slate-300 px-4 py-2 text-sm" placeholder="メールアドレス / Email" />
+        <textarea rows="4" class="w-full rounded-lg border border-slate-300 px-4 py-2 text-sm" placeholder="メッセージ / Message"></textarea>
+        <button class="px-6 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-700">
+          送信 / Send
+        </button>
       </form>
     </section>
 
     <!-- Footer -->
-    <footer class="mt-20 border-t py-8 text-sm text-slate-600">
-      <div class="flex flex-col md:flex-row justify-between gap-4">
+    <footer class="mt-20 border-t py-10 text-sm text-slate-500">
+      <div class="flex flex-col md:flex-row justify-between gap-6">
         <div>
-          <p class="font-semibold">株式会社一二一一</p>
+          <p class="font-semibold text-slate-700">株式会社一二一一</p>
           <p>〒130-0011 東京都墨田区石原2-16-2宿栖両国A</p>
           <p>TEL: 070-9235-7133</p>
           <p>Email: c1211tokyo@gmail.com</p>
         </div>
-        <div class="text-slate-500">
+        <div>
           <p>© 2025 Tokyo Voyage Co., Ltd.</p>
-          <p><a href="https://github.com/your-org" class="hover:text-slate-900">GitHub</a></p>
+          <p><a href="https://github.com/your-org" class="hover:text-slate-700">GitHub</a></p>
         </div>
       </div>
     </footer>
