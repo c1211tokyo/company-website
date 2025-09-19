@@ -1,98 +1,220 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1211Co.,Ltd.</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>1211 Co., Ltd. — 宿栖東京</title>
+  <meta name="description" content="宿栖東京 — 東京の旅をデザインする。民泊・旅館運営、投資移民相談、自媒体運営。" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* 细微自定义：避免使用非英文文件名导致的问题，可按需替换图片名 */
+    :root{
+      --muted-ink:#4b5563;       /* gray-600 */
+      --muted-ink-2:#6b7280;     /* gray-500 */
+      --card-bg: #ffffff;
+      --page-bg-from: #f4f6f7;
+      --page-bg-to: #efeff0;
+    }
+    /* 更柔和的卡片阴影 */
+    .soft-shadow { box-shadow: 0 6px 22px rgba(16,24,40,0.06); }
+    /* 控制文本最大高度，便于长文本在窄屏下更好阅读 */
+    .text-compact p { line-height: 1.65; }
+  </style>
 </head>
-<body class="bg-gradient-to-b from-gray-100 to-gray-50 text-gray-800 antialiased font-sans">
+<body class="bg-gradient-to-b from-[var(--page-bg-from)] to-[var(--page-bg-to)] text-[var(--muted-ink)] antialiased">
 
   <!-- Header -->
   <header class="max-w-7xl mx-auto px-6 py-8 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-gray-500 to-gray-400 shadow-md">
+    <div class="flex items-center gap-4">
+      <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-gray-600 to-gray-500 soft-shadow">
         <span class="text-white font-bold text-lg">宿栖</span>
       </div>
       <div>
-        <div class="text-xl font-semibold tracking-wide">1211 Co., Ltd.</div>
+        <div class="text-lg md:text-xl font-semibold tracking-wide">1211 Co., Ltd.</div>
         <div class="text-xs text-gray-500">東京の旅をデザインする</div>
       </div>
     </div>
+    <!-- 右侧占位（未来可放语言切换/社媒图标） -->
+    <nav class="text-sm space-x-4 hidden md:block">
+      <a href="#services" class="hover:underline">Services</a>
+      <a href="#about" class="hover:underline">About</a>
+      <a href="#contact" class="hover:underline">Contact</a>
+    </nav>
   </header>
-  
-  <!-- Hero -->
-  <main class="max-w-7xl mx-auto px-6">
-    <section class="grid md:grid-cols-2 gap-12 items-center mt-12">
+
+  <main class="max-w-7xl mx-auto px-6 pb-20">
+
+    <!-- Hero -->
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mt-6">
       <div class="text-center md:text-left">
         <h1 class="font-extrabold leading-tight">
-          <span class="block text-4xl md:text-5xl text-gray-700">
-            東京を、もっと自由にもっと特別に
-          </span>
-          <span class="block mt-2 text-2xl md:text-3xl text-gray-600">
-            Discover a New Way to Experience Tokyo
-          </span>
+          <span class="block text-3xl md:text-5xl text-gray-800">東京を、もっと自由にもっと特別に</span>
+          <span class="block mt-2 text-lg md:text-2xl text-gray-600">Discover a New Way to Experience Tokyo</span>
         </h1>
-        <p class="mt-6 text-lg text-gray-700 leading-relaxed">
-          オーダーメイドの旅程、多彩な宿泊施設、そして心に残るフォト体験。<br>
-          私たちは、あなたの東京滞在を快適で忘れられない思い出に変えます。
+
+        <p class="mt-6 text-base md:text-lg text-gray-700 leading-relaxed">
+          オーダーメイドの旅程、多彩な宿泊施設、心に残るフォト体験。私たちは、あなたの東京滞在を快適で忘れられない思い出に変えます。
         </p>
-        <p class="mt-6 text-lg text-gray-600 leading-relaxed">
-          From tailor-made itineraries and unique stays to professional photo journeys,<br>
-          we craft a smooth and unforgettable Tokyo experience just for you.
+
+        <p class="mt-4 text-base text-gray-600 leading-relaxed">
+          From tailor-made itineraries and unique stays to professional photo journeys, we craft an unforgettable Tokyo experience.
         </p>
-        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-          <a href="#contact" class="px-6 py-3 rounded-lg bg-gray-700 text-white font-medium shadow hover:bg-gray-800 transition-transform hover:scale-105">
-            お問い合わせ
-          </a>
-          <a href="#services" class="px-6 py-3 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-100 transition">
-            サービスを見る
-          </a>
+
+        <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+          <a href="#contact" class="inline-block px-6 py-3 rounded-lg bg-gray-800 text-white font-medium shadow hover:bg-gray-900 transform transition">お問い合わせ</a>
+          <a href="#services" class="inline-block px-6 py-3 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition">サービスを見る</a>
         </div>
       </div>
+
       <div class="flex justify-center">
-        <div class="w-80 h-80 bg-gray-200 rounded-xl flex items-center justify-center shadow-lg">
-          <img src="宿栖東京版1png.png" alt="東京のイメージ" class="w-72 h-72 object-cover rounded-lg" />
+        <div class="w-80 h-80 md:w-96 md:h-96 rounded-2xl bg-[linear-gradient(180deg,#f7f6f2,#f1f3f4)] overflow-hidden soft-shadow flex items-center justify-center">
+          <!-- 建议使用英文英文小写短名，例如 hero.jpg -->
+          <img src="宿栖東京版1png.png" alt="Tokyo image" class="w-full h-full object-cover" />
         </div>
       </div>
     </section>
+
+    <!-- Services -->
+    <section id="services" class="mt-12">
+      <h2 class="text-2xl font-semibold text-gray-800 mb-6">サービス / Services</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <article class="p-6 bg-[var(--card-bg)] rounded-2xl border border-gray-200 soft-shadow text-compact">
+          <h3 class="font-semibold text-gray-800">カスタム旅程 / Custom Itineraries</h3>
+          <p class="mt-3 text-sm text-gray-600">食文化や隠れスポットを含むオーダーメイドプラン。プロカメラマンによる撮影も提供。</p>
+        </article>
+
+        <article class="p-6 bg-[var(--card-bg)] rounded-2xl border border-gray-200 soft-shadow text-compact">
+          <h3 class="font-semibold text-gray-800">民泊 & 旅館 / Private Lodgings & Inns</h3>
+          <p class="mt-3 text-sm text-gray-600">新宿・渋谷・台東・墨田などで多様な宿泊体験を提案。長短期どちらも対応可能。</p>
+        </article>
+
+        <article class="p-6 bg-[var(--card-bg)] rounded-2xl border border-gray-200 soft-shadow text-compact">
+          <h3 class="font-semibold text-gray-800">メディア運営 / Media & Marketing</h3>
+          <p class="mt-3 text-sm text-gray-600">自社メディアと多チャンネル連動でプロモーションを最適化します。</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Brand Introduction (三栏，自适应) -->
+    <section id="about" class="mt-16">
+      <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">宿栖東京 ブランド紹介 / Brand Introduction</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- 中文 -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 soft-shadow text-sm text-gray-700 text-compact">
+          <p>
+            宿栖東京，从一段东京旅程中的朴实愿望出发，逐步成长为东京旅居服务的领先品牌。我们以东京核心城区为起点，将“舒适、细致、多元”的理念融入每一间客房，用心为全球旅人打造属于他们的“第二个家”。主要业务板块：民宿与旅馆运营管理、投资移民咨询、自媒体运营等。
+          </p>
+          <p class="mt-4">
+            东京是一座兼具五光十色与人文温度的城市，而宿栖東京希望通过多样化的住宿选择、独具匠心的空间设计和贴心的服务，让住客在感受东京现代魅力的同时，也能发现隐藏在街巷中的生活韵味。从新宿的繁华夜景到清澄白河的静谧庭院，从涩谷的时尚潮流到墨田的传统匠心，每一处居所都承载着我们对旅人体验的用心。自2018年创立以来，宿栖東京始终坚持实用与美感的平衡，不断优化服务标准。目前，我们的物业主要集中在东京的核心区域，包括新宿、涩谷、台東和墨田。旅行的意义，不止在于风景，还有那些如“家”一般的温暖瞬间。宿栖東京，用每一个细致入微的设计，为您的东京旅程创造难忘的回忆。
+          </p>
+        </div>
+
+        <!-- 日本語 -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 soft-shadow text-sm text-gray-600 text-compact">
+          <p>
+            宿栖東京は、東京の旅の素朴な願いから始まり、徐々に東京滞在サービスのリーディングブランドへと成長してきました。東京の中心エリアを起点に、「快適・細やか・多様性」を理念に掲げ、世界中の旅行者に「第二の我が家」を提供しています。主な事業分野：民泊・旅館の運営管理、投資移民コンサルティング、メディア運営など。
+          </p>
+          <p class="mt-4">
+            東京は華やかさと人間味が共存する都市です。宿栖東京は、多様な宿泊選択肢、独自の空間デザイン、心のこもったサービスを通じて、ゲストが東京の現代的な魅力を楽しむと同時に、路地裏に潜む生活の趣を発見できることを願っています。2018年の創業以来、実用性と美意識の調和を重視し、サービス基準を絶えず改善してきました。現在、新宿・渋谷・台東・墨田を中心に多彩な地域をカバーしています。
+          </p>
+        </div>
+
+        <!-- English -->
+        <div class="bg-white border border-gray-200 rounded-2xl p-6 soft-shadow text-sm text-gray-500 text-compact">
+          <p>
+            From a humble wish during a journey in Tokyo, Shuku Tokyo has grown into a leading brand in urban hospitality. Starting from the city’s central districts, we integrate the values of “comfort, detail, and diversity” into every property, creating a true “second home” for travelers worldwide. Our core services include private lodging & inn management, investment immigration consulting, and media operations.
+          </p>
+          <p class="mt-4">
+            Tokyo is a city of both dazzling lights and human warmth. Through diverse accommodation choices, thoughtful spatial design, and attentive service, Shuku Tokyo helps guests enjoy modern charm while discovering local flavors. Since 2018, we have pursued a balance between practicality and aesthetics, with properties across Shinjuku, Shibuya, Taito, and Sumida. Travel is not only about scenery, but also about warm, homelike moments — we create those moments with care.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Official Accounts (QR) -->
+    <section class="mt-16">
+      <h3 class="text-2xl font-semibold text-gray-800 mb-6">公式アカウント / Official Accounts</h3>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
+        <div class="text-center">
+          <div class="mx-auto w-40 h-40 bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow">
+            <img src="WechatIMG47.png" alt="WeChat QR" class="w-full h-full object-contain" />
+          </div>
+          <p class="mt-3 text-sm text-gray-600">WeChat</p>
+        </div>
+
+        <div class="text-center">
+          <div class="mx-auto w-40 h-40 bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow">
+            <img src="xiaohongshu.png" alt="小红书 QR" class="w-full h-full object-contain" />
+          </div>
+          <p class="mt-3 text-sm text-gray-600">小红书</p>
+        </div>
+
+        <div class="text-center">
+          <div class="mx-auto w-40 h-40 bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow">
+            <img src="douyin.png" alt="抖音 QR" class="w-full h-full object-contain" />
+          </div>
+          <p class="mt-3 text-sm text-gray-600">抖音 / Douyin</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="mt-16 bg-white border border-gray-200 rounded-2xl p-8 soft-shadow">
+      <div class="md:flex md:justify-between md:items-start gap-6">
+        <div class="md:w-1/2">
+          <h3 class="text-xl font-semibold text-gray-800">お問い合わせ / Contact</h3>
+          <p class="mt-2 text-gray-600">ご予約・ご質問・メディア取材などお気軽にどうぞ。</p>
+
+          <div class="mt-6 text-sm text-gray-700">
+            <p class="font-medium">株式会社一二一一（1211 Co., Ltd.）</p>
+            <p class="mt-2">〒130-0011 東京都墨田区石原2-16-2 宿栖両国A</p>
+            <p class="mt-2">TEL: <a href="tel:07092357133" class="text-gray-800 hover:underline">070-9235-7133</a></p>
+            <p class="mt-2">Email: <span id="emailText" class="font-medium">c1211tokyo@gmail.com</span>
+              <button onclick="copyEmail()" class="ml-2 text-xs px-2 py-1 border rounded hover:bg-gray-50">コピー</button>
+            </p>
+          </div>
+        </div>
+
+        <div class="md:w-1/2 mt-6 md:mt-0">
+          <form action="https://formspree.io/f/xvgbekga" method="POST" class="space-y-4">
+            <input name="name" required class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm" placeholder="お名前 / Your name" />
+            <input name="email" type="email" required class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm" placeholder="メールアドレス / Email" />
+            <textarea name="message" rows="4" required class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm" placeholder="メッセージ / Message"></textarea>
+            <input type="hidden" name="_subject" value="新しいお問い合わせが届きました / New Contact Message" />
+            <input type="hidden" name="_language" value="ja" />
+            <div class="flex justify-end">
+              <button type="submit" class="px-6 py-2 rounded-lg bg-gray-800 text-white hover:bg-gray-900">送信 / Send</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-16 border-t pt-8 text-sm text-gray-500">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-6">
+        <div>
+          <p class="font-semibold text-gray-800">株式会社一二一一</p>
+          <p class="mt-2">© 2025 Tokyo Voyage Co., Ltd.</p>
+        </div>
+        <div>
+          <p>GitHub: <a href="https://github.com/c1211tokyo" target="_blank" rel="noopener" class="hover:underline text-gray-700">c1211tokyo</a></p>
+        </div>
+      </div>
+    </footer>
+
   </main>
 
-  <!-- Brand Introduction -->
-  <section id="about" class="mt-24">
-    <h2 class="text-3xl font-bold text-gray-700 mb-10 text-center">宿栖東京 ブランド紹介 / Brand Introduction</h2>
-    
-    <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
-      
-      <!-- 中文 -->
-      <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm text-sm leading-relaxed">
-        <p class="text-gray-700">
-          宿栖東京，从一段东京旅程中的朴实愿望出发，逐步成长为东京旅居服务的领先品牌。我们以东京核心城区为起点，将“舒适、细致、多元”的理念融入每一间客房，用心为全球旅人打造属于他们的“第二个家”。主要业务板块：民宿与旅馆运营管理、投资移民咨询、自媒体运营等。
-        </p>
-        <p class="mt-4 text-gray-700">
-          东京是一座兼具五光十色与人文温度的城市，而宿栖東京希望通过多样化的住宿选择、独具匠心的空间设计和贴心的服务，让住客在感受东京现代魅力的同时，也能发现隐藏在街巷中的生活韵味。从新宿的繁华夜景到清澄白河的静谧庭院，从涩谷的时尚潮流到墨田的传统匠心，每一处居所都承载着我们对旅人体验的用心。自2018年创立以来，宿栖東京始终坚持实用与美感的平衡，不断优化服务标准。目前，我们的物业主要集中在东京的核心区域，包括新宿、涩谷、台东和墨田。旅行的意义，不止在于风景，还有那些如“家”一般的温暖瞬间。宿栖東京，用每一个细致入微的设计，为您的东京旅程创造难忘的回忆。
-        </p>
-      </div>
-
-      <!-- 日本語 -->
-      <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm text-sm leading-relaxed">
-        <p class="text-gray-600">
-          宿栖東京は、東京の旅の素朴な願いから始まり、徐々に東京滞在サービスのリーディングブランドへと成長してきました。東京の中心エリアを起点に、「快適・細やか・多様性」を理念に掲げ、世界中の旅行者に「第二の我が家」を提供しています。主な事業分野：民泊・旅館の運営管理、投資移民コンサルティング、メディア運営など。
-        </p>
-        <p class="mt-4 text-gray-600">
-          東京は華やかさと人間味が共存する都市です。宿栖東京は、多様な宿泊選択肢、独自の空間デザイン、心のこもったサービスを通じて、ゲストが東京の現代的な魅力を楽しむと同時に、路地裏に潜む生活の趣を発見できることを願っています。新宿の華やかな夜景から清澄白河の静かな庭、渋谷のファッショントレンドから墨田の伝統工芸まで、各物件には私たちのこだわりが込められています。2018年の創業以来、実用性と美意識の調和を重視し、サービス基準を絶えず改善してきました。現在、新宿・渋谷・台東・墨田を中心に多彩な地域をカバー。旅の意味は風景だけでなく、「家」のような温もりある瞬間にもあります。
-        </p>
-      </div>
-
-      <!-- English -->
-      <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm text-sm leading-relaxed">
-        <p class="text-gray-500">
-          From a humble wish during a journey in Tokyo, ShukuseiTokyo has grown into a leading brand in urban hospitality. Starting from the city’s central districts, we integrate the values of “comfort, detail, and diversity” into every property, creating a true “second home” for travelers worldwide. Our core business areas include: private lodging & inn management, investment immigration consulting, and media operations.
-        </p>
-        <p class="mt-4 text-gray-500">
-          Tokyo is a city of both dazzling lights and human warmth. Through diverse accommodation choices, thoughtful design, and attentive service, Shuku Tokyo enables guests to enjoy modern charm while discovering local flavors. Since its founding in 2018, Shuku Tokyo has balanced practicality and aesthetics, with properties across Shinjuku, Shibuya, Taito, and Sumida. Travel is not only about scenery, but also about warm, homelike moments. With every detail, we create unforgettable memories — not just stays, but beginnings of stories.
-        </p>
-      </div>
-
-    </div>
-  </section>
+  <script>
+    function copyEmail(){
+      const text = document.getElementById('emailText').innerText;
+      navigator.clipboard.writeText(text).then(()=> {
+        alert('Email 地址已复制：' + text);
+      }).catch(()=> {
+        alert('复制失败，请手动复制：' + text);
+      });
+    }
+  </script>
+</body>
+</html>
