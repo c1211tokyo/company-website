@@ -32,45 +32,45 @@
         <p class="mt-6 text-lg text-slate-800 leading-relaxed">
           地元ガイド、民泊&旅館、写真で残す思い出。<br>
           私たちは、あなたの東京滞在をスムーズで特別な体験にします。
+        </p>
         <p class="mt-6 text-lg text-slate-600 leading-relaxed">
-          Local guides,Private lodgings and inns, and photography-led journeys.<br>
+          Local guides, private lodgings and inns, and photography-led journeys.<br>
           We will make your stay in Tokyo a smooth and special experience.
         </p>
         <div class="mt-8 flex gap-4">
-          <a href="#contact" class="px-6 py-3 rounded-lg bg-slate-600 text-white font-medium shadow hover:bg-slate-700 transition">
+          <a href="#contact" class="px-6 py-3 rounded-lg bg-slate-600 text-white font-medium shadow hover:bg-slate-700 transition-transform hover:scale-105">
             お問い合わせ
           </a>
-          <a href="#services" class="px-6 py-3 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-100">
+          <a href="#services" class="px-6 py-3 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-100 transition">
             サービスを見る
           </a>
         </div>
       </div>
       <div class="flex justify-center">
-<div class="flex justify-center">
-  <!-- 自定义正方形图片，底色 -->
-  <div class="w-80 h-80 bg-[#fff9ea] rounded-xl flex items-center justify-center shadow-lg">
-    <img src="宿栖東京版1png.png" alt="東京のイメージ" class="w-78 h-78 object-cover rounded-lg" />
-  </div>
-</div>
+        <!-- 自定义正方形图片 -->
+        <div class="w-80 h-80 bg-[#fff9ea] rounded-xl flex items-center justify-center shadow-lg">
+          <img src="宿栖東京版1png.png" alt="東京のイメージ" class="w-78 h-78 object-cover rounded-lg" />
+        </div>
+      </div>
     </section>
 
     <!-- Services -->
     <section id="services" class="mt-20">
       <h2 class="text-2xl font-semibold text-slate-700">サービス / Services</h2>
       <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="p-6 bg-white rounded-2xl shadow border border-slate-200 hover:shadow-md">
+        <div class="p-6 bg-white rounded-2xl shadow border border-slate-200 hover:shadow-md transition">
           <h3 class="font-semibold text-slate-700">カスタム旅程 / Custom Itineraries</h3>
           <p class="mt-3 text-slate-600 text-sm leading-relaxed">
             食・文化・隠れスポットを含むオーダーメイドプラン。
           </p>
         </div>
-        <div class="p-6 bg-white rounded-2xl shadow border border-slate-200 hover:shadow-md">
+        <div class="p-6 bg-white rounded-2xl shadow border border-slate-200 hover:shadow-md transition">
           <h3 class="font-semibold text-slate-700">民泊&旅館 / Private lodgings and inns</h3>
           <p class="mt-3 text-slate-600 text-sm leading-relaxed">
             東京の各区にある様々なタイプの居住空間。
           </p>
         </div>
-        <div class="p-6 bg-white rounded-2xl shadow border border-slate-200 hover:shadow-md">
+        <div class="p-6 bg-white rounded-2xl shadow border border-slate-200 hover:shadow-md transition">
           <h3 class="font-semibold text-slate-700">フォトジャーニー / Photo Journeys</h3>
           <p class="mt-3 text-slate-600 text-sm leading-relaxed">
             プロカメラマンと一緒に東京の思い出を残します。
@@ -101,12 +101,41 @@
     <!-- Contact -->
     <section id="contact" class="mt-20 bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
       <h2 class="text-xl font-semibold text-slate-700">お問い合わせ / Contact</h2>
-      <p class="mt-2 text-slate-600">ご予約・ご質問・メディア取材などお気軽にどうぞ。</p>
-      <form class="mt-6 space-y-4">
-        <input class="w-full rounded-lg border border-slate-300 px-4 py-2 text-sm" placeholder="お名前 / Your Name" />
-        <input class="w-full rounded-lg border border-slate-300 px-4 py-2 text-sm" placeholder="メールアドレス / Email" />
-        <textarea rows="4" class="w-full rounded-lg border border-slate-300 px-4 py-2 text-sm" placeholder="メッセージ / Message"></textarea>
-        <button class="px-6 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-700">
+      <p class="mt-2 text-slate-600">
+        ご予約・ご質問・メディア取材などお気軽にどうぞ。<br>
+        For reservations, inquiries, or media requests, please feel free to contact us.
+      </p>
+
+      <form action="https://formspree.io/f/c1211tokyo" method="POST" class="mt-6 space-y-4">
+        <input 
+          type="text" 
+          name="name" 
+          required 
+          class="w-full rounded-lg border border-slate-300 px-4 py-2 text-sm" 
+          placeholder="お名前 / Your Name" 
+        />
+        <input 
+          type="email" 
+          name="email" 
+          required 
+          class="w-full rounded-lg border border-slate-300 px-4 py-2 text-sm" 
+          placeholder="メールアドレス / Email" 
+        />
+        <textarea 
+          name="message" 
+          rows="4" 
+          required 
+          class="w-full rounded-lg border border-slate-300 px-4 py-2 text-sm" 
+          placeholder="メッセージ / Message"
+        ></textarea>
+
+        <input type="hidden" name="_subject" value="新しいお問い合わせが届きました / New Contact Message" />
+        <input type="hidden" name="_language" value="ja" />
+
+        <button 
+          type="submit" 
+          class="px-6 py-2 bg-slate-600 text-white rounded-lg hover:bg-slate-700 transition-transform hover:scale-105"
+        >
           送信 / Send
         </button>
       </form>
@@ -117,9 +146,9 @@
       <div class="flex flex-col md:flex-row justify-between gap-6">
         <div>
           <p class="font-semibold text-slate-700">株式会社一二一一</p>
-          <p>〒130-0011 東京都墨田区石原2-16-2宿栖両国A</p>
-          <p>TEL: 070-9235-7133</p>
-          <p>Email: c1211tokyo@gmail.com</p>
+          <p>〒130-0011 東京都墨田区石原2-16-2 宿栖両国A</p>
+          <p>TEL: <a href="tel:07092357133" class="hover:text-slate-700">070-9235-7133</a></p>
+          <p>Email: <a href="mailto:c1211tokyo@gmail.com" class="hover:text-slate-700">c1211tokyo@gmail.com</a></p>
         </div>
         <div>
           <p>© 2025 Tokyo Voyage Co., Ltd.</p>
