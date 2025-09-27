@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About — 1211 Co., Ltd.</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b from-gray-50 to-gray-100 text-gray-700 antialiased">
+
+  <!-- Header (和首页一致，导航保持相同) -->
+  <header class="max-w-7xl mx-auto px-6 py-8 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-gray-600 to-gray-500">
+        <span class="text-white font-bold text-lg">宿栖</span>
+      </div>
+      <div>
+        <div class="text-lg md:text-xl font-semibold tracking-wide">1211 Co., Ltd.</div>
+        <div class="text-xs text-gray-500">東京の旅をデザインする</div>
+      </div>
+    </div>
+    <nav class="text-sm space-x-4 hidden md:block">
+      <a href="index.html" class="hover:underline">Home</a>
+      <a href="about.html" class="hover:underline font-semibold">About</a>
+      <a href="index.html#services" class="hover:underline">Services</a>
+      <a href="index.html#contact" class="hover:underline">Contact</a>
+    </nav>
+  </header>
+
+  <!-- About 内容 -->
+  <main class="max-w-4xl mx-auto px-6 py-12">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">About Us</h1>
+    <p class="text-lg leading-relaxed text-gray-700">
+      这里是独立子页面的内容占位。你可以在这里写更详细的公司介绍、品牌故事，或者放置不同于首页的信息。
+    </p>
+    <p class="mt-6">
+      <a href="index.html" class="text-gray-800 underline hover:text-gray-900">← 返回首页</a>
+    </p>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-16 border-t pt-8 text-sm text-gray-500 text-center">
+    <p>© 2025 1211 Co., Ltd.</p>
+  </footer>
+</body>
+</html>
