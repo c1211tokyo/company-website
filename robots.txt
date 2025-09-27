@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://1211.world/sitemap.xml
