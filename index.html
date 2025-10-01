@@ -153,32 +153,66 @@
     </p>
   </div>
 </section>
-    <!-- Official Accounts (QR) -->
-    <section class="mt-16">
-      <h3 class="text-2xl font-semibold text-gray-800 mb-6">公式アカウント / Official Accounts</h3>
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
-        <div class="text-center">
-          <div class="mx-auto w-40 h-43 bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow">
-            <img src="homepic/wechat.png" alt="WeChat QR" class="w-full h-full object-contain" />
-          </div>
-          <p class="mt-3 text-sm text-gray-600">微信/WeChat</p>
-        </div>
-
-        <div class="text-center">
-          <div class="mx-auto w-40 h-43 bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow">
-            <img src="homepic/xiaohongshu.png" alt="小红书 QR" class="w-full h-full object-contain" />
-          </div>
-          <p class="mt-3 text-sm text-gray-600">小红书/Rednote</p>
-        </div>
-
-        <div class="text-center">
-          <div class="mx-auto w-40 h-43 bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow">
-            <img src="homepic/douyin.png" alt="抖音 QR" class="w-full h-full object-contain" />
-          </div>
-          <p class="mt-3 text-sm text-gray-600">抖音/Douyin</p>
-        </div>
+    
+<!-- Official Accounts (QR) -->
+<section class="mt-16">
+  <h3 class="text-2xl font-semibold text-gray-800 mb-6">公式アカウント / Official Accounts</h3>
+  
+  <!-- Grid：5列布局（小屏幕2列，中屏幕3列，大屏幕5列） -->
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+    
+    <!-- 微信 -->
+    <div class="text-center">
+      <div onclick="openLightbox('homepic/wechat.png')" class="cursor-pointer mx-auto w-40 h-43 bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow hover:scale-105 transition">
+        <img src="homepic/wechat.png" alt="WeChat QR" class="w-full h-full object-contain" />
       </div>
-    </section>
+      <p class="mt-3 text-sm text-blue-600 hover:underline">
+        <a href="http://text1" target="_blank">微信 / WeChat</a>
+      </p>
+    </div>
+
+    <!-- 小红书 -->
+    <div class="text-center">
+      <div onclick="openLightbox('homepic/xiaohongshu.png')" class="cursor-pointer mx-auto w-40 h-43 bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow hover:scale-105 transition">
+        <img src="homepic/xiaohongshu.png" alt="小红书 QR" class="w-full h-full object-contain" />
+      </div>
+      <p class="mt-3 text-sm text-blue-600 hover:underline">
+        <a href="http://text2" target="_blank">小红书 / Rednote</a>
+      </p>
+    </div>
+
+    <!-- 抖音 -->
+    <div class="text-center">
+      <div onclick="openLightbox('homepic/douyin.png')" class="cursor-pointer mx-auto w-40 h-43 bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow hover:scale-105 transition">
+        <img src="homepic/douyin.png" alt="抖音 QR" class="w-full h-full object-contain" />
+      </div>
+      <p class="mt-3 text-sm text-blue-600 hover:underline">
+        <a href="http://text3" target="_blank">抖音 / Douyin</a>
+      </p>
+    </div>
+
+    <!-- 微博 -->
+    <div class="text-center">
+      <div onclick="openLightbox('homepic/weibo.png')" class="cursor-pointer mx-auto w-40 h-43 bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow hover:scale-105 transition">
+        <img src="homepic/weibo.png" alt="微博 QR" class="w-full h-full object-contain" />
+      </div>
+      <p class="mt-3 text-sm text-blue-600 hover:underline">
+        <a href="http://text4" target="_blank">微博 / Weibo</a>
+      </p>
+    </div>
+
+    <!-- Bilibili -->
+    <div class="text-center">
+      <div onclick="openLightbox('homepic/bilibili.png')" class="cursor-pointer mx-auto w-40 h-43 bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow hover:scale-105 transition">
+        <img src="homepic/bilibili.png" alt="Bilibili QR" class="w-full h-full object-contain" />
+      </div>
+      <p class="mt-3 text-sm text-blue-600 hover:underline">
+        <a href="http://text5" target="_blank">Bilibili</a>
+      </p>
+    </div>
+
+  </div>
+</section>
 
     <!-- Contact -->
     <section id="contact" class="mt-16 bg-white border border-gray-200 rounded-2xl p-8 soft-shadow">
@@ -234,5 +268,22 @@
       });
     }
   </script>
+<!-- Lightbox -->
+<div id="lightbox" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50">
+  <span class="absolute top-6 right-8 text-white text-4xl cursor-pointer" onclick="closeLightbox()">&times;</span>
+  <img id="lightbox-img" src="" class="max-w-full max-h-full rounded-lg shadow-lg border border-white" />
+</div>
+
+<script>
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').classList.remove('hidden');
+    document.getElementById('lightbox').classList.add('flex');
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.add('hidden');
+    document.getElementById('lightbox').classList.remove('flex');
+  }
+</script>
 </body>
 </html>
