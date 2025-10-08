@@ -1,86 +1,116 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="zh">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>パスポート提出フォーム | 1211.world</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>护照上传 Passport Upload</title>
   <style>
-    body {
-      background-color: #f3f3f3;
-      color: #333;
-      font-family: "Noto Sans JP", "Hiragino Sans", sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      padding: 40px 20px;
+    body { font-family: system-ui, sans-serif; background:#f7f7f7; margin:0; padding:2rem; }
+    .container { max-width:600px; margin:auto; background:white; padding:2rem; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+    h2 { text-align:center; margin-bottom:1rem;}
+    label { display:block; margin:0.5rem 0 0.25rem; font-weight:600;}
+    input[type=text], input[type=file], select {
+      width:100%; padding:0.5rem; border:1px solid #ccc; border-radius:6px;
     }
-    .container {
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-      padding: 30px 40px;
-      max-width: 600px;
-      width: 100%;
-    }
-    h1 {
-      text-align: center;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      color: #444;
-    }
-    label {
-      display: block;
-      margin-top: 1rem;
-      font-size: 0.95rem;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      margin-top: 4px;
-      box-sizing: border-box;
-    }
-    button {
-      margin-top: 1.5rem;
-      width: 100%;
-      background-color: #555;
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 6px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    button:hover { background-color: #333; }
-    .lang-note {
-      text-align: center;
-      margin-bottom: 1rem;
-      font-size: 0.85rem;
-      color: #777;
-    }
+    button { margin-top:1rem; padding:0.6rem 1.2rem; border:none; border-radius:6px; cursor:pointer; }
+    .add { background:#ddd; }
+    .submit { background:#007bff; color:white; width:100%; }
+    .guest-box { background:#f0f0f0; padding:1rem; border-radius:8px; margin-top:1rem; }
+    .delete { background:#ff6b6b; color:white; margin-top:0.5rem;}
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>パスポート提出フォーム</h1>
-    <p class="lang-note">日本語 / English / 中文</p>
-    <form action="https://formspree.io/f/xvgbekga" method="POST" enctype="multipart/form-data">
-      <label>お名前 / Name / 姓名</label>
-      <input type="text" name="name" required>
+    <select id="lang" style="float:right;">
+      <option value="zh">中文</option>
+      <option value="ja">日本語</option>
+      <option value="en">English</option>
+    </select>
 
-      <label>宿泊日 / Stay Dates / 入住日期</label>
-      <input type="text" name="stay_dates" placeholder="例：10月12日〜10月14日" required>
+    <h2 id="title">护照信息上传</h2>
+    <form id="passportForm">
+      <label id="label-main">预订人姓名</label>
+      <input type="text" id="mainName" name="mainName" required>
 
-      <label>部屋番号 / Room No. / 房间号</label>
-      <input type="text" name="room" required>
+      <div id="guestList"></div>
 
-      <label>パスポート写真 / Passport Photo / 护照照片</label>
-      <input type="file" name="passport_photo" accept="image/*,.pdf" required>
-
-      <button type="submit">送信 / Submit / 提交</button>
+      <button type="button" class="add" id="addGuest">➕ 添加住客</button>
+      <button type="submit" class="submit" id="submitBtn">提交</button>
     </form>
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
+  <script>
+    const form = document.getElementById('passportForm');
+    const guestList = document.getElementById('guestList');
+    const addGuestBtn = document.getElementById('addGuest');
+    const langSelect = document.getElementById('lang');
+
+    const texts = {
+      zh: { title:"护照信息上传", main:"预订人姓名", add:"➕ 添加住客", submit:"提交", del:"删除" },
+      ja: { title:"パスポート情報アップロード", main:"予約者氏名", add:"➕ 宿泊者追加", submit:"送信", del:"削除" },
+      en: { title:"Upload Passport Info", main:"Main Guest Name", add:"➕ Add Guest", submit:"Submit", del:"Delete" },
+    };
+
+    langSelect.addEventListener('change', () => {
+      const t = texts[langSelect.value];
+      document.getElementById('title').textContent = t.title;
+      document.getElementById('label-main').textContent = t.main;
+      addGuestBtn.textContent = t.add;
+      document.getElementById('submitBtn').textContent = t.submit;
+      document.querySelectorAll('.delete').forEach(btn => btn.textContent = t.del);
+    });
+
+    addGuestBtn.addEventListener('click', () => {
+      const t = texts[langSelect.value];
+      const div = document.createElement('div');
+      div.className = 'guest-box';
+      div.innerHTML = `
+        <label>${t.main}</label>
+        <input type="text" name="guest_name[]" required>
+        <label>护照照片 / パスポート写真</label>
+        <input type="file" name="passport_photo[]" accept="image/*" required>
+        <button type="button" class="delete">${t.del}</button>
+      `;
+      div.querySelector('.delete').onclick = () => div.remove();
+      guestList.appendChild(div);
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData();
+      formData.append('mainName', document.getElementById('mainName').value);
+
+      const guestNames = document.querySelectorAll('input[name="guest_name[]"]');
+      const guestPhotos = document.querySelectorAll('input[name="passport_photo[]"]');
+
+      for (let i = 0; i < guestNames.length; i++) {
+        formData.append(`guest_${i}_name`, guestNames[i].value);
+
+        const file = guestPhotos[i].files[0];
+        if (file) {
+          const compressed = await imageCompression(file, {
+            maxSizeMB: 5,
+            maxWidthOrHeight: 2000,
+            useWebWorker: true,
+          });
+          formData.append(`guest_${i}_passport`, compressed, compressed.name);
+        }
+      }
+
+      try {
+        const res = await fetch("https://formspree.io/f/xvgbekga", {
+          method: "POST",
+          body: formData,
+        });
+        if (res.ok) alert("上传成功 / Upload complete!");
+        else alert("上传失败，请重试 / Upload failed, please retry.");
+      } catch (err) {
+        alert("网络错误，请稍后重试 / Network error, please retry.");
+      }
+      form.reset();
+      guestList.innerHTML = "";
+    });
+  </script>
 </body>
 </html>
