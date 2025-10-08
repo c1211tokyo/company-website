@@ -31,6 +31,15 @@
     <form id="passportForm">
       <label id="label-main">预订人姓名</label>
       <input type="text" id="mainName" name="mainName" required>
+      
+      <label id="label-dates">入住日期（到达日 - 离开日）</label>
+<div style="display:flex; gap:0.5rem;">
+  <input type="date" id="checkin" name="checkin" required style="flex:1;">
+  <input type="date" id="checkout" name="checkout" required style="flex:1;">
+</div>
+
+<label id="label-room">房间号 / 房源名</label>
+<input type="text" id="roomName" name="roomName" required>
 
       <div id="guestList"></div>
 
@@ -80,6 +89,9 @@
       e.preventDefault();
       const formData = new FormData();
       formData.append('mainName', document.getElementById('mainName').value);
+      formData.append('checkin', document.getElementById('checkin').value);
+      formData.append('checkout', document.getElementById('checkout').value);
+      formData.append('roomName', document.getElementById('roomName').value);
 
       const guestNames = document.querySelectorAll('input[name="guest_name[]"]');
       const guestPhotos = document.querySelectorAll('input[name="passport_photo[]"]');
