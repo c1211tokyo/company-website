@@ -64,4 +64,23 @@
 </head>
 <body>
   <div class="container">
-    <h1>パスポート提出フォーム</
+    <h1>パスポート提出フォーム</h1>
+    <p class="lang-note">日本語 / English / 中文</p>
+    <form action="https://formspree.io/f/xvgbekga" method="POST" enctype="multipart/form-data">
+      <label>お名前 / Name / 姓名</label>
+      <input type="text" name="name" required>
+
+      <label>宿泊日 / Stay Dates / 入住日期</label>
+      <input type="text" name="stay_dates" placeholder="例：10月12日〜10月14日" required>
+
+      <label>部屋番号 / Room No. / 房间号</label>
+      <input type="text" name="room" required>
+
+      <label>パスポート写真 / Passport Photo / 护照照片</label>
+      <input type="file" name="passport_photo" accept="image/*,.pdf" required>
+
+      <button type="submit">送信 / Submit / 提交</button>
+    </form>
+  </div>
+</body>
+</html>
