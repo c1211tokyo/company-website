@@ -9,7 +9,7 @@
     .container { max-width:600px; margin:auto; background:white; padding:2rem; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.1);}
     h2 { text-align:center; margin-bottom:1rem;}
     label { display:block; margin:0.5rem 0 0.25rem; font-weight:600;}
-    input[type=text], input[type=file], select {
+    input[type=text], input[type=file], input[type=date], select {
       width:100%; padding:0.5rem; border:1px solid #ccc; border-radius:6px;
     }
     button { margin-top:1rem; padding:0.6rem 1.2rem; border:none; border-radius:6px; cursor:pointer; }
@@ -31,15 +31,17 @@
     <form id="passportForm">
       <label id="label-main">预订人姓名</label>
       <input type="text" id="mainName" name="mainName" required>
-      
-      <label id="label-dates">入住日期（到达日 - 离开日）</label>
-<div style="display:flex; gap:0.5rem;">
-  <input type="date" id="checkin" name="checkin" required style="flex:1;">
-  <input type="date" id="checkout" name="checkout" required style="flex:1;">
-</div>
 
-<label id="label-room">房间号 / 房源名</label>
-<input type="text" id="roomName" name="roomName" required>
+      <!-- 入住日期 -->
+      <label id="label-dates">入住日期（到达日 - 离开日）</label>
+      <div style="display:flex; gap:0.5rem;">
+        <input type="date" id="checkin" name="checkin" required style="flex:1;">
+        <input type="date" id="checkout" name="checkout" required style="flex:1;">
+      </div>
+
+      <!-- 房间号 / 房源名 -->
+      <label id="label-room">房间号 / 房源名</label>
+      <input type="text" id="roomName" name="roomName" required>
 
       <div id="guestList"></div>
 
@@ -56,20 +58,63 @@
     const langSelect = document.getElementById('lang');
 
     const texts = {
-      zh: { title:"护照信息上传", main:"预订人姓名", add:"➕ 添加住客", submit:"提交", del:"删除" },
-      ja: { title:"パスポート情報アップロード", main:"予約者氏名", add:"➕ 宿泊者追加", submit:"送信", del:"削除" },
-      en: { title:"Upload Passport Info", main:"Main Guest Name", add:"➕ Add Guest", submit:"Submit", del:"Delete" },
+      zh: {
+        title: "护照信息上传",
+        main: "预订人姓名",
+        dates: "入住日期（到达日 - 离开日）",
+        room: "房间号 / 房源名",
+        add: "➕ 添加住客",
+        submit: "提交",
+        del: "删除",
+      },
+      ja: {
+        title: "パスポート情報アップロード",
+        main: "予約者氏名",
+        dates: "宿泊日（チェックイン - チェックアウト）",
+        room: "部屋番号 / 施設名",
+        add: "➕ 宿泊者追加",
+        submit: "送信",
+        del: "削除",
+      },
+      en: {
+        title: "Upload Passport Info",
+        main: "Main Guest Name",
+        dates: "Stay Dates (Check-in - Check-out)",
+        room: "Room Number / Property Name",
+        add: "➕ Add Guest",
+        submit: "Submit",
+        del: "Delete",
+      },
     };
 
+    // 多语言切换
     langSelect.addEventListener('change', () => {
       const t = texts[langSelect.value];
       document.getElementById('title').textContent = t.title;
       document.getElementById('label-main').textContent = t.main;
+      document.getElementById('label-dates').textContent = t.dates;
+      document.getElementById('label-room').textContent = t.room;
       addGuestBtn.textContent = t.add;
       document.getElementById('submitBtn').textContent = t.submit;
       document.querySelectorAll('.delete').forEach(btn => btn.textContent = t.del);
     });
 
+    // 默认入住日期 = 今日
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("checkin").value = today;
+    document.getElementById("checkin").min = today;
+    document.getElementById("checkout").min = today;
+
+    // 当入住日期变化时自动调整退房最早日期
+    document.getElementById("checkin").addEventListener("change", () => {
+      const checkinDate = document.getElementById("checkin").value;
+      document.getElementById("checkout").min = checkinDate;
+      if (document.getElementById("checkout").value < checkinDate) {
+        document.getElementById("checkout").value = checkinDate;
+      }
+    });
+
+    // 添加住客
     addGuestBtn.addEventListener('click', () => {
       const t = texts[langSelect.value];
       const div = document.createElement('div');
@@ -85,6 +130,7 @@
       guestList.appendChild(div);
     });
 
+    // 提交表单
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const formData = new FormData();
@@ -115,10 +161,10 @@
           method: "POST",
           body: formData,
         });
-        if (res.ok) alert("上传成功 / Upload complete!");
-        else alert("上传失败，请重试 / Upload failed, please retry.");
+        if (res.ok) alert("✅ 上传成功 / Upload complete!");
+        else alert("⚠️ 上传失败，请重试 / Upload failed, please retry.");
       } catch (err) {
-        alert("网络错误，请稍后重试 / Network error, please retry.");
+        alert("🌐 网络错误，请稍后重试 / Network error, please retry.");
       }
       form.reset();
       guestList.innerHTML = "";
