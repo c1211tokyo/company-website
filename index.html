@@ -10,7 +10,7 @@
   <meta name="keywords" content="一二一一,ジュウニジュウイチ,株式会社一二一一,1211,宿栖東京,東京,民宿,旅館,投資移民,自媒体,観光サービス" />
   <meta name="robots" content="index, follow" />
 
-  <!-- OGP / SNS -->
+  <!-- OGP / SNS 预览 -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="株式会社一二一一 | 宿栖東京" />
   <meta property="og:description" content="東京を、もっと自由にもっと特別に。株式会社一二一一（1211 Co., Ltd.）は、東京での宿泊・観光体験をデザインする『宿栖東京』ブランドを展開。" />
@@ -18,147 +18,248 @@
   <meta property="og:site_name" content="株式会社一二一一 | 1211 Co., Ltd." />
   <meta property="og:image" content="https://1211.world/homepic/SHUKUSEI.png" />
 
-  <!-- Twitter -->
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="株式会社一二一一 | 宿栖東京" />
   <meta name="twitter:description" content="東京を、もっと自由にもっと特別に。民宿・旅館運営、投資移民コンサルティング、自媒体運営、各種旅行関連サービス。" />
   <meta name="twitter:image" content="https://1211.world/homepic/SHUKUSEI.png" />
 
-  <!-- Tailwind -->
+  <!-- 站点地图 -->
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://1211.world/sitemap.xml" />
+
+  <!-- Schema.org 组织结构化数据 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "株式会社一二一一",
+    "alternateName": "1211 Co., Ltd.",
+    "url": "https://1211.world",
+    "logo": "https://1211.world/homepic/SHUKUSEI.png",
+    "sameAs": [
+      "https://weixin.qq.com/",
+      "https://www.xiaohongshu.com/",
+      "https://www.douyin.com/"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "JP",
+      "addressRegion": "東京都",
+      "addressLocality": "墨田区",
+      "streetAddress": "石原2-16-2 宿栖両国A",
+      "postalCode": "130-0011"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+81-70-9235-7133",
+      "contactType": "customer service",
+      "availableLanguage": ["Japanese", "Chinese", "English"]
+    }
+  }
+  </script>
+
+  <!-- 样式 -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root {
-      --muted-ink: #374151;
+      --muted-ink: #4b5563;
       --muted-ink-2: #6b7280;
       --card-bg: #ffffff;
-      --page-bg-from: #f9fafb;
-      --page-bg-to: #f3f4f6;
+      --page-bg-from: #f4f6f7;
+      --page-bg-to: #efeff0;
     }
-    .soft-shadow { box-shadow: 0 8px 24px rgba(0,0,0,0.05); }
+    .soft-shadow { box-shadow: 0 6px 22px rgba(16,24,40,0.06); }
     .text-compact p { line-height: 1.65; }
-    .nav-link {
-      position: relative;
-      transition: color 0.2s;
-    }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -2px; left: 0;
-      width: 0%; height: 1px;
-      background: currentColor;
-      transition: width 0.3s;
-    }
-    .nav-link:hover::after { width: 100%; }
   </style>
 </head>
 
 <body class="bg-gradient-to-b from-[var(--page-bg-from)] to-[var(--page-bg-to)] text-[var(--muted-ink)] antialiased">
 
   <!-- Header -->
-  <header class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between sticky top-0 bg-white/80 backdrop-blur-md shadow-sm z-40 transition">
-    <div class="flex items-center gap-4">
-      <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-gray-700 to-gray-500 soft-shadow">
-        <span class="text-white font-bold text-lg">宿栖</span>
-      </div>
-      <div>
-        <div class="text-lg md:text-xl font-semibold tracking-wide">1211 Co., Ltd.</div>
-        <div class="text-xs text-gray-500">東京の旅をデザインする</div>
-      </div>
+ <header class="max-w-7xl mx-auto px-6 py-8 flex items-center justify-between">
+  <div class="flex items-center gap-4">
+    <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-gray-600 to-gray-500 soft-shadow">
+      <span class="text-white font-bold text-lg">宿栖</span>
     </div>
+    <div>
+      <div class="text-lg md:text-xl font-semibold tracking-wide">1211 Co., Ltd.</div>
+      <div class="text-xs text-gray-500">東京の旅をデザインする</div>
+    </div>
+  </div>
 
-    <!-- 桌面导航 -->
-    <nav class="hidden md:flex text-sm space-x-6 font-medium">
-      <a href="#services" class="nav-link hover:text-gray-800">More</a>
-      <a href="about.html" class="nav-link hover:text-gray-800">About</a>
-      <a href="#contact" class="nav-link hover:text-gray-800">Contact</a>
-      <a href="http://book.1211.world" target="_blank" rel="noopener noreferrer" class="nav-link hover:text-gray-800">Book</a>
-    </nav>
-
-    <!-- 手机导航按钮 -->
-    <button id="menuBtn" class="md:hidden text-2xl text-gray-700 focus:outline-none">☰</button>
-  </header>
-
-  <!-- 手机菜单 -->
-  <nav id="mobileMenu" class="hidden flex-col items-center space-y-4 bg-white border-t py-4 shadow-md md:hidden">
+  <!-- 桌面导航 -->
+  <nav class="text-sm space-x-4 hidden md:block">
     <a href="#services" class="hover:underline">More</a>
     <a href="about.html" class="hover:underline">About</a>
     <a href="#contact" class="hover:underline">Contact</a>
     <a href="http://book.1211.world" target="_blank" rel="noopener noreferrer" class="hover:underline">Book</a>
   </nav>
 
-  <main class="max-w-7xl mx-auto px-6 pb-20">
+  <!-- 手机导航按钮 -->
+  <button id="menuBtn" class="md:hidden text-gray-700 text-2xl focus:outline-none">☰</button>
+</header>
 
-    <!-- Hero -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mt-10">
-      <div class="text-center md:text-left">
-        <h1 class="font-extrabold leading-tight">
-          <span class="block text-3xl md:text-5xl text-gray-800">東京を、もっと自由にもっと特別に</span>
-          <span class="block mt-2 text-lg md:text-2xl text-gray-400">Discover a New Way to Experience Tokyo</span>
-        </h1>
+<!-- 手机菜单 -->
+<nav id="mobileMenu" class="hidden flex-col items-center space-y-4 bg-white border-t py-4 md:hidden">
+  <a href="#services" class="hover:underline">More</a>
+  <a href="about.html" class="hover:underline">About</a>
+  <a href="#contact" class="hover:underline">Contact</a>
+  <a href="http://book.1211.world" target="_blank" rel="noopener noreferrer" class="hover:underline">Book</a>
+</nav>
 
-        <p class="mt-6 text-base md:text-lg text-gray-700 leading-relaxed">
-          オーダーメイドの旅程、多彩な宿泊施設、心に残るフォト体験。私たちは、あなたの東京滞在を快適で忘れられない思い出に変えます。
-        </p>
+<script>
+  document.getElementById('menuBtn').addEventListener('click', function () {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('hidden');
+  });
+</script>
 
-        <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
-          <a href="#contact" class="inline-block px-6 py-3 rounded-lg bg-gray-800 text-white font-medium shadow hover:shadow-lg hover:bg-gray-900 transition">お問い合わせ / Contact</a>
-          <a href="#services" class="inline-block px-6 py-3 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition">さらに / More</a>
-        </div>
-      </div>
+<!-- Hero -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mt-6">
+  <div class="text-center md:text-left">
+    <h1 class="font-extrabold leading-tight">
+      <span class="block text-3xl md:text-5xl text-gray-800 whitespace-normal md:whitespace-nowrap">
+        東京を、もっと自由にもっと特別に
+      </span>
+      <span class="block mt-2 text-lg md:text-2xl text-gray-300">
+        Discover a New Way to Experience Tokyo
+      </span>
+    </h1>
 
-      <div class="flex justify-center md:justify-end">
-        <div class="w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-2xl bg-gradient-to-b from-gray-50 to-gray-100 overflow-hidden soft-shadow flex items-center justify-center">
-          <img src="homepic/SHUKUSEI.png" alt="Tokyo image" class="w-full h-full object-cover" />
-        </div>
-      </div>
-    </section>
+    <p class="mt-6 text-base md:text-lg text-gray-700 leading-relaxed">
+      オーダーメイドの旅程、多彩な宿泊施設、心に残るフォト体験。私たちは、あなたの東京滞在を快適で忘れられない思い出に変えます。
+    </p>
 
-    <!-- Brand -->
-    <section id="about" class="mt-20">
+    <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+      <a href="#contact" class="inline-block px-6 py-3 rounded-lg bg-gray-800 text-white font-medium shadow hover:bg-gray-900 transition">お問い合わせ/Contact Us</a>
+      <a href="#services" class="inline-block px-6 py-3 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 transition">さらに/More</a>
+    </div>
+  </div>
+
+  <div class="flex justify-center md:justify-end">
+    <div class="w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-2xl bg-[linear-gradient(180deg,#f7f6f2,#f1f3f4)] overflow-hidden soft-shadow flex items-center justify-center">
+      <img src="homepic/SHUKUSEI.png" alt="Tokyo image" class="w-full h-full object-cover" />
+    </div>
+  </div>
+</section>
+    
+    <!-- Brand Introduction -->
+    <section id="about" class="mt-16">
       <h2 class="text-2xl font-semibold text-gray-800 mb-6">宿栖東京 ブランド紹介 / Brand Introduction</h2>
       <div class="bg-white border border-gray-200 rounded-2xl p-6 soft-shadow text-sm text-gray-600 leading-relaxed">
-        <p>宿栖東京は、東京での旅における素朴な願いから始まり、東京滞在サービスのリーディングブランドへと成長しました。東京の中心部から出発点とし、「快適さ、細やかさ、多様性」という理念をすべての客室に反映させ、世界中の旅人にとっての「第二の我が家」を心を込めて創り上げています。主な事業分野：民宿・旅館の運営管理、投資移民コンサルティング、自媒体運営など、各種旅行関連サービス。</p>
+        <p>
+          宿栖東京は、東京での旅における素朴な願いから始まり、東京滞在サービスのリーディングブランドへと成長しました。東京の中心部から出発点とし、「快適さ、細やかさ、多様性」という理念をすべての客室に反映させ、世界中の旅人にとっての「第二の我が家」を心を込めて創り上げています。主な事業分野：民宿・旅館の運営管理、投資移民コンサルティング、自媒体運営など、各種旅行関連サービス。
+        </p>
       </div>
     </section>
-
+    
     <!-- Services -->
-    <section id="services" class="mt-16">
+    <section id="services" class="mt-12">
       <h2 class="text-2xl font-semibold text-gray-800 mb-6">サービス / Services</h2>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <article class="p-6 bg-white rounded-2xl border border-gray-200 soft-shadow hover:shadow-lg transition">
+        <article class="p-6 bg-[var(--card-bg)] rounded-2xl border border-gray-200 soft-shadow text-compact">
           <h3 class="font-semibold text-gray-800">カスタム旅程 / Custom Itineraries</h3>
           <p class="mt-3 text-sm text-gray-600">食文化や隠れスポットを含むオーダーメイドプラン。プロカメラマンによる撮影も提供。</p>
         </article>
-        <article class="p-6 bg-white rounded-2xl border border-gray-200 soft-shadow hover:shadow-lg transition">
+
+        <article class="p-6 bg-[var(--card-bg)] rounded-2xl border border-gray-200 soft-shadow text-compact">
           <h3 class="font-semibold text-gray-800">民泊 & 旅館 / Private Lodgings & Inns</h3>
           <p class="mt-3 text-sm text-gray-600">新宿・渋谷・台東・墨田などで多様な宿泊体験を提案。長短期どちらも対応可能。</p>
         </article>
-        <article class="p-6 bg-white rounded-2xl border border-gray-200 soft-shadow hover:shadow-lg transition">
+
+        <article class="p-6 bg-[var(--card-bg)] rounded-2xl border border-gray-200 soft-shadow text-compact">
           <h3 class="font-semibold text-gray-800">メディア運営 / Media & Marketing</h3>
           <p class="mt-3 text-sm text-gray-600">自社メディアと多チャンネル連動でプロモーションを最適化します。</p>
         </article>
       </div>
     </section>
+    
+<!-- Official Accounts (QR) -->
+<section class="mt-16">
+  <h3 class="text-2xl font-semibold text-gray-800 mb-6">公式アカウント / Official Accounts</h3>
+  
+  <!-- Grid：5列布局（小屏幕2列，中屏幕3列，大屏幕5列） -->
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+    
+    <!-- 微信 -->
+    <div class="text-center">
+      <div onclick="openLightbox('homepic/wechat.png')" class="cursor-pointer mx-auto w-auto h-auto bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow hover:scale-105 transition">
+        <img src="homepic/wechat.png" alt="WeChat QR" class="w-full h-full object-contain" />
+      </div>
+      <p class="mt-3 text-sm text-blue-600 hover:underline">
+        <a href="http://text1" target="_blank">微信 / WeChat</a>
+      </p>
+    </div>
+
+    <!-- 小红书 -->
+    <div class="text-center">
+      <div onclick="openLightbox('homepic/xiaohongshu.png')" class="cursor-pointer mx-auto w-auto h-auto bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow hover:scale-105 transition">
+        <img src="homepic/xiaohongshu.png" alt="小红书 QR" class="w-full h-full object-contain" />
+      </div>
+      <p class="mt-3 text-sm text-blue-600 hover:underline">
+        <a href="https://www.xiaohongshu.com/user/profile/63c8478a0000000026011f42?xsec_token=YBfC48QtvEJH5Nfnnkq1XN8EktPSLIFH1HnVofsRSugjg=&xsec_source=app_share&xhsshare=CopyLink&shareRedId=ODY7M0VGNk42NzUyOTgwNjY0OTc1OEtL&apptime=1759294429&share_id=7278ca7999a049ccba23ac185aa827ca" target="_blank">小红书 / Rednote</a>
+      </p>
+    </div>
+
+    <!-- 抖音 -->
+    <div class="text-center">
+      <div onclick="openLightbox('homepic/douyin.png')" class="cursor-pointer mx-auto w-auto h-auto bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow hover:scale-105 transition">
+        <img src="homepic/douyin.png" alt="抖音 QR" class="w-full h-full object-contain" />
+      </div>
+      <p class="mt-3 text-sm text-blue-600 hover:underline">
+        <a href="https://v.douyin.com/NLX7h5yZKSY/" target="_blank">抖音 / Douyin</a>
+      </p>
+    </div>
+
+    <!-- 微博 -->
+    <div class="text-center">
+      <div onclick="openLightbox('homepic/weibo.png')" class="cursor-pointer mx-auto w-auto h-auto bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow hover:scale-105 transition">
+        <img src="homepic/weibo.png" alt="微博 QR" class="w-full h-full object-contain" />
+      </div>
+      <p class="mt-3 text-sm text-blue-600 hover:underline">
+        <a href="https://weibo.com/u/3950407080" target="_blank">微博 / Weibo</a>
+      </p>
+    </div>
+
+    <!-- Bilibili -->
+    <div class="text-center">
+      <div onclick="openLightbox('homepic/bilibili.png')" class="cursor-pointer mx-auto w-auto h-auto bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow hover:scale-105 transition">
+        <img src="homepic/bilibili.png" alt="Bilibili QR" class="w-full h-full object-contain" />
+      </div>
+      <p class="mt-3 text-sm text-blue-600 hover:underline">
+        <a href="https://b23.tv/8ENLYNL" target="_blank">Bilibili</a>
+      </p>
+    </div>
+
+  </div>
+</section>
 
     <!-- Contact -->
-    <section id="contact" class="mt-20 bg-white border border-gray-200 rounded-2xl p-8 soft-shadow">
-      <h3 class="text-xl font-semibold text-gray-800 mb-4">お問い合わせ / Contact</h3>
-      <div class="md:flex md:justify-between gap-6">
-        <div class="md:w-1/2 text-sm text-gray-700 space-y-2">
-          <p class="font-medium">株式会社一二一一（1211 Co., Ltd.）</p>
-          <p>〒130-0011 東京都墨田区石原2-16-2 宿栖両国A</p>
-          <p>TEL: <a href="tel:07092357133" class="text-gray-800 hover:underline">070-9235-7133</a></p>
-          <p>Email: <span id="emailText" class="font-medium">c1211tokyo@gmail.com</span>
-            <button onclick="copyEmail()" class="ml-2 text-xs px-2 py-1 border rounded hover:bg-gray-50">コピー</button>
-          </p>
+    <section id="contact" class="mt-16 bg-white border border-gray-200 rounded-2xl p-8 soft-shadow">
+      <div class="md:flex md:justify-between md:items-start gap-6">
+        <div class="md:w-1/2">
+          <h3 class="text-xl font-semibold text-gray-800">お問い合わせ / Contact</h3>
+          <p class="mt-2 text-gray-600">ご予約・ご質問・メディア取材などお気軽にどうぞ。</p>
+
+          <div class="mt-6 text-sm text-gray-700">
+            <p class="font-medium">株式会社一二一一（1211 Co., Ltd.）</p>
+            <p class="mt-2">〒130-0011 東京都墨田区石原2-16-2 宿栖両国A</p>
+            <p class="mt-2">TEL: <a href="tel:07092357133" class="text-gray-800 hover:underline">070-9235-7133</a></p>
+            <p class="mt-2">Email: <span id="emailText" class="font-medium">c1211tokyo@gmail.com</span>
+              <button onclick="copyEmail()" class="ml-2 text-xs px-2 py-1 border rounded hover:bg-gray-50">コピー</button>
+            </p>
+          </div>
         </div>
+
         <div class="md:w-1/2 mt-6 md:mt-0">
           <form action="https://formspree.io/f/xvgbekga" method="POST" class="space-y-4">
             <input name="name" required class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm" placeholder="お名前 / Your name" />
             <input name="email" type="email" required class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm" placeholder="メールアドレス / Email" />
             <textarea name="message" rows="4" required class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm" placeholder="メッセージ / Message"></textarea>
+            <input type="hidden" name="_subject" value="新しいお問い合わせが届きました / New Contact Message" />
+            <input type="hidden" name="_language" value="ja" />
             <div class="flex justify-end">
-              <button type="submit" class="px-6 py-2 rounded-lg bg-gray-800 text-white hover:bg-gray-900 shadow hover:shadow-lg transition">送信 / Send</button>
+              <button type="submit" class="px-6 py-2 rounded-lg bg-gray-800 text-white hover:bg-gray-900">送信 / Send</button>
             </div>
           </form>
         </div>
@@ -166,20 +267,19 @@
     </section>
 
     <!-- Footer -->
-    <footer class="mt-16 border-t pt-8 text-center text-sm text-gray-500">
-      <p class="font-semibold text-gray-800">株式会社一二一一</p>
-      <p class="mt-1">© 2025 1211 Co., Ltd. All rights reserved.</p>
+    <footer class="mt-16 border-t pt-8 text-sm text-gray-500">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-6">
+        <div>
+          <p class="font-semibold text-gray-800">株式会社一二一一</p>
+          <p class="mt-2">© 2025 1211 Co., Ltd.</p>
+        </div>
+      </div>
     </footer>
+
   </main>
 
-  <!-- Scripts -->
+  <!-- Script -->
   <script>
-    const btn = document.getElementById('menuBtn');
-    const menu = document.getElementById('mobileMenu');
-    btn.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
-    });
-
     function copyEmail() {
       const text = document.getElementById('emailText').innerText;
       navigator.clipboard.writeText(text).then(() => {
@@ -188,6 +288,21 @@
         alert('コピー失敗しました。手動でコピーしてください：' + text);
       });
     }
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.remove('hidden');
+      document.getElementById('lightbox').classList.add('flex');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.add('hidden');
+      document.getElementById('lightbox').classList.remove('flex');
+    }
   </script>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50">
+    <span class="absolute top-6 right-8 text-white text-4xl cursor-pointer" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="" class="max-w-full max-h-full rounded-lg shadow-lg border border-white" />
+  </div>
 </body>
 </html>
