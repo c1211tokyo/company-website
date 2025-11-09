@@ -75,25 +75,42 @@
 
 <body class="bg-gradient-to-b from-[var(--page-bg-from)] to-[var(--page-bg-to)] text-[var(--muted-ink)] antialiased">
 
-  <!-- Header -->
-  <header class="max-w-7xl mx-auto px-6 py-8 flex items-center justify-between">
-    <div class="flex items-center gap-4">
-      <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-gray-600 to-gray-500 soft-shadow">
-        <span class="text-white font-bold text-lg">宿栖</span>
-      </div>
-      <div>
-        <div class="text-lg md:text-xl font-semibold tracking-wide">1211 Co., Ltd.</div>
-        <div class="text-xs text-gray-500">東京の旅をデザインする</div>
-      </div>
+<!-- Header -->
+<header class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
+  <!-- 左侧 Logo -->
+  <div class="flex items-center gap-4">
+    <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-gray-600 to-gray-500 soft-shadow">
+      <span class="text-white font-bold text-lg">宿栖</span>
     </div>
-    <!-- 右侧导航 -->
-<nav class="text-sm space-x-4">
-  <a href="#services" class="hover:underline">More</a>
-  <a href="about.html" class="hover:underline">About</a>
-  <a href="#contact" class="hover:underline">Contact</a>
-  <a href="http://book.1211.world" target="_blank" rel="noopener noreferrer" class="hover:underline">Book</a>
+    <div>
+      <div class="text-lg md:text-xl font-semibold tracking-wide">1211 Co., Ltd.</div>
+      <div class="text-xs text-gray-500">東京の旅をデザインする</div>
+    </div>
+  </div>
+
+  <!-- 桌面导航（仅大屏显示） -->
+  <nav class="hidden md:flex text-sm space-x-6">
+    <a href="#services" class="hover:underline">More</a>
+    <a href="about.html" class="hover:underline">About</a>
+    <a href="#contact" class="hover:underline">Contact</a>
+    <a href="http://book.1211.world" target="_blank" rel="noopener noreferrer" class="hover:underline">Book</a>
+  </nav>
+
+  <!-- 手机菜单按钮（小屏显示） -->
+  <button id="menu-btn" class="md:hidden flex flex-col justify-center gap-1.5 p-2 border border-gray-300 rounded-lg hover:bg-gray-100 transition">
+    <span class="block w-6 h-0.5 bg-gray-700"></span>
+    <span class="block w-6 h-0.5 bg-gray-700"></span>
+    <span class="block w-6 h-0.5 bg-gray-700"></span>
+  </button>
+</header>
+
+<!-- 手机菜单（默认隐藏） -->
+<nav id="mobile-menu" class="hidden md:hidden flex-col bg-white border-t border-gray-200 text-center py-4 space-y-3 shadow-lg">
+  <a href="#services" class="block hover:underline py-1">More</a>
+  <a href="about.html" class="block hover:underline py-1">About</a>
+  <a href="#contact" class="block hover:underline py-1">Contact</a>
+  <a href="http://book.1211.world" target="_blank" rel="noopener noreferrer" class="block hover:underline py-1">Book</a>
 </nav>
-  </header>
 
   <main class="max-w-7xl mx-auto px-6 pb-20">
 
@@ -280,6 +297,15 @@
       document.getElementById('lightbox').classList.add('hidden');
       document.getElementById('lightbox').classList.remove('flex');
     }
+    // 手机菜单展开/收起逻辑
+document.addEventListener("DOMContentLoaded", function () {
+  const menuBtn = document.getElementById("menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+
+  menuBtn.addEventListener("click", function () {
+    mobileMenu.classList.toggle("hidden");
+  });
+});
   </script>
 
   <!-- Lightbox -->
