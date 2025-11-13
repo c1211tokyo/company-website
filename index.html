@@ -6,14 +6,17 @@
 
   <!-- 基本信息 -->
   <title>株式会社一二一一 | 1211 Co., Ltd. — 宿栖東京</title>
-  <meta name="description" content="株式会社一二一一（1211 Co., Ltd.）は東京を拠点に、民宿・旅館の運営管理、投資移民コンサルティング、自媒体運営、各種旅行関連サービスを展開する『宿栖東京』ブランドを運営しています。" />
+  <meta name="description" content="株式会社一二一一(1211 Co., Ltd.)は東京を拠点に、民宿・旅館の運営管理、投資移民コンサルティング、自媒体運営、各種旅行関連サービスを展開する『宿栖東京』ブランドを運営しています。" />
   <meta name="keywords" content="一二一一,ジュウニジュウイチ,株式会社一二一一,1211,宿栖東京,東京,民宿,旅館,投資移民,自媒体,観光サービス" />
   <meta name="robots" content="index, follow" />
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://1211.world/" />
 
   <!-- OGP / SNS 预览 -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="株式会社一二一一 | 宿栖東京" />
-  <meta property="og:description" content="東京を、もっと自由にもっと特別に。株式会社一二一一（1211 Co., Ltd.）は、東京での宿泊・観光体験をデザインする『宿栖東京』ブランドを展開。" />
+  <meta property="og:description" content="東京を、もっと自由にもっと特別に。株式会社一二一一(1211 Co., Ltd.)は、東京での宿泊・観光体験をデザインする『宿栖東京』ブランドを展開。" />
   <meta property="og:url" content="https://1211.world/" />
   <meta property="og:site_name" content="株式会社一二一一 | 1211 Co., Ltd." />
   <meta property="og:image" content="https://1211.world/homepic/SHUKUSEI.png" />
@@ -26,6 +29,9 @@
 
   <!-- 站点地图 -->
   <link rel="sitemap" type="application/xml" title="Sitemap" href="https://1211.world/sitemap.xml" />
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://cdn.tailwindcss.com">
 
   <!-- Schema.org 组织结构化数据 -->
   <script type="application/ld+json">
@@ -68,12 +74,47 @@
       --page-bg-from: #f4f6f7;
       --page-bg-to: #efeff0;
     }
+    html {
+      scroll-behavior: smooth;
+    }
     .soft-shadow { box-shadow: 0 6px 22px rgba(16,24,40,0.06); }
     .text-compact p { line-height: 1.65; }
+    
+    /* Toast notification */
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #1f2937;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      pointer-events: none;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .toast.error {
+      background: #dc2626;
+    }
+    
+    /* Mobile menu transition */
+    #mobile-menu {
+      transition: all 0.3s ease;
+    }
   </style>
 </head>
 
 <body class="bg-gradient-to-b from-[var(--page-bg-from)] to-[var(--page-bg-to)] text-[var(--muted-ink)] antialiased">
+
+<!-- Toast Container -->
+<div id="toast" class="toast"></div>
 
 <!-- Header -->
 <header class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
@@ -88,7 +129,7 @@
     </div>
   </div>
 
-  <!-- 桌面导航（仅大屏显示） -->
+  <!-- 桌面导航(仅大屏显示) -->
   <nav class="hidden md:flex text-sm space-x-6">
     <a href="#services" class="hover:underline">More</a>
     <a href="about.html" class="hover:underline">About</a>
@@ -96,20 +137,20 @@
     <a href="http://book.1211.world" target="_blank" rel="noopener noreferrer" class="hover:underline">Book</a>
   </nav>
 
-  <!-- 手机菜单按钮（小屏显示） -->
-  <button id="menu-btn" class="md:hidden flex flex-col justify-center gap-1.5 p-2 border border-gray-300 rounded-lg hover:bg-gray-100 transition">
+  <!-- 手机菜单按钮(小屏显示) -->
+  <button id="menu-btn" class="md:hidden flex flex-col justify-center gap-1.5 p-2 border border-gray-300 rounded-lg hover:bg-gray-100 transition" aria-label="メニューを開く">
     <span class="block w-6 h-0.5 bg-gray-700"></span>
     <span class="block w-6 h-0.5 bg-gray-700"></span>
     <span class="block w-6 h-0.5 bg-gray-700"></span>
   </button>
 </header>
 
-<!-- 手机菜单（默认隐藏） -->
+<!-- 手机菜单(默认隐藏) -->
 <nav id="mobile-menu" class="hidden md:hidden flex-col bg-white border-t border-gray-200 text-center py-4 space-y-3 shadow-lg">
-  <a href="#services" class="block hover:underline py-1">More</a>
-  <a href="about.html" class="block hover:underline py-1">About</a>
-  <a href="#contact" class="block hover:underline py-1">Contact</a>
-  <a href="http://book.1211.world" target="_blank" rel="noopener noreferrer" class="block hover:underline py-1">Book</a>
+  <a href="#services" class="block hover:underline py-1 mobile-link">More</a>
+  <a href="about.html" class="block hover:underline py-1 mobile-link">About</a>
+  <a href="#contact" class="block hover:underline py-1 mobile-link">Contact</a>
+  <a href="http://book.1211.world" target="_blank" rel="noopener noreferrer" class="block hover:underline py-1 mobile-link">Book</a>
 </nav>
 
   <main class="max-w-7xl mx-auto px-6 pb-20">
@@ -138,7 +179,7 @@
 
   <div class="flex justify-center md:justify-end">
     <div class="w-72 h-72 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-2xl bg-[linear-gradient(180deg,#f7f6f2,#f1f3f4)] overflow-hidden soft-shadow flex items-center justify-center">
-      <img src="homepic/SHUKUSEI.png" alt="Tokyo image" class="w-full h-full object-cover" />
+      <img src="homepic/SHUKUSEI.png" alt="宿栖東京 - 東京の旅をデザインする、快適で忘れられない滞在体験" class="w-full h-full object-cover" loading="lazy" />
     </div>
   </div>
 </section>
@@ -148,7 +189,7 @@
       <h2 class="text-2xl font-semibold text-gray-800 mb-6">宿栖東京 ブランド紹介 / Brand Introduction</h2>
       <div class="bg-white border border-gray-200 rounded-2xl p-6 soft-shadow text-sm text-gray-600 leading-relaxed">
         <p>
-          宿栖東京は、東京での旅における素朴な願いから始まり、東京滞在サービスのリーディングブランドへと成長しました。東京の中心部から出発点とし、「快適さ、細やかさ、多様性」という理念をすべての客室に反映させ、世界中の旅人にとっての「第二の我が家」を心を込めて創り上げています。主な事業分野：民宿・旅館の運営管理、投資移民コンサルティング、自媒体運営など、各種旅行関連サービス。
+          宿栖東京は、東京での旅における素朴な願いから始まり、東京滞在サービスのリーディングブランドへと成長しました。東京の中心部から出発点とし、「快適さ、細やかさ、多様性」という理念をすべての客室に反映させ、世界中の旅人にとっての「第二の我が家」を心を込めて創り上げています。主な事業分野:民宿・旅館の運営管理、投資移民コンサルティング、自媒体運営など、各種旅行関連サービス。
         </p>
       </div>
     </section>
@@ -178,56 +219,56 @@
 <section class="mt-16">
   <h3 class="text-2xl font-semibold text-gray-800 mb-6">公式アカウント / Official Accounts</h3>
   
-  <!-- Grid：5列布局（小屏幕2列，中屏幕3列，大屏幕5列） -->
+  <!-- Grid:5列布局(小屏幕2列、中屏幕3列、大屏幕5列) -->
   <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
     
     <!-- 微信 -->
     <div class="text-center">
       <div onclick="openLightbox('homepic/wechat.png')" class="cursor-pointer mx-auto w-auto h-auto bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow hover:scale-105 transition">
-        <img src="homepic/wechat.png" alt="WeChat QR" class="w-full h-full object-contain" />
+        <img src="homepic/wechat.png" alt="宿栖東京 WeChat QRコード" class="w-full h-full object-contain" loading="lazy" />
       </div>
       <p class="mt-3 text-sm text-blue-600 hover:underline">
-        <a href="http://text1" target="_blank">微信 / WeChat</a>
+        <a href="#" onclick="return false;">微信 / WeChat</a>
       </p>
     </div>
 
     <!-- 小红书 -->
     <div class="text-center">
       <div onclick="openLightbox('homepic/xiaohongshu.png')" class="cursor-pointer mx-auto w-auto h-auto bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow hover:scale-105 transition">
-        <img src="homepic/xiaohongshu.png" alt="小红书 QR" class="w-full h-full object-contain" />
+        <img src="homepic/xiaohongshu.png" alt="宿栖東京 小红书 QRコード" class="w-full h-full object-contain" loading="lazy" />
       </div>
       <p class="mt-3 text-sm text-blue-600 hover:underline">
-        <a href="https://www.xiaohongshu.com/user/profile/63c8478a0000000026011f42?xsec_token=YBfC48QtvEJH5Nfnnkq1XN8EktPSLIFH1HnVofsRSugjg=&xsec_source=app_share&xhsshare=CopyLink&shareRedId=ODY7M0VGNk42NzUyOTgwNjY0OTc1OEtL&apptime=1759294429&share_id=7278ca7999a049ccba23ac185aa827ca" target="_blank">小红书 / Rednote</a>
+        <a href="https://www.xiaohongshu.com/user/profile/63c8478a0000000026011f42?xsec_token=YBfC48QtvEJH5Nfnnkq1XN8EktPSLIFH1HnVofsRSugjg=&xsec_source=app_share&xhsshare=CopyLink&shareRedId=ODY7M0VGNk42NzUyOTgwNjY0OTc1OEtL&apptime=1759294429&share_id=7278ca7999a049ccba23ac185aa827ca" target="_blank" rel="noopener noreferrer">小红书 / Rednote</a>
       </p>
     </div>
 
     <!-- 抖音 -->
     <div class="text-center">
       <div onclick="openLightbox('homepic/douyin.png')" class="cursor-pointer mx-auto w-auto h-auto bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow hover:scale-105 transition">
-        <img src="homepic/douyin.png" alt="抖音 QR" class="w-full h-full object-contain" />
+        <img src="homepic/douyin.png" alt="宿栖東京 抖音 QRコード" class="w-full h-full object-contain" loading="lazy" />
       </div>
       <p class="mt-3 text-sm text-blue-600 hover:underline">
-        <a href="https://v.douyin.com/NLX7h5yZKSY/" target="_blank">抖音 / Douyin</a>
+        <a href="https://v.douyin.com/NLX7h5yZKSY/" target="_blank" rel="noopener noreferrer">抖音 / Douyin</a>
       </p>
     </div>
 
     <!-- 微博 -->
     <div class="text-center">
       <div onclick="openLightbox('homepic/weibo.png')" class="cursor-pointer mx-auto w-auto h-auto bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow hover:scale-105 transition">
-        <img src="homepic/weibo.png" alt="微博 QR" class="w-full h-full object-contain" />
+        <img src="homepic/weibo.png" alt="宿栖東京 微博 QRコード" class="w-full h-full object-contain" loading="lazy" />
       </div>
       <p class="mt-3 text-sm text-blue-600 hover:underline">
-        <a href="https://weibo.com/u/3950407080" target="_blank">微博 / Weibo</a>
+        <a href="https://weibo.com/u/3950407080" target="_blank" rel="noopener noreferrer">微博 / Weibo</a>
       </p>
     </div>
 
     <!-- Bilibili -->
     <div class="text-center">
       <div onclick="openLightbox('homepic/bilibili.png')" class="cursor-pointer mx-auto w-auto h-auto bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden soft-shadow hover:scale-105 transition">
-        <img src="homepic/bilibili.png" alt="Bilibili QR" class="w-full h-full object-contain" />
+        <img src="homepic/bilibili.png" alt="宿栖東京 Bilibili QRコード" class="w-full h-full object-contain" loading="lazy" />
       </div>
       <p class="mt-3 text-sm text-blue-600 hover:underline">
-        <a href="https://b23.tv/8ENLYNL" target="_blank">Bilibili</a>
+        <a href="https://b23.tv/8ENLYNL" target="_blank" rel="noopener noreferrer">Bilibili</a>
       </p>
     </div>
 
@@ -242,24 +283,24 @@
           <p class="mt-2 text-gray-600">ご予約・ご質問・メディア取材などお気軽にどうぞ。</p>
 
           <div class="mt-6 text-sm text-gray-700">
-            <p class="font-medium">株式会社一二一一（1211 Co., Ltd.）</p>
+            <p class="font-medium">株式会社一二一一(1211 Co., Ltd.)</p>
             <p class="mt-2">〒130-0011 東京都墨田区石原2-16-2 宿栖両国A</p>
-            <p class="mt-2">TEL: <a href="tel:07092357133" class="text-gray-800 hover:underline">070-9235-7133</a></p>
+            <p class="mt-2">TEL: <a href="tel:+81-70-9235-7133" class="text-gray-800 hover:underline">070-9235-7133</a></p>
             <p class="mt-2">Email: <span id="emailText" class="font-medium">c1211tokyo@gmail.com</span>
-              <button onclick="copyEmail()" class="ml-2 text-xs px-2 py-1 border rounded hover:bg-gray-50">コピー</button>
+              <button onclick="copyEmail()" class="ml-2 text-xs px-2 py-1 border rounded hover:bg-gray-50 transition">コピー</button>
             </p>
           </div>
         </div>
 
         <div class="md:w-1/2 mt-6 md:mt-0">
-          <form action="https://formspree.io/f/xvgbekga" method="POST" class="space-y-4">
-            <input name="name" required class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm" placeholder="お名前 / Your name" />
-            <input name="email" type="email" required class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm" placeholder="メールアドレス / Email" />
-            <textarea name="message" rows="4" required class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm" placeholder="メッセージ / Message"></textarea>
+          <form id="contactForm" action="https://formspree.io/f/xvgbekga" method="POST" class="space-y-4">
+            <input name="name" required class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400" placeholder="お名前 / Your name" />
+            <input name="email" type="email" required class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400" placeholder="メールアドレス / Email" />
+            <textarea name="message" rows="4" required class="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400" placeholder="メッセージ / Message"></textarea>
             <input type="hidden" name="_subject" value="新しいお問い合わせが届きました / New Contact Message" />
             <input type="hidden" name="_language" value="ja" />
             <div class="flex justify-end">
-              <button type="submit" class="px-6 py-2 rounded-lg bg-gray-800 text-white hover:bg-gray-900">送信 / Send</button>
+              <button type="submit" id="submitBtn" class="px-6 py-2 rounded-lg bg-gray-800 text-white hover:bg-gray-900 transition disabled:opacity-50 disabled:cursor-not-allowed">送信 / Send</button>
             </div>
           </form>
         </div>
@@ -280,38 +321,91 @@
 
   <!-- Script -->
   <script>
-    function copyEmail() {
-      const text = document.getElementById('emailText').innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        alert('Email 地址已复制：' + text);
-      }).catch(() => {
-        alert('コピー失敗しました。手動でコピーしてください：' + text);
-      });
+    // Toast notification function
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.className = 'toast show' + (type === 'error' ? ' error' : '');
+      
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
     }
+
+    // Copy email function
+    async function copyEmail() {
+      const text = document.getElementById('emailText').innerText;
+      try {
+        await navigator.clipboard.writeText(text);
+        showToast('メールアドレスをコピーしました');
+      } catch (err) {
+        showToast('コピーに失敗しました', 'error');
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+          document.execCommand('copy');
+          showToast('メールアドレスをコピーしました');
+        } catch (e) {
+          showToast('コピーに失敗しました', 'error');
+        }
+        document.body.removeChild(textArea);
+      }
+    }
+
+    // Lightbox functions
     function openLightbox(src) {
       document.getElementById('lightbox-img').src = src;
       document.getElementById('lightbox').classList.remove('hidden');
       document.getElementById('lightbox').classList.add('flex');
     }
+
     function closeLightbox() {
       document.getElementById('lightbox').classList.add('hidden');
       document.getElementById('lightbox').classList.remove('flex');
     }
-    // 手机菜单展开/收起逻辑
-document.addEventListener("DOMContentLoaded", function () {
-  const menuBtn = document.getElementById("menu-btn");
-  const mobileMenu = document.getElementById("mobile-menu");
 
-  menuBtn.addEventListener("click", function () {
-    mobileMenu.classList.toggle("hidden");
-  });
-});
+    // Mobile menu toggle
+    document.addEventListener("DOMContentLoaded", function () {
+      const menuBtn = document.getElementById("menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      menuBtn.addEventListener("click", function () {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      // Close mobile menu when clicking a link
+      const mobileLinks = document.querySelectorAll('.mobile-link');
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+        });
+      });
+
+      // Form submission handling
+      const form = document.getElementById('contactForm');
+      const submitBtn = document.getElementById('submitBtn');
+      
+      form.addEventListener('submit', function(e) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = '送信中... / Sending...';
+      });
+    });
+
+    // Close lightbox on escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeLightbox();
+      }
+    });
   </script>
 
   <!-- Lightbox -->
-  <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50">
-    <span class="absolute top-6 right-8 text-white text-4xl cursor-pointer" onclick="closeLightbox()">&times;</span>
-    <img id="lightbox-img" src="" class="max-w-full max-h-full rounded-lg shadow-lg border border-white" />
+  <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50" onclick="closeLightbox()">
+    <span class="absolute top-6 right-8 text-white text-4xl cursor-pointer hover:text-gray-300 transition" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="" alt="QR Code" class="max-w-full max-h-full rounded-lg shadow-lg border border-white" onclick="event.stopPropagation()" />
   </div>
 </body>
 </html>
