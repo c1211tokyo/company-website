@@ -170,7 +170,7 @@
       opacity: 1;
     }
 
-    /* 改进菜单按钮图标切换 */
+    /* 修复：改进菜单按钮图标切换 */
     .menu-icon line {
       transition: all 0.3s ease;
       transform-origin: center;
@@ -184,7 +184,7 @@
       color: white;
     }
 
-    /* 添加焦点样式提升无障碍性 */
+    /* 优化：添加焦点样式提升无障碍性 */
     button:focus-visible, a:focus-visible {
       outline: 2px solid var(--m-accent);
       outline-offset: 2px;
@@ -210,7 +210,7 @@
 
     <nav class="hidden md:flex text-sm font-medium tracking-wide space-x-8 text-[var(--m-text-main)]">
       <a href="#services" class="hover:text-[var(--m-accent)] transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-[var(--m-accent)] after:left-0 after:-bottom-1 after:transition-all hover:after:w-full">More</a>
-      <a href="#about" class="hover:text-[var(--m-accent)] transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-[var(--m-accent)] after:left-0 after:-bottom-1 after:transition-all hover:after:w-full">About</a>
+      <a href="about.html" class="hover:text-[var(--m-accent)] transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-[var(--m-accent)] after:left-0 after:-bottom-1 after:transition-all hover:after:w-full">About</a>
       <a href="#contact" class="hover:text-[var(--m-accent)] transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-[var(--m-accent)] after:left-0 after:-bottom-1 after:transition-all hover:after:w-full">Contact</a>
       <a href="http://book.1211.world" target="_blank" rel="noopener noreferrer" class="px-5 py-2 rounded-full border border-[var(--m-accent)] text-[var(--m-accent)] hover:bg-[var(--m-accent)] hover:text-white transition-all duration-300">Book</a>
     </nav>
