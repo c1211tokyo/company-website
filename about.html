@@ -1,48 +1,404 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" class="scroll-smooth">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>About — 1211 Co., Ltd.</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gradient-to-b from-gray-50 to-gray-100 text-gray-700 antialiased">
 
-  <!-- Header (和首页一致，导航保持相同) -->
-  <header class="max-w-7xl mx-auto px-6 py-8 flex items-center justify-between">
-    <div class="flex items-center gap-4">
-      <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-gradient-to-br from-gray-600 to-gray-500">
-        <span class="text-white font-bold text-lg">宿栖</span>
+  <title>About Us — 株式会社一二一一 | 1211 Co., Ltd.</title>
+  <meta name="description" content="株式会社一二一一の企業情報、ブランド理念、サービス内容をご紹介します。2018年創業以来、東京での宿泊体験をデザインし続けています。" />
+  <meta name="keywords" content="一二一一,1211,宿栖東京,会社概要,企業情報,About" />
+  
+  <link rel="canonical" href="https://1211.world/about.html" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --m-bg: #FDFCF8;
+      --m-text-main: #4A4A4A;
+      --m-text-muted: #808080;
+      --m-accent: #7D9D9C;
+      --m-accent-dark: #5F7A79;
+      --m-card-bg: rgba(255, 255, 255, 0.8);
+      --glass-border: rgba(255, 255, 255, 0.6);
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background-color: var(--m-bg);
+      color: var(--m-text-main);
+      background-image: radial-gradient(#E6E6E6 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    h1, h2, h3, .en-font {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .glass {
+      background: var(--m-card-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+    }
+
+    .transition-smooth {
+      transition: all 0.3s ease;
+    }
+
+    .soft-shadow {
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+    }
+    .soft-shadow:hover {
+      box-shadow: 0 20px 40px -10px rgba(125, 157, 156, 0.15);
+      transform: translateY(-5px);
+    }
+
+    #mobile-menu {
+      transition: max-height 0.4s ease-in-out, opacity 0.4s ease;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+    }
+    #mobile-menu.open {
+      max-height: 300px;
+      opacity: 1;
+    }
+
+    .menu-icon line {
+      transition: all 0.3s ease;
+      transform-origin: center;
+    }
+    .menu-open .line-1 { transform: rotate(45deg) translateY(6px); }
+    .menu-open .line-2 { opacity: 0; }
+    .menu-open .line-3 { transform: rotate(-45deg) translateY(-6px); }
+
+    ::selection {
+      background: var(--m-accent);
+      color: white;
+    }
+
+    button:focus-visible, a:focus-visible {
+      outline: 2px solid var(--m-accent);
+      outline-offset: 2px;
+    }
+
+    /* Timeline styles */
+    .timeline-item {
+      position: relative;
+      padding-left: 2.5rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      width: 0.75rem;
+      height: 0.75rem;
+      background: var(--m-accent);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(125, 157, 156, 0.1);
+    }
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: 0.34rem;
+      top: 1.5rem;
+      width: 2px;
+      height: calc(100% - 1rem);
+      background: linear-gradient(to bottom, var(--m-accent), transparent);
+    }
+    .timeline-item:last-child::after {
+      display: none;
+    }
+  </style>
+</head>
+
+<body class="antialiased overflow-x-hidden">
+
+<header class="fixed w-full top-0 z-40 glass transition-smooth" id="navbar">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-3 group">
+      <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-[var(--m-accent)] text-white shadow-md group-hover:rotate-12 transition-transform duration-300">
+        <span class="font-bold text-lg tracking-tighter">宿</span>
       </div>
       <div>
-        <div class="text-lg md:text-xl font-semibold tracking-wide">1211 Co., Ltd.</div>
-        <div class="text-xs text-gray-500">東京の旅をデザインする</div>
+        <div class="text-lg font-bold tracking-wide text-[var(--m-text-main)] group-hover:text-[var(--m-accent)] transition-colors">1211 Co., Ltd.</div>
+        <div class="text-[10px] text-[var(--m-text-muted)] uppercase tracking-widest">Design Your Tokyo</div>
+      </div>
+    </a>
+
+    <nav class="hidden md:flex text-sm font-medium tracking-wide space-x-8 text-[var(--m-text-main)]">
+      <a href="index.html" class="hover:text-[var(--m-accent)] transition-colors">Home</a>
+      <a href="index.html#services" class="hover:text-[var(--m-accent)] transition-colors">More</a>
+      <a href="about.html" class="text-[var(--m-accent)] font-semibold relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-[var(--m-accent)] after:left-0 after:-bottom-1">About</a>
+      <a href="index.html#contact" class="hover:text-[var(--m-accent)] transition-colors">Contact</a>
+      <a href="http://book.1211.world" target="_blank" rel="noopener noreferrer" class="px-5 py-2 rounded-full border border-[var(--m-accent)] text-[var(--m-accent)] hover:bg-[var(--m-accent)] hover:text-white transition-all duration-300">Book</a>
+    </nav>
+
+    <button id="menu-btn" class="md:hidden p-2 text-[var(--m-text-main)] focus:outline-none menu-icon" aria-label="Toggle menu" aria-expanded="false">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <line class="line-1" x1="4" y1="6" x2="20" y2="6" stroke-width="2" stroke-linecap="round"/>
+        <line class="line-2" x1="4" y1="12" x2="20" y2="12" stroke-width="2" stroke-linecap="round"/>
+        <line class="line-3" x1="4" y1="18" x2="20" y2="18" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <nav id="mobile-menu" class="md:hidden bg-[var(--m-bg)] border-b border-gray-100 shadow-inner">
+    <div class="flex flex-col text-center py-4 space-y-4 text-sm font-medium text-[var(--m-text-main)]">
+      <a href="index.html" class="mobile-link hover:text-[var(--m-accent)]">Home</a>
+      <a href="index.html#services" class="mobile-link hover:text-[var(--m-accent)]">More</a>
+      <a href="about.html" class="mobile-link text-[var(--m-accent)]">About</a>
+      <a href="index.html#contact" class="mobile-link hover:text-[var(--m-accent)]">Contact</a>
+      <a href="http://book.1211.world" target="_blank" rel="noopener noreferrer" class="mobile-link text-[var(--m-accent)]">Book Stay</a>
+    </div>
+  </nav>
+</header>
+
+<main class="max-w-7xl mx-auto px-6 pb-20 pt-28">
+
+  <!-- Page Header -->
+  <section class="text-center mb-16 reveal">
+    <span class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-widest text-[var(--m-accent)] bg-[rgba(125,157,156,0.1)] rounded-full uppercase">About Us</span>
+    <h1 class="text-4xl md:text-5xl font-bold text-[var(--m-text-main)] mb-4 en-font">会社概要</h1>
+    <p class="text-lg text-[var(--m-text-muted)] max-w-2xl mx-auto">
+      東京での旅をデザインする。宿栖東京ブランドを通じて、世界中の旅人に「第二の我が家」を提供します。
+    </p>
+  </section>
+
+  <!-- Brand Story -->
+  <section class="mb-20 reveal">
+    <div class="glass rounded-3xl p-8 md:p-12 soft-shadow">
+      <h2 class="text-2xl md:text-3xl font-semibold text-[var(--m-text-main)] mb-6 en-font">Brand Story</h2>
+      <div class="prose prose-lg max-w-none text-[var(--m-text-main)] leading-relaxed space-y-4">
+        <p>
+          2018年の創業以来、<strong class="text-[var(--m-accent)]">宿栖東京</strong>は実用性と美観のバランスを堅持し、サービス基準の継続的な最適化に努めてまいりました。
+        </p>
+        <p>
+          現在、当社の物件は<strong>新宿、渋谷、台東、墨田</strong>など東京の中心エリアに集中し、繁華街から伝統的な風情まで多様な地域をカバーしています。
+        </p>
+        <p>
+          プロジェクトのコストパフォーマンスを重視し、すべてのパートナー様に最適な投資収益率を提供することに尽力しております。
+        </p>
+        <p class="text-[var(--m-text-muted)] text-sm mt-8 pt-6 border-t border-gray-200">
+          宿栖東京は、東京での旅における素朴な願いから始まり、東京滞在サービスのリーディングブランドへと成長しました。東京の中心部から出発点とし、「快適さ、細やかさ、多様性」という理念をすべての客室に反映させ、世界中の旅人にとっての「第二の我が家」を心を込めて創り上げています。
+        </p>
       </div>
     </div>
-    <nav class="text-sm space-x-4 hidden md:block">
-      <a href="index.html" class="hover:underline">Home</a>
-      <a href="about.html" class="hover:underline font-semibold">About</a>
-      <a href="index.html#services" class="hover:underline">More</a>
-      <a href="index.html#contact" class="hover:underline">Contact</a>
-    </nav>
-  </header>
+  </section>
 
-  <!-- About 内容 -->
-  <main class="max-w-4xl mx-auto px-6 py-12">
-    <h1 class="text-3xl font-bold text-gray-800 mb-6">About Us</h1>
-    <p class="text-lg leading-relaxed text-gray-700">
-      2018年の創業以来、宿栖東京は実用性と美観のバランスを堅持し、サービス基準の継続的な最適化に努めてまいりました。
-      現在、当社の物件は新宿、渋谷、台東、墨田など東京の中心エリアに集中し、繁華街から伝統的な風情まで多様な地域をカバーしています。
-      プロジェクトのコストパフォーマンスを重視し、すべてのパートナー様に最適な投資収益率を提供することに尽力しております。
-    </p>
-    <p class="mt-6">
-      <a href="index.html" class="text-gray-800 underline hover:text-gray-900">← Return to Homepage</a>
-    </p>
-  </main>
+  <!-- Company Info -->
+  <section class="mb-20 reveal">
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="glass rounded-3xl p-8 soft-shadow">
+        <h3 class="text-xl font-semibold text-[var(--m-text-main)] mb-6 flex items-center gap-3">
+          <svg class="w-6 h-6 text-[var(--m-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+          会社情報
+        </h3>
+        <div class="space-y-3 text-sm text-[var(--m-text-main)]">
+          <div class="flex justify-between py-2 border-b border-gray-100">
+            <span class="text-[var(--m-text-muted)]">会社名</span>
+            <span class="font-medium">株式会社一二一一</span>
+          </div>
+          <div class="flex justify-between py-2 border-b border-gray-100">
+            <span class="text-[var(--m-text-muted)]">英文名</span>
+            <span class="font-medium en-font">1211 Co., Ltd.</span>
+          </div>
+          <div class="flex justify-between py-2 border-b border-gray-100">
+            <span class="text-[var(--m-text-muted)]">設立</span>
+            <span class="font-medium">2018年</span>
+          </div>
+          <div class="flex justify-between py-2 border-b border-gray-100">
+            <span class="text-[var(--m-text-muted)]">本社</span>
+            <span class="font-medium text-right">東京都墨田区</span>
+          </div>
+          <div class="flex justify-between py-2">
+            <span class="text-[var(--m-text-muted)]">ブランド</span>
+            <span class="font-medium text-[var(--m-accent)]">宿栖東京</span>
+          </div>
+        </div>
+      </div>
 
-  <!-- Footer -->
-  <footer class="mt-16 border-t pt-8 text-sm text-gray-500 text-center">
-    <p>© 2025 1211 Co., Ltd.</p>
+      <div class="glass rounded-3xl p-8 soft-shadow">
+        <h3 class="text-xl font-semibold text-[var(--m-text-main)] mb-6 flex items-center gap-3">
+          <svg class="w-6 h-6 text-[var(--m-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          事業内容
+        </h3>
+        <ul class="space-y-3 text-sm text-[var(--m-text-main)]">
+          <li class="flex items-start gap-3">
+            <span class="text-[var(--m-accent)] mt-1">●</span>
+            <span>民宿・旅館の運営管理</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-[var(--m-accent)] mt-1">●</span>
+            <span>投資移民コンサルティング</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-[var(--m-accent)] mt-1">●</span>
+            <span>自媒体運営（SNS・コンテンツマーケティング）</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-[var(--m-accent)] mt-1">●</span>
+            <span>旅行関連サービス全般</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-[var(--m-accent)] mt-1">●</span>
+            <span>オーダーメイド旅程企画</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-[var(--m-accent)] mt-1">●</span>
+            <span>プロフェッショナル撮影サービス</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="mb-20 reveal">
+    <h2 class="text-2xl md:text-3xl font-semibold text-[var(--m-text-main)] mb-10 text-center en-font">Our Journey</h2>
+    <div class="glass rounded-3xl p-8 md:p-12 soft-shadow max-w-3xl mx-auto">
+      <div class="space-y-8">
+        <div class="timeline-item">
+          <h3 class="text-lg font-semibold text-[var(--m-text-main)] mb-2">2018年 — 創業</h3>
+          <p class="text-sm text-[var(--m-text-muted)]">東京での新しい宿泊体験の提供を目指し、株式会社一二一一を設立。</p>
+        </div>
+        <div class="timeline-item">
+          <h3 class="text-lg font-semibold text-[var(--m-text-main)] mb-2">2019年 — ブランド展開</h3>
+          <p class="text-sm text-[var(--m-text-muted)]">「宿栖東京」ブランドを立ち上げ、新宿・渋谷エリアでの運営を開始。</p>
+        </div>
+        <div class="timeline-item">
+          <h3 class="text-lg font-semibold text-[var(--m-text-main)] mb-2">2020-2022年 — エリア拡大</h3>
+          <p class="text-sm text-[var(--m-text-muted)]">台東・墨田エリアへ展開を拡大。多様な宿泊ニーズに対応。</p>
+        </div>
+        <div class="timeline-item">
+          <h3 class="text-lg font-semibold text-[var(--m-text-main)] mb-2">2023年 — サービス多角化</h3>
+          <p class="text-sm text-[var(--m-text-muted)]">投資移民コンサルティング、自媒体運営など、総合的な東京体験サービスへ。</p>
+        </div>
+        <div class="timeline-item">
+          <h3 class="text-lg font-semibold text-[var(--m-text-main)] mb-2">2024-2025年 — 現在</h3>
+          <p class="text-sm text-[var(--m-text-muted)]">東京滞在サービスのリーディングブランドとして、さらなる成長を続けています。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Values -->
+  <section class="mb-20 reveal">
+    <h2 class="text-2xl md:text-3xl font-semibold text-[var(--m-text-main)] mb-10 text-center en-font">Core Values</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="text-center p-8 rounded-3xl bg-white soft-shadow">
+        <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-[rgba(125,157,156,0.1)] flex items-center justify-center">
+          <svg class="w-8 h-8 text-[var(--m-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+        </div>
+        <h3 class="text-lg font-semibold text-[var(--m-text-main)] mb-3">快適さ</h3>
+        <p class="text-sm text-[var(--m-text-muted)]">すべてのゲストに快適で心地よい空間を提供します。</p>
+      </div>
+
+      <div class="text-center p-8 rounded-3xl bg-white soft-shadow">
+        <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-[rgba(125,157,156,0.1)] flex items-center justify-center">
+          <svg class="w-8 h-8 text-[var(--m-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        </div>
+        <h3 class="text-lg font-semibold text-[var(--m-text-main)] mb-3">細やかさ</h3>
+        <p class="text-sm text-[var(--m-text-muted)]">細部へのこだわりと丁寧なサービスを大切にします。</p>
+      </div>
+
+      <div class="text-center p-8 rounded-3xl bg-white soft-shadow">
+        <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-[rgba(125,157,156,0.1)] flex items-center justify-center">
+          <svg class="w-8 h-8 text-[var(--m-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        </div>
+        <h3 class="text-lg font-semibold text-[var(--m-text-main)] mb-3">多様性</h3>
+        <p class="text-sm text-[var(--m-text-muted)]">多様なニーズに応える柔軟なサービスを展開します。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="text-center reveal">
+    <div class="glass rounded-3xl p-12 md:p-16 soft-shadow">
+      <h2 class="text-2xl md:text-3xl font-bold text-[var(--m-text-main)] mb-4 en-font">Ready to Experience Tokyo?</h2>
+      <p class="text-[var(--m-text-muted)] mb-8 max-w-2xl mx-auto">
+        私たちと一緒に、あなただけの東京体験を創りましょう。ご質問・ご予約はお気軽にお問い合わせください。
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="index.html#contact" class="px-8 py-3.5 rounded-full bg-[var(--m-text-main)] text-white font-medium shadow-lg hover:bg-[var(--m-accent)] hover:shadow-[var(--m-accent)]/30 hover:-translate-y-1 transition-all duration-300">
+          Contact Us
+        </a>
+        <a href="index.html" class="px-8 py-3.5 rounded-full border border-gray-300 text-[var(--m-text-main)] hover:border-[var(--m-accent)] hover:text-[var(--m-accent)] hover:bg-white transition-all duration-300">
+          Back to Home
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="mt-20 border-t border-gray-200 pt-8 text-center md:text-left">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+      <div>
+        <p class="font-bold text-[var(--m-text-main)]">株式会社一二一一</p>
+        <p class="text-xs text-[var(--m-text-muted)] mt-1">© 2025 1211 Co., Ltd. All Rights Reserved.</p>
+      </div>
+      <div class="flex gap-4 text-xs text-[var(--m-text-muted)]">
+         <span>Designed for Tokyo</span>
+      </div>
+    </div>
   </footer>
+
+</main>
+
+<script>
+  const revealElements = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+    
+    menuBtn.addEventListener("click", () => {
+      const isOpen = mobileMenu.classList.contains('open');
+      mobileMenu.classList.toggle("open");
+      menuBtn.classList.toggle("menu-open");
+      menuBtn.setAttribute('aria-expanded', !isOpen);
+    });
+    
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove("open");
+        menuBtn.classList.remove("menu-open");
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      if (window.scrollY > 50) {
+        nav.classList.add('shadow-sm');
+      } else {
+        nav.classList.remove('shadow-sm');
+      }
+    });
+  });
+</script>
 </body>
 </html>
