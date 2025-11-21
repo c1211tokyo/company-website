@@ -10,278 +10,24 @@
     
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+        /* 水印样式 */
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            font-size: 8rem;
+            font-weight: 900;
+            color: rgba(0, 0, 0, 0.03);
+            pointer-events: none;
+            user-select: none;
+            white-space: nowrap;
+            z-index: 0;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
     <div id="root"></div>
-
-    <!-- 使用 ES Module 方式直接在浏览器运行 React -->
-    <script type="module">
-        // 从 esm.sh CDN 导入 React, ReactDOM 和 Lucide 图标
-        import React, { useState, useMemo } from 'https://esm.sh/react@18.2.0?dev';
-        import { createRoot } from 'https://esm.sh/react-dom@18.2.0/client?dev';
-        import { Lock, Unlock, Calculator, TrendingUp, Building, Home, Store, Maximize2, Minimize2, Globe } from 'https://esm.sh/lucide-react@0.263.1?dev';
-
-        // 配置常量
-        const PASSWORD = "su1211";
-
-        const i18n = {
-            zh: {
-                title: '民宿/旅馆 投资回报测算工具',
-                enterPassword: '请输入访问密码',
-                passwordPlaceholder: '请输入密码',
-                wrongPassword: '密码错误，请重试',
-                enter: '进入系统',
-                single: '单一民宿',
-                multiUniform: '多套民宿(统一价)',
-                multiVaried: '多套民宿(多价格)',
-                mixed: '混合经营',
-                mixedVaried: '混合经营(多价格)',
-                purchasePrice: '购入资金 (日元)',
-                tax: '税费 (日元)',
-                renovation: '装修/リフォーム费用',
-                propertyTax: '年固定资产税',
-                monthlyExpense: '月支出 (水电杂费等)',
-                dailyPrice: '民宿日单价',
-                units: '民宿套数',
-                unitConfig: '各户型配置',
-                unitType: '户型',
-                unitCount: '数量',
-                unitPrice: '日单价',
-                addUnit: '+ 添加户型',
-                hasRental: '包含直租收入',
-                rentalIncome: '月租金收入',
-                hasShop: '包含店铺/自营收入',
-                shopIncome: '月店铺收入',
-                loanType: '月供计算方式',
-                directInput: '直接输入',
-                autoCalc: '贷款自动计算',
-                monthlyPayment: '月供金额',
-                loanAmount: '贷款金额',
-                loanRate: '年利率 (%)',
-                loanYears: '贷款年限',
-                calcMonthly: '等额本息月供',
-                totalInvestment: '总投资额',
-                yearlyExpense: '年支出预测',
-                currentPrice: '当前日单价',
-                operationMode: '经营模式',
-                roiTable: 'ROI 测算表',
-                dailyPriceCol: '日单价',
-                yearlyIncome: '年收入',
-                fullscreen: '全屏显示',
-                exitFullscreen: '退出全屏',
-                legend: 'ROI指标说明',
-                excellent: '优秀',
-                good: '良好',
-                average: '一般',
-                low: '偏低',
-                powered: '技术支持',
-            },
-            ja: {
-                title: '民泊/旅館 投資収益シミュレーター',
-                enterPassword: 'パスワードを入力してください',
-                passwordPlaceholder: 'パスワード',
-                wrongPassword: 'パスワードが間違っています',
-                enter: 'ログイン',
-                single: '単一民泊',
-                multiUniform: '複数民泊(統一価格)',
-                multiVaried: '複数民泊(複数価格)',
-                mixed: '複合経営',
-                mixedVaried: '複合経営(複数価格)',
-                purchasePrice: '購入資金 (円)',
-                tax: '税金 (円)',
-                renovation: 'リフォーム費用',
-                propertyTax: '年間固定資産税',
-                monthlyExpense: '月間支出 (光熱費等)',
-                dailyPrice: '民泊日単価',
-                units: '民泊数',
-                unitConfig: '各タイプ設定',
-                unitType: 'タイプ',
-                unitCount: '数量',
-                unitPrice: '日単価',
-                addUnit: '+ タイプ追加',
-                hasRental: '賃貸収入あり',
-                rentalIncome: '月間賃貸収入',
-                hasShop: '店舗/自営収入あり',
-                shopIncome: '月間店舗収入',
-                loanType: '月々返済計算方法',
-                directInput: '直接入力',
-                autoCalc: 'ローン自動計算',
-                monthlyPayment: '月々返済額',
-                loanAmount: 'ローン金額',
-                loanRate: '年利率 (%)',
-                loanYears: 'ローン年数',
-                calcMonthly: '元利均等月々返済',
-                totalInvestment: '総投資額',
-                yearlyExpense: '年間支出予測',
-                currentPrice: '現在日単価',
-                operationMode: '経営モード',
-                roiTable: 'ROI シミュレーション表',
-                dailyPriceCol: '日単価',
-                yearlyIncome: '年間収入',
-                fullscreen: 'フルスクリーン',
-                exitFullscreen: '終了',
-                legend: 'ROI指標説明',
-                excellent: '優秀',
-                good: '良好',
-                average: '普通',
-                low: '低い',
-                powered: '技術提供',
-            }
-        };
-
-        function MinpakuROICalculator() {
-            const [lang, setLang] = useState('zh');
-            const t = i18n[lang];
-            // 默认锁定状态，如果需要测试可以改为 false
-            const [isLocked, setIsLocked] = useState(true);
-            const [password, setPassword] = useState('');
-            const [error, setError] = useState('');
-            const [isFullscreen, setIsFullscreen] = useState(false);
-            const [mode, setMode] = useState('single');
-            const [loanType, setLoanType] = useState('direct');
-            
-            const [params, setParams] = useState({
-                purchasePrice: 100000000,
-                tax: 7000000,
-                renovation: 5000000,
-                propertyTax: 700000,
-                monthlyExpense: 80000,
-                dailyPrice: 35000,
-                units: 3,
-                unitTypes: [{ name: 'A', count: 2, price: 35000 }, { name: 'B', count: 1, price: 45000 }],
-                hasRental: false,
-                rentalIncome: 150000,
-                hasShop: false,
-                shopIncome: 400000,
-                monthlyPayment: 0,
-                loanAmount: 70000000,
-                loanRate: 1.5,
-                loanYears: 35,
-            });
-
-            const handleLogin = () => {
-                if (password === PASSWORD) {
-                    setIsLocked(false);
-                    setError('');
-                } else {
-                    setError(t.wrongPassword);
-                }
-            };
-
-            const calcLoanPayment = useMemo(() => {
-                const P = params.loanAmount;
-                const r = params.loanRate / 100 / 12;
-                const n = params.loanYears * 12;
-                if (r === 0) return P / n;
-                return P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
-            }, [params.loanAmount, params.loanRate, params.loanYears]);
-
-            const monthlyPayment = loanType === 'direct' ? params.monthlyPayment : calcLoanPayment;
-
-            const totalInvestment = useMemo(() => {
-                return params.purchasePrice + params.tax + params.renovation;
-            }, [params]);
-
-            const yearlyExpense = useMemo(() => {
-                return params.monthlyExpense * 12 + params.propertyTax;
-            }, [params]);
-
-            const isVariedMode = mode === 'multiVaried' || mode === 'mixedVaried';
-
-            const calcYearlyIncome = (price, rate) => {
-                const days = 365 * (rate / 100);
-                if (isVariedMode) {
-                    return params.unitTypes.reduce((sum, ut) => sum + ut.price * ut.count * days, 0);
-                }
-                let income = price * days;
-                if (mode !== 'single') income *= params.units;
-                return income;
-            };
-
-            const calcROI = (price, rate) => {
-                let income = calcYearlyIncome(price, rate);
-                if (params.hasRental && (mode === 'mixed' || mode === 'mixedVaried')) income += params.rentalIncome * 12;
-                if (params.hasShop && (mode === 'mixed' || mode === 'mixedVaried')) income += params.shopIncome * 12;
-                const net = income - yearlyExpense - monthlyPayment * 12;
-                return (net / totalInvestment) * 100;
-            };
-
-            const occupancyRates = [50, 60, 70, 80, 90];
-            const priceRange = [25000, 30000, 35000, 40000, 45000, 50000];
-            const fmt = (n) => `¥${Math.round(n).toLocaleString()}`;
-
-            const addUnitType = () => {
-                setParams({ ...params, unitTypes: [...params.unitTypes, { name: String.fromCharCode(65 + params.unitTypes.length), count: 1, price: 35000 }] });
-            };
-
-            const updateUnitType = (idx, field, val) => {
-                const newTypes = [...params.unitTypes];
-                newTypes[idx][field] = field === 'name' ? val : Number(val);
-                setParams({ ...params, unitTypes: newTypes });
-            };
-
-            const removeUnitType = (idx) => {
-                setParams({ ...params, unitTypes: params.unitTypes.filter((_, i) => i !== idx) });
-            };
-
-            if (isLocked) {
-                return React.createElement("div", { className: "min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4" },
-                    React.createElement("div", { className: "bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md" },
-                        React.createElement("div", { className: "flex justify-end mb-2" },
-                            React.createElement("button", { onClick: () => setLang(lang === 'zh' ? 'ja' : 'zh'), className: "flex items-center gap-1 text-sm text-gray-500 hover:text-blue-600" },
-                                React.createElement(Globe, { className: "w-4 h-4" }),
-                                lang === 'zh' ? '日本語' : '中文'
-                            )
-                        ),
-                        React.createElement("div", { className: "text-center mb-6" },
-                            React.createElement("h2", { className: "text-2xl font-bold text-gray-800 mb-1" }, "宿栖東京"),
-                            React.createElement("p", { className: "text-xs text-gray-400" }, "1211 Co., Ltd.")
-                        ),
-                        React.createElement("div", { className: "text-center mb-8" },
-                            React.createElement("div", { className: "inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full mb-4" },
-                                React.createElement(Lock, { className: "w-8 h-8 text-white" })
-                            ),
-                            React.createElement("h1", { className: "text-xl font-bold text-gray-800" }, t.title),
-                            React.createElement("p", { className: "text-gray-500 mt-2" }, t.enterPassword)
-                        ),
-                        React.createElement("div", { className: "space-y-4" },
-                            React.createElement("input", {
-                                type: "password",
-                                value: password,
-                                onChange: (e) => setPassword(e.target.value),
-                                onKeyPress: (e) => e.key === 'Enter' && handleLogin(),
-                                placeholder: t.passwordPlaceholder,
-                                className: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                            }),
-                            error && React.createElement("p", { className: "text-red-500 text-sm" }, error),
-                            React.createElement("button", {
-                                onClick: handleLogin,
-                                className: "w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-lg font-medium hover:opacity-90 transition flex items-center justify-center gap-2"
-                            },
-                                React.createElement(Unlock, { className: "w-5 h-5" }),
-                                t.enter
-                            )
-                        )
-                    )
-                );
-            }
-
-            // 主界面组件渲染逻辑...
-            // 为了在浏览器无需 Babel 编译也能运行，我们将 JSX 转换为 React.createElement 
-            // 或者直接使用 htm 库，但这里为了简单直接用 createElement 模拟 JSX 的结构 
-            // (注意：如果你有构建工具，可以直接用 JSX。这里为了让你直接打开 HTML，我们做了兼容)
-            
-            // 实际上，现代浏览器直接运行 JSX 还是需要 Babel standalone。
-            // 为了确保这必定能运行，我下面将使用 JSX + Babel Standalone 的组合模式。
-            // 这样你就可以保持上面的代码风格。
-            return null; 
-        }
-
-        // 挂载应用
-        const root = createRoot(document.getElementById('root'));
-        // 这里的逻辑被移动到了下面的 text/babel 脚本中，以支持 JSX 语法
-    </script>
 
     <!-- 引入 Babel Standalone 以支持 JSX -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -290,8 +36,7 @@
     <script type="text/babel" data-type="module">
         import React, { useState, useMemo } from 'https://esm.sh/react@18.2.0?dev';
         import { createRoot } from 'https://esm.sh/react-dom@18.2.0/client?dev';
-        // 导入图标
-        import { Lock, Unlock, Calculator, TrendingUp, Building, Home, Store, Maximize2, Minimize2, Globe } from 'https://esm.sh/lucide-react@0.263.1?dev';
+        import { Lock, Unlock, Calculator, TrendingUp, Building, Home, Store, Maximize2, Minimize2, Globe, Info } from 'https://esm.sh/lucide-react@0.263.1?dev';
 
         const PASSWORD = "su1211";
 
@@ -336,7 +81,7 @@
                 currentPrice: '当前日单价',
                 operationMode: '经营模式',
                 roiTable: 'ROI 测算表',
-                dailyPriceCol: '日单价',
+                dailyPriceCol: '日单价 (平均)',
                 yearlyIncome: '年收入',
                 fullscreen: '全屏显示',
                 exitFullscreen: '退出全屏',
@@ -346,6 +91,12 @@
                 average: '一般',
                 low: '偏低',
                 powered: '技术支持',
+                calcNoteTitle: '测算说明',
+                noteBase: '测算基准：民宿日收益 × 365天 × 入住率',
+                noteRental: ' + (月租金 × 12)',
+                noteShop: ' + (店铺月收 × 12)',
+                noteDeduct: ' - 年支出 - (月供 × 12)',
+                watermarkText: '宿栖',
             },
             ja: {
                 title: '民泊/旅館 投資収益シミュレーター',
@@ -387,7 +138,7 @@
                 currentPrice: '現在日単価',
                 operationMode: '経営モード',
                 roiTable: 'ROI シミュレーション表',
-                dailyPriceCol: '日単価',
+                dailyPriceCol: '日単価 (平均)',
                 yearlyIncome: '年間収入',
                 fullscreen: 'フルスクリーン',
                 exitFullscreen: '終了',
@@ -397,6 +148,12 @@
                 average: '普通',
                 low: '低い',
                 powered: '技術提供',
+                calcNoteTitle: '計算根拠',
+                noteBase: '基準：民泊日収益 × 365日 × 稼働率',
+                noteRental: ' + (月間家賃 × 12)',
+                noteShop: ' + (月間店舗収入 × 12)',
+                noteDeduct: ' - 年間支出 - (ローン返済 × 12)',
+                watermarkText: 'SUQI',
             }
         };
 
@@ -409,6 +166,7 @@
             const [isFullscreen, setIsFullscreen] = useState(false);
             const [mode, setMode] = useState('single');
             const [loanType, setLoanType] = useState('direct');
+            
             const [params, setParams] = useState({
                 purchasePrice: 100000000,
                 tax: 7000000,
@@ -437,6 +195,7 @@
                 }
             };
 
+            // 贷款计算
             const calcLoanPayment = useMemo(() => {
                 const P = params.loanAmount;
                 const r = params.loanRate / 100 / 12;
@@ -447,37 +206,88 @@
 
             const monthlyPayment = loanType === 'direct' ? params.monthlyPayment : calcLoanPayment;
 
+            // 总投资
             const totalInvestment = useMemo(() => {
                 return params.purchasePrice + params.tax + params.renovation;
             }, [params]);
 
+            // 年支出
             const yearlyExpense = useMemo(() => {
                 return params.monthlyExpense * 12 + params.propertyTax;
             }, [params]);
 
             const isVariedMode = mode === 'multiVaried' || mode === 'mixedVaried';
+            const isMixed = mode === 'mixed' || mode === 'mixedVaried';
 
-            const calcYearlyIncome = (price, rate) => {
-                const days = 365 * (rate / 100);
+            // 辅助格式化函数
+            const fmt = (n) => `¥${Math.round(n).toLocaleString()}`;
+
+            // 获取动态的价格范围用于表格展示
+            const getTablePriceRange = () => {
+                let basePrice = 0;
                 if (isVariedMode) {
-                    return params.unitTypes.reduce((sum, ut) => sum + ut.price * ut.count * days, 0);
+                    const totalCount = params.unitTypes.reduce((s, t) => s + t.count, 0);
+                    const totalDaily = params.unitTypes.reduce((s, t) => s + t.price * t.count, 0);
+                    basePrice = totalCount > 0 ? totalDaily / totalCount : 0;
+                } else {
+                    basePrice = params.dailyPrice;
                 }
-                let income = price * days;
-                if (mode !== 'single') income *= params.units;
-                return income;
+                
+                // 取整到百位
+                basePrice = Math.round(basePrice / 100) * 100;
+                if (basePrice === 0) basePrice = 35000; // 默认值防止除零
+
+                // 生成 -10000, -5000, Base, +5000, +10000 的序列
+                const offsets = [-10000, -5000, 0, 5000, 10000];
+                return offsets.map(offset => {
+                    const p = basePrice + offset;
+                    return p > 0 ? p : null;
+                }).filter(p => p !== null);
             };
 
-            const calcROI = (price, rate) => {
-                let income = calcYearlyIncome(price, rate);
-                if (params.hasRental && (mode === 'mixed' || mode === 'mixedVaried')) income += params.rentalIncome * 12;
-                if (params.hasShop && (mode === 'mixed' || mode === 'mixedVaried')) income += params.shopIncome * 12;
+            // 核心逻辑：根据表格行的参考单价，计算该行对应的总年收入
+            const calcTableYearlyIncome = (rowRefPrice, occupancyRate) => {
+                const days = 365 * (occupancyRate / 100);
+                let accommodationIncome = 0;
+
+                if (isVariedMode) {
+                    // 多价格模式下，rowRefPrice 代表的是“加权平均单价”
+                    // 我们需要根据这个新的平均价，按比例缩放所有户型的收入
+                    const totalCount = params.unitTypes.reduce((s, t) => s + t.count, 0);
+                    const currentTotalDaily = params.unitTypes.reduce((s, t) => s + t.price * t.count, 0);
+                    const currentAvg = totalCount > 0 ? currentTotalDaily / totalCount : 1;
+                    
+                    // 计算缩放比例
+                    const ratio = rowRefPrice / currentAvg;
+                    
+                    // 调整后的日总收入 = 原日总收入 * 比例
+                    accommodationIncome = currentTotalDaily * ratio * days;
+                } else {
+                    // 统一价格模式
+                    let daily = rowRefPrice;
+                    // 如果不是单一民宿，需要乘以套数
+                    if (mode !== 'single') {
+                        daily *= params.units; 
+                    }
+                    accommodationIncome = daily * days;
+                }
+
+                let totalIncome = accommodationIncome;
+                // 加上混合经营的固定收入
+                if (params.hasRental && isMixed) totalIncome += params.rentalIncome * 12;
+                if (params.hasShop && isMixed) totalIncome += params.shopIncome * 12;
+
+                return totalIncome;
+            };
+
+            // ROI 计算
+            const calcROIValue = (income) => {
                 const net = income - yearlyExpense - monthlyPayment * 12;
                 return (net / totalInvestment) * 100;
             };
 
             const occupancyRates = [50, 60, 70, 80, 90];
-            const priceRange = [25000, 30000, 35000, 40000, 45000, 50000];
-            const fmt = (n) => `¥${Math.round(n).toLocaleString()}`;
+            const tablePrices = getTablePriceRange();
 
             const addUnitType = () => {
                 setParams({...params, unitTypes: [...params.unitTypes, { name: String.fromCharCode(65 + params.unitTypes.length), count: 1, price: 35000 }]});
@@ -526,46 +336,75 @@
             }
 
             const ROITable = () => (
-                <div className={`bg-white rounded-xl shadow-lg p-6 ${isFullscreen ? 'fixed inset-0 z-50 overflow-auto' : ''}`}>
-                    <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-2">
-                            <TrendingUp className="w-6 h-6 text-green-600" />
-                            <h2 className="text-xl font-bold text-gray-800">{t.roiTable}</h2>
+                <div className={`bg-white rounded-xl shadow-lg p-6 relative overflow-hidden ${isFullscreen ? 'fixed inset-0 z-50 overflow-auto' : ''}`}>
+                    {/* 水印 */}
+                    <div className="watermark">{t.watermarkText}</div>
+                    
+                    <div className="relative z-10">
+                        <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-center gap-2">
+                                <TrendingUp className="w-6 h-6 text-green-600" />
+                                <h2 className="text-xl font-bold text-gray-800">{t.roiTable}</h2>
+                            </div>
+                            <button onClick={() => setIsFullscreen(!isFullscreen)} className="flex items-center gap-1 px-3 py-1 bg-gray-100 rounded-lg hover:bg-gray-200 text-sm">
+                                {isFullscreen ? <><Minimize2 className="w-4 h-4" />{t.exitFullscreen}</> : <><Maximize2 className="w-4 h-4" />{t.fullscreen}</>}
+                            </button>
                         </div>
-                        <button onClick={() => setIsFullscreen(!isFullscreen)} className="flex items-center gap-1 px-3 py-1 bg-gray-100 rounded-lg hover:bg-gray-200 text-sm">
-                            {isFullscreen ? <><Minimize2 className="w-4 h-4" />{t.exitFullscreen}</> : <><Maximize2 className="w-4 h-4" />{t.fullscreen}</>}
-                        </button>
-                    </div>
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-sm">
-                            <thead>
-                                <tr className="bg-gray-100">
-                                    <th className="px-3 py-2 text-left">{t.dailyPriceCol}</th>
-                                    {occupancyRates.map(r => (<React.Fragment key={r}><th className="px-3 py-2 text-right">{r}%</th><th className="px-3 py-2 text-right">ROI</th></React.Fragment>))}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {(isVariedMode ? [0] : priceRange).map((price, pi) => (
-                                    <tr key={pi} className="border-b hover:bg-gray-50">
-                                        <td className="px-3 py-2 font-medium">{isVariedMode ? t.unitConfig : fmt(price)}</td>
-                                        {occupancyRates.map(rate => {
-                                            const income = calcYearlyIncome(price, rate) + (params.hasRental && (mode==='mixed'||mode==='mixedVaried') ? params.rentalIncome*12 : 0) + (params.hasShop && (mode==='mixed'||mode==='mixedVaried') ? params.shopIncome*12 : 0);
-                                            const roi = calcROI(price, rate);
-                                            const color = roi >= 12 ? 'text-green-700 bg-green-100' : roi >= 8 ? 'text-blue-700 bg-blue-100' : roi >= 5 ? 'text-yellow-700 bg-yellow-100' : 'text-red-700 bg-red-100';
-                                            return (<React.Fragment key={rate}><td className="px-3 py-2 text-right">{fmt(income)}</td><td className={`px-3 py-2 text-right font-bold ${color} rounded`}>{roi.toFixed(2)}%</td></React.Fragment>);
-                                        })}
+                        
+                        <div className="overflow-x-auto bg-white/80 backdrop-blur-sm rounded-lg">
+                            <table className="w-full text-sm">
+                                <thead>
+                                    <tr className="bg-gray-100">
+                                        <th className="px-3 py-2 text-left">{t.dailyPriceCol}</th>
+                                        {occupancyRates.map(r => (<React.Fragment key={r}><th className="px-3 py-2 text-right">{r}%</th><th className="px-3 py-2 text-right">ROI</th></React.Fragment>))}
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {tablePrices.map((price, pi) => (
+                                        <tr key={pi} className="border-b hover:bg-gray-50 transition-colors">
+                                            <td className="px-3 py-2 font-medium">
+                                                {fmt(price)}
+                                                {isVariedMode && pi === 2 && <span className="text-xs text-blue-500 ml-1">(当前/平均)</span>}
+                                            </td>
+                                            {occupancyRates.map(rate => {
+                                                const income = calcTableYearlyIncome(price, rate);
+                                                const roi = calcROIValue(income);
+                                                const color = roi >= 12 ? 'text-green-700 bg-green-100' : roi >= 8 ? 'text-blue-700 bg-blue-100' : roi >= 5 ? 'text-yellow-700 bg-yellow-100' : 'text-red-700 bg-red-100';
+                                                return (<React.Fragment key={rate}><td className="px-3 py-2 text-right">{fmt(income)}</td><td className={`px-3 py-2 text-right font-bold ${color} rounded`}>{roi.toFixed(2)}%</td></React.Fragment>);
+                                            })}
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div className="mt-4 flex flex-wrap gap-4 text-xs">
+                            <div className="flex gap-4">
+                                <span className="flex items-center gap-1"><span className="w-3 h-3 bg-green-100 rounded"></span>≥12% {t.excellent}</span>
+                                <span className="flex items-center gap-1"><span className="w-3 h-3 bg-blue-100 rounded"></span>8-12% {t.good}</span>
+                                <span className="flex items-center gap-1"><span className="w-3 h-3 bg-yellow-100 rounded"></span>5-8% {t.average}</span>
+                                <span className="flex items-center gap-1"><span className="w-3 h-3 bg-red-100 rounded"></span>&lt;5% {t.low}</span>
+                            </div>
+                        </div>
+
+                        {/* 底部注脚 */}
+                        <div className="mt-4 p-3 bg-gray-50 rounded-lg text-xs text-gray-500 border border-gray-100">
+                            <div className="flex items-start gap-2">
+                                <Info className="w-4 h-4 mt-0.5 text-gray-400 flex-shrink-0" />
+                                <div>
+                                    <span className="font-bold text-gray-600 mb-1 block">{t.calcNoteTitle}</span>
+                                    <p>
+                                        {t.noteBase}
+                                        {(params.hasRental && isMixed) && <span>{t.noteRental}</span>}
+                                        {(params.hasShop && isMixed) && <span>{t.noteShop}</span>}
+                                        <span>{t.noteDeduct}</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {isFullscreen && <div className="mt-4 text-center text-xs text-gray-400">宿栖東京 | 1211 Co., Ltd.</div>}
                     </div>
-                    <div className="mt-4 flex gap-4 text-xs flex-wrap">
-                        <span className="flex items-center gap-1"><span className="w-3 h-3 bg-green-100 rounded"></span>≥12% {t.excellent}</span>
-                        <span className="flex items-center gap-1"><span className="w-3 h-3 bg-blue-100 rounded"></span>8-12% {t.good}</span>
-                        <span className="flex items-center gap-1"><span className="w-3 h-3 bg-yellow-100 rounded"></span>5-8% {t.average}</span>
-                        <span className="flex items-center gap-1"><span className="w-3 h-3 bg-red-100 rounded"></span>&lt;5% {t.low}</span>
-                    </div>
-                    {isFullscreen && <div className="mt-4 text-center text-xs text-gray-400">宿栖東京 | 1211 Co., Ltd.</div>}
                 </div>
             );
 
