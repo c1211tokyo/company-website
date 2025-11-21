@@ -1,0 +1,367 @@
+import React, { useState, useMemo } from 'react';
+import { Lock, Unlock, Calculator, TrendingUp, Building, Home, Store, Maximize2, Minimize2, Globe } from 'lucide-react';
+
+const PASSWORD = "su1211";
+
+const i18n = {
+  zh: {
+    title: '民宿/旅馆 投资回报测算工具',
+    enterPassword: '请输入访问密码',
+    passwordPlaceholder: '请输入密码',
+    wrongPassword: '密码错误，请重试',
+    enter: '进入系统',
+    single: '单一民宿',
+    multiUniform: '多套民宿(统一价)',
+    multiVaried: '多套民宿(多价格)',
+    mixed: '混合经营',
+    mixedVaried: '混合经营(多价格)',
+    purchasePrice: '购入资金 (日元)',
+    tax: '税费 (日元)',
+    renovation: '装修/リフォーム费用',
+    propertyTax: '年固定资产税',
+    monthlyExpense: '月支出 (水电杂费等)',
+    dailyPrice: '民宿日单价',
+    units: '民宿套数',
+    unitConfig: '各户型配置',
+    unitType: '户型',
+    unitCount: '数量',
+    unitPrice: '日单价',
+    addUnit: '+ 添加户型',
+    hasRental: '包含直租收入',
+    rentalIncome: '月租金收入',
+    hasShop: '包含店铺/自营收入',
+    shopIncome: '月店铺收入',
+    loanType: '月供计算方式',
+    directInput: '直接输入',
+    autoCalc: '贷款自动计算',
+    monthlyPayment: '月供金额',
+    loanAmount: '贷款金额',
+    loanRate: '年利率 (%)',
+    loanYears: '贷款年限',
+    calcMonthly: '等额本息月供',
+    totalInvestment: '总投资额',
+    yearlyExpense: '年支出预测',
+    currentPrice: '当前日单价',
+    operationMode: '经营模式',
+    roiTable: 'ROI 测算表',
+    dailyPriceCol: '日单价',
+    yearlyIncome: '年收入',
+    fullscreen: '全屏显示',
+    exitFullscreen: '退出全屏',
+    legend: 'ROI指标说明',
+    excellent: '优秀',
+    good: '良好',
+    average: '一般',
+    low: '偏低',
+    powered: '技术支持',
+  },
+  ja: {
+    title: '民泊/旅館 投資収益シミュレーター',
+    enterPassword: 'パスワードを入力してください',
+    passwordPlaceholder: 'パスワード',
+    wrongPassword: 'パスワードが間違っています',
+    enter: 'ログイン',
+    single: '単一民泊',
+    multiUniform: '複数民泊(統一価格)',
+    multiVaried: '複数民泊(複数価格)',
+    mixed: '複合経営',
+    mixedVaried: '複合経営(複数価格)',
+    purchasePrice: '購入資金 (円)',
+    tax: '税金 (円)',
+    renovation: 'リフォーム費用',
+    propertyTax: '年間固定資産税',
+    monthlyExpense: '月間支出 (光熱費等)',
+    dailyPrice: '民泊日単価',
+    units: '民泊数',
+    unitConfig: '各タイプ設定',
+    unitType: 'タイプ',
+    unitCount: '数量',
+    unitPrice: '日単価',
+    addUnit: '+ タイプ追加',
+    hasRental: '賃貸収入あり',
+    rentalIncome: '月間賃貸収入',
+    hasShop: '店舗/自営収入あり',
+    shopIncome: '月間店舗収入',
+    loanType: '月々返済計算方法',
+    directInput: '直接入力',
+    autoCalc: 'ローン自動計算',
+    monthlyPayment: '月々返済額',
+    loanAmount: 'ローン金額',
+    loanRate: '年利率 (%)',
+    loanYears: 'ローン年数',
+    calcMonthly: '元利均等月々返済',
+    totalInvestment: '総投資額',
+    yearlyExpense: '年間支出予測',
+    currentPrice: '現在日単価',
+    operationMode: '経営モード',
+    roiTable: 'ROI シミュレーション表',
+    dailyPriceCol: '日単価',
+    yearlyIncome: '年間収入',
+    fullscreen: 'フルスクリーン',
+    exitFullscreen: '終了',
+    legend: 'ROI指標説明',
+    excellent: '優秀',
+    good: '良好',
+    average: '普通',
+    low: '低い',
+    powered: '技術提供',
+  }
+};
+
+export default function MinpakuROICalculator() {
+  const [lang, setLang] = useState('zh');
+  const t = i18n[lang];
+  const [isLocked, setIsLocked] = useState(true);
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [mode, setMode] = useState('single');
+  const [loanType, setLoanType] = useState('direct');
+  const [params, setParams] = useState({
+    purchasePrice: 100000000,
+    tax: 7000000,
+    renovation: 5000000,
+    propertyTax: 700000,
+    monthlyExpense: 80000,
+    dailyPrice: 35000,
+    units: 3,
+    unitTypes: [{ name: 'A', count: 2, price: 35000 }, { name: 'B', count: 1, price: 45000 }],
+    hasRental: false,
+    rentalIncome: 150000,
+    hasShop: false,
+    shopIncome: 400000,
+    monthlyPayment: 0,
+    loanAmount: 70000000,
+    loanRate: 1.5,
+    loanYears: 35,
+  });
+
+  const handleLogin = () => {
+    if (password === PASSWORD) {
+      setIsLocked(false);
+      setError('');
+    } else {
+      setError(t.wrongPassword);
+    }
+  };
+
+  const calcLoanPayment = useMemo(() => {
+    const P = params.loanAmount;
+    const r = params.loanRate / 100 / 12;
+    const n = params.loanYears * 12;
+    if (r === 0) return P / n;
+    return P * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+  }, [params.loanAmount, params.loanRate, params.loanYears]);
+
+  const monthlyPayment = loanType === 'direct' ? params.monthlyPayment : calcLoanPayment;
+
+  const totalInvestment = useMemo(() => {
+    return params.purchasePrice + params.tax + params.renovation;
+  }, [params]);
+
+  const yearlyExpense = useMemo(() => {
+    return params.monthlyExpense * 12 + params.propertyTax;
+  }, [params]);
+
+  const isVariedMode = mode === 'multiVaried' || mode === 'mixedVaried';
+
+  const calcYearlyIncome = (price, rate) => {
+    const days = 365 * (rate / 100);
+    if (isVariedMode) {
+      return params.unitTypes.reduce((sum, ut) => sum + ut.price * ut.count * days, 0);
+    }
+    let income = price * days;
+    if (mode !== 'single') income *= params.units;
+    return income;
+  };
+
+  const calcROI = (price, rate) => {
+    let income = calcYearlyIncome(price, rate);
+    if (params.hasRental && (mode === 'mixed' || mode === 'mixedVaried')) income += params.rentalIncome * 12;
+    if (params.hasShop && (mode === 'mixed' || mode === 'mixedVaried')) income += params.shopIncome * 12;
+    const net = income - yearlyExpense - monthlyPayment * 12;
+    return (net / totalInvestment) * 100;
+  };
+
+  const occupancyRates = [50, 60, 70, 80, 90];
+  const priceRange = [25000, 30000, 35000, 40000, 45000, 50000];
+  const fmt = (n) => `¥${Math.round(n).toLocaleString()}`;
+
+  const addUnitType = () => {
+    setParams({...params, unitTypes: [...params.unitTypes, { name: String.fromCharCode(65 + params.unitTypes.length), count: 1, price: 35000 }]});
+  };
+
+  const updateUnitType = (idx, field, val) => {
+    const newTypes = [...params.unitTypes];
+    newTypes[idx][field] = field === 'name' ? val : Number(val);
+    setParams({...params, unitTypes: newTypes});
+  };
+
+  const removeUnitType = (idx) => {
+    setParams({...params, unitTypes: params.unitTypes.filter((_, i) => i !== idx)});
+  };
+
+  if (isLocked) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
+          <div className="flex justify-end mb-2">
+            <button onClick={() => setLang(lang === 'zh' ? 'ja' : 'zh')} className="flex items-center gap-1 text-sm text-gray-500 hover:text-blue-600">
+              <Globe className="w-4 h-4" />{lang === 'zh' ? '日本語' : '中文'}
+            </button>
+          </div>
+          <div className="text-center mb-6">
+            <h2 className="text-2xl font-bold text-gray-800 mb-1">宿栖東京</h2>
+            <p className="text-xs text-gray-400">1211 Co., Ltd.</p>
+          </div>
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full mb-4">
+              <Lock className="w-8 h-8 text-white" />
+            </div>
+            <h1 className="text-xl font-bold text-gray-800">{t.title}</h1>
+            <p className="text-gray-500 mt-2">{t.enterPassword}</p>
+          </div>
+          <div className="space-y-4">
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} onKeyPress={(e) => e.key === 'Enter' && handleLogin()} placeholder={t.passwordPlaceholder} className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
+            {error && <p className="text-red-500 text-sm">{error}</p>}
+            <button onClick={handleLogin} className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-lg font-medium hover:opacity-90 transition flex items-center justify-center gap-2">
+              <Unlock className="w-5 h-5" />{t.enter}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const ROITable = () => (
+    <div className={`bg-white rounded-xl shadow-lg p-6 ${isFullscreen ? 'fixed inset-0 z-50 overflow-auto' : ''}`}>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <TrendingUp className="w-6 h-6 text-green-600" />
+          <h2 className="text-xl font-bold text-gray-800">{t.roiTable}</h2>
+        </div>
+        <button onClick={() => setIsFullscreen(!isFullscreen)} className="flex items-center gap-1 px-3 py-1 bg-gray-100 rounded-lg hover:bg-gray-200 text-sm">
+          {isFullscreen ? <><Minimize2 className="w-4 h-4" />{t.exitFullscreen}</> : <><Maximize2 className="w-4 h-4" />{t.fullscreen}</>}
+        </button>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="px-3 py-2 text-left">{t.dailyPriceCol}</th>
+              {occupancyRates.map(r => (<React.Fragment key={r}><th className="px-3 py-2 text-right">{r}%</th><th className="px-3 py-2 text-right">ROI</th></React.Fragment>))}
+            </tr>
+          </thead>
+          <tbody>
+            {(isVariedMode ? [0] : priceRange).map((price, pi) => (
+              <tr key={pi} className="border-b hover:bg-gray-50">
+                <td className="px-3 py-2 font-medium">{isVariedMode ? t.unitConfig : fmt(price)}</td>
+                {occupancyRates.map(rate => {
+                  const income = calcYearlyIncome(price, rate) + (params.hasRental && (mode==='mixed'||mode==='mixedVaried') ? params.rentalIncome*12 : 0) + (params.hasShop && (mode==='mixed'||mode==='mixedVaried') ? params.shopIncome*12 : 0);
+                  const roi = calcROI(price, rate);
+                  const color = roi >= 12 ? 'text-green-700 bg-green-100' : roi >= 8 ? 'text-blue-700 bg-blue-100' : roi >= 5 ? 'text-yellow-700 bg-yellow-100' : 'text-red-700 bg-red-100';
+                  return (<React.Fragment key={rate}><td className="px-3 py-2 text-right">{fmt(income)}</td><td className={`px-3 py-2 text-right font-bold ${color} rounded`}>{roi.toFixed(2)}%</td></React.Fragment>);
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="mt-4 flex gap-4 text-xs flex-wrap">
+        <span className="flex items-center gap-1"><span className="w-3 h-3 bg-green-100 rounded"></span>≥12% {t.excellent}</span>
+        <span className="flex items-center gap-1"><span className="w-3 h-3 bg-blue-100 rounded"></span>8-12% {t.good}</span>
+        <span className="flex items-center gap-1"><span className="w-3 h-3 bg-yellow-100 rounded"></span>5-8% {t.average}</span>
+        <span className="flex items-center gap-1"><span className="w-3 h-3 bg-red-100 rounded"></span>&lt;5% {t.low}</span>
+      </div>
+      {isFullscreen && <div className="mt-4 text-center text-xs text-gray-400">宿栖東京 | 1211 Co., Ltd.</div>}
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen bg-gray-50 p-4">
+      <div className="max-w-7xl mx-auto">
+        <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center">
+                <Calculator className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-gray-800">{t.title}</h1>
+                <p className="text-xs text-gray-400">宿栖東京 | 1211 Co., Ltd.</p>
+              </div>
+            </div>
+            <button onClick={() => setLang(lang === 'zh' ? 'ja' : 'zh')} className="flex items-center gap-1 px-3 py-1 bg-gray-100 rounded-lg hover:bg-gray-200 text-sm">
+              <Globe className="w-4 h-4" />{lang === 'zh' ? '日本語' : '中文'}
+            </button>
+          </div>
+          <div className="flex gap-2 mb-6 flex-wrap">
+            {[['single', Home, t.single], ['multiUniform', Building, t.multiUniform], ['multiVaried', Building, t.multiVaried], ['mixed', Store, t.mixed], ['mixedVaried', Store, t.mixedVaried]].map(([m, Icon, label]) => (
+              <button key={m} onClick={() => setMode(m)} className={`px-3 py-2 rounded-lg flex items-center gap-2 text-sm transition ${mode === m ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}>
+                <Icon className="w-4 h-4" />{label}
+              </button>
+            ))}
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+            <div><label className="block text-sm font-medium text-gray-700 mb-1">{t.purchasePrice}</label><input type="number" value={params.purchasePrice} onChange={(e) => setParams({...params, purchasePrice: Number(e.target.value)})} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" /></div>
+            <div><label className="block text-sm font-medium text-gray-700 mb-1">{t.tax}</label><input type="number" value={params.tax} onChange={(e) => setParams({...params, tax: Number(e.target.value)})} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" /></div>
+            <div><label className="block text-sm font-medium text-gray-700 mb-1">{t.renovation}</label><input type="number" value={params.renovation} onChange={(e) => setParams({...params, renovation: Number(e.target.value)})} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" /></div>
+            <div><label className="block text-sm font-medium text-gray-700 mb-1">{t.propertyTax}</label><input type="number" value={params.propertyTax} onChange={(e) => setParams({...params, propertyTax: Number(e.target.value)})} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" /></div>
+            <div><label className="block text-sm font-medium text-gray-700 mb-1">{t.monthlyExpense}</label><input type="number" value={params.monthlyExpense} onChange={(e) => setParams({...params, monthlyExpense: Number(e.target.value)})} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" /></div>
+            {!isVariedMode && <div><label className="block text-sm font-medium text-gray-700 mb-1">{t.dailyPrice}</label><input type="number" value={params.dailyPrice} onChange={(e) => setParams({...params, dailyPrice: Number(e.target.value)})} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" /></div>}
+            {(mode === 'multiUniform' || mode === 'mixed') && <div><label className="block text-sm font-medium text-gray-700 mb-1">{t.units}</label><input type="number" value={params.units} onChange={(e) => setParams({...params, units: Number(e.target.value)})} className="w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" /></div>}
+          </div>
+          {isVariedMode && (
+            <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+              <h3 className="font-medium mb-3">{t.unitConfig}</h3>
+              {params.unitTypes.map((ut, i) => (
+                <div key={i} className="flex gap-2 mb-2 items-center">
+                  <input value={ut.name} onChange={(e) => updateUnitType(i, 'name', e.target.value)} placeholder={t.unitType} className="w-20 px-2 py-1 border rounded" />
+                  <input type="number" value={ut.count} onChange={(e) => updateUnitType(i, 'count', e.target.value)} placeholder={t.unitCount} className="w-20 px-2 py-1 border rounded" />
+                  <input type="number" value={ut.price} onChange={(e) => updateUnitType(i, 'price', e.target.value)} placeholder={t.unitPrice} className="w-28 px-2 py-1 border rounded" />
+                  {params.unitTypes.length > 1 && <button onClick={() => removeUnitType(i)} className="text-red-500 hover:text-red-700">✕</button>}
+                </div>
+              ))}
+              <button onClick={addUnitType} className="text-blue-600 text-sm hover:underline">{t.addUnit}</button>
+            </div>
+          )}
+          {(mode === 'mixed' || mode === 'mixedVaried') && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+              <div className="flex items-center gap-2"><input type="checkbox" checked={params.hasRental} onChange={(e) => setParams({...params, hasRental: e.target.checked})} /><label>{t.hasRental}</label></div>
+              {params.hasRental && <div><label className="block text-sm text-gray-700 mb-1">{t.rentalIncome}</label><input type="number" value={params.rentalIncome} onChange={(e) => setParams({...params, rentalIncome: Number(e.target.value)})} className="w-full px-3 py-2 border rounded-lg" /></div>}
+              <div className="flex items-center gap-2"><input type="checkbox" checked={params.hasShop} onChange={(e) => setParams({...params, hasShop: e.target.checked})} /><label>{t.hasShop}</label></div>
+              {params.hasShop && <div><label className="block text-sm text-gray-700 mb-1">{t.shopIncome}</label><input type="number" value={params.shopIncome} onChange={(e) => setParams({...params, shopIncome: Number(e.target.value)})} className="w-full px-3 py-2 border rounded-lg" /></div>}
+            </div>
+          )}
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2">{t.loanType}</label>
+            <div className="flex gap-4 mb-3">
+              <label className="flex items-center gap-2"><input type="radio" checked={loanType === 'direct'} onChange={() => setLoanType('direct')} />{t.directInput}</label>
+              <label className="flex items-center gap-2"><input type="radio" checked={loanType === 'auto'} onChange={() => setLoanType('auto')} />{t.autoCalc}</label>
+            </div>
+            {loanType === 'direct' ? (
+              <div className="w-64"><label className="block text-sm text-gray-700 mb-1">{t.monthlyPayment}</label><input type="number" value={params.monthlyPayment} onChange={(e) => setParams({...params, monthlyPayment: Number(e.target.value)})} className="w-full px-3 py-2 border rounded-lg" /></div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div><label className="block text-sm text-gray-700 mb-1">{t.loanAmount}</label><input type="number" value={params.loanAmount} onChange={(e) => setParams({...params, loanAmount: Number(e.target.value)})} className="w-full px-3 py-2 border rounded-lg" /></div>
+                <div><label className="block text-sm text-gray-700 mb-1">{t.loanRate}</label><input type="number" step="0.1" value={params.loanRate} onChange={(e) => setParams({...params, loanRate: Number(e.target.value)})} className="w-full px-3 py-2 border rounded-lg" /></div>
+                <div><label className="block text-sm text-gray-700 mb-1">{t.loanYears}</label><input type="number" value={params.loanYears} onChange={(e) => setParams({...params, loanYears: Number(e.target.value)})} className="w-full px-3 py-2 border rounded-lg" /></div>
+                <div><label className="block text-sm text-gray-700 mb-1">{t.calcMonthly}</label><div className="px-3 py-2 bg-blue-50 rounded-lg font-bold text-blue-700">{fmt(calcLoanPayment)}</div></div>
+              </div>
+            )}
+          </div>
+          <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+              <div><p className="text-sm text-gray-600">{t.totalInvestment}</p><p className="text-xl font-bold text-blue-600">{fmt(totalInvestment)}</p></div>
+              <div><p className="text-sm text-gray-600">{t.yearlyExpense}</p><p className="text-xl font-bold text-red-500">{fmt(yearlyExpense)}</p></div>
+              <div><p className="text-sm text-gray-600">{t.monthlyPayment}</p><p className="text-xl font-bold text-orange-500">{fmt(monthlyPayment)}</p></div>
+              <div><p className="text-sm text-gray-600">{t.operationMode}</p><p className="text-lg font-bold text-purple-600">{t[mode]}</p></div>
+            </div>
+          </div>
+        </div>
+        <ROITable />
+        <div className="text-center mt-6 text-xs text-gray-400">{t.powered}: 宿栖東京 | 1211 Co., Ltd.</div>
+      </div>
+    </div>
+  );
+}
