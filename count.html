@@ -18,7 +18,7 @@
             transform: translate(-50%, -50%) rotate(-15deg);
             font-size: 6rem; 
             font-weight: 900;
-            /* 调整透明度更淡：0.08 -> 0.04 */
+            /* 透明度 0.04 */
             color: rgba(0, 0, 0, 0.04); 
             pointer-events: none;
             user-select: none;
@@ -421,7 +421,7 @@
                             </div>
                         </div>
 
-                        {/* ROI表格区域，移除了全屏逻辑 */}
+                        {/* ROI表格区域 */}
                         <div className="bg-white rounded-xl shadow-lg p-6 relative overflow-hidden transition-all duration-300">
                             {/* 水印：层级为0 */}
                             <div className="watermark">{t.watermarkText}</div>
@@ -433,7 +433,7 @@
                                         <TrendingUp className="w-6 h-6 text-green-600" />
                                         <h2 className="text-xl font-bold text-gray-800">{t.roiTable}</h2>
                                     </div>
-                                    {/* 删除了全屏按钮 */}
+                                    {/* - */}
                                 </div>
                                 
                                 <div className="overflow-x-auto rounded-lg">
@@ -490,7 +490,7 @@
                             </div>
                         </div>
 
-                        <div className="text-center mt-6 text-xs text-gray-400">{t.powered}: 宿栖東京 | 1211 Co., Ltd.</div>
+                        <div className="text-center mt-6 text-xs text-gray-400">{t.powered}: 宿栖東京 | 1211 Co., Ltd.SUYU</div>
                     </div>
                 </div>
             );
