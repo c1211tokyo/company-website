@@ -16,9 +16,10 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) rotate(-15deg);
-            font-size: 6rem; /* 稍微调小一点适应更多屏幕 */
+            font-size: 6rem; 
             font-weight: 900;
-            color: rgba(0, 0, 0, 0.08); /* 增加透明度到 0.08 让其可见 */
+            /* 调整透明度更淡：0.08 -> 0.04 */
+            color: rgba(0, 0, 0, 0.04); 
             pointer-events: none;
             user-select: none;
             white-space: nowrap;
@@ -41,7 +42,8 @@
     <script type="text/babel" data-type="module">
         import React, { useState, useMemo } from 'https://esm.sh/react@18.2.0?dev';
         import { createRoot } from 'https://esm.sh/react-dom@18.2.0/client?dev';
-        import { Lock, Unlock, Calculator, TrendingUp, Building, Home, Store, Maximize2, Minimize2, Globe, Info } from 'https://esm.sh/lucide-react@0.263.1?dev';
+        // 移除了 Maximize2, Minimize2
+        import { Lock, Unlock, Calculator, TrendingUp, Building, Home, Store, Globe, Info } from 'https://esm.sh/lucide-react@0.263.1?dev';
 
         const PASSWORD = "su1211";
 
@@ -59,7 +61,7 @@
                 mixedVaried: '混合经营(多价格)',
                 purchasePrice: '购入资金 (日元)',
                 tax: '税费 (日元)',
-                renovation: '装修/リフォーム费用',
+                renovation: '装修费用', // 修正文案
                 propertyTax: '年固定资产税',
                 monthlyExpense: '月支出 (水电杂费等)',
                 dailyPrice: '民宿日单价',
@@ -88,8 +90,6 @@
                 roiTable: 'ROI 测算表',
                 dailyPriceCol: '日单价 (平均)',
                 yearlyIncome: '年收入',
-                fullscreen: '全屏显示',
-                exitFullscreen: '退出全屏',
                 legend: 'ROI指标说明',
                 excellent: '优秀',
                 good: '良好',
@@ -145,8 +145,6 @@
                 roiTable: 'ROI シミュレーション表',
                 dailyPriceCol: '日単価 (平均)',
                 yearlyIncome: '年間収入',
-                fullscreen: 'フルスクリーン',
-                exitFullscreen: '終了',
                 legend: 'ROI指標説明',
                 excellent: '優秀',
                 good: '良好',
@@ -168,7 +166,7 @@
             const [isLocked, setIsLocked] = useState(true);
             const [password, setPassword] = useState('');
             const [error, setError] = useState('');
-            const [isFullscreen, setIsFullscreen] = useState(false);
+            // 删除了 isFullscreen 状态
             const [mode, setMode] = useState('single');
             const [loanType, setLoanType] = useState('direct');
             
@@ -423,8 +421,8 @@
                             </div>
                         </div>
 
-                        {/* ROI表格直接渲染区域，修复全屏状态丢失问题 */}
-                        <div className={`bg-white rounded-xl shadow-lg p-6 relative overflow-hidden transition-all duration-300 ${isFullscreen ? 'fixed inset-0 z-50 w-screen h-screen overflow-auto' : ''}`}>
+                        {/* ROI表格区域，移除了全屏逻辑 */}
+                        <div className="bg-white rounded-xl shadow-lg p-6 relative overflow-hidden transition-all duration-300">
                             {/* 水印：层级为0 */}
                             <div className="watermark">{t.watermarkText}</div>
                             
@@ -435,12 +433,9 @@
                                         <TrendingUp className="w-6 h-6 text-green-600" />
                                         <h2 className="text-xl font-bold text-gray-800">{t.roiTable}</h2>
                                     </div>
-                                    <button onClick={() => setIsFullscreen(!isFullscreen)} className="flex items-center gap-1 px-3 py-1 bg-gray-100 rounded-lg hover:bg-gray-200 text-sm transition-colors cursor-pointer z-50">
-                                        {isFullscreen ? <><Minimize2 className="w-4 h-4" />{t.exitFullscreen}</> : <><Maximize2 className="w-4 h-4" />{t.fullscreen}</>}
-                                    </button>
+                                    {/* 删除了全屏按钮 */}
                                 </div>
                                 
-                                {/* 移除 bg-white/80，使水印可见 */}
                                 <div className="overflow-x-auto rounded-lg">
                                     <table className="w-full text-sm">
                                         <thead>
@@ -492,8 +487,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                {isFullscreen && <div className="mt-4 text-center text-xs text-gray-400">宿栖東京 | 1211 Co., Ltd.</div>}
                             </div>
                         </div>
 
