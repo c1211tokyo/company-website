@@ -83,7 +83,6 @@
       font-family: 'Montserrat', sans-serif;
     }
 
-    /* 修复：添加缺失的 blob 动画 */
     @keyframes blob {
       0%, 100% { transform: translate(0, 0) scale(1); }
       33% { transform: translate(30px, -50px) scale(1.1); }
@@ -121,7 +120,6 @@
       border: 1px solid var(--glass-border);
     }
 
-    /* 统一的过渡效果类 */
     .transition-smooth {
       transition: all 0.3s ease;
     }
@@ -170,7 +168,6 @@
       opacity: 1;
     }
 
-    /* 修复：改进菜单按钮图标切换 */
     .menu-icon line {
       transition: all 0.3s ease;
       transform-origin: center;
@@ -184,7 +181,6 @@
       color: white;
     }
 
-    /* 优化：添加焦点样式提升无障碍性 */
     button:focus-visible, a:focus-visible {
       outline: 2px solid var(--m-accent);
       outline-offset: 2px;
@@ -326,7 +322,7 @@
   <section class="mt-24 reveal">
     <h3 class="text-center text-2xl font-semibold text-[var(--m-text-main)] mb-10 en-font">Social Media</h3>
     
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-8">
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-8">
       <div class="group text-center">
         <button onclick="openLightbox('homepic/wechat.png')" class="cursor-zoom-in mx-auto w-24 h-24 md:w-32 md:h-32 bg-white rounded-2xl flex items-center justify-center p-4 shadow-sm group-hover:shadow-xl group-hover:scale-105 transition-smooth border border-gray-100" aria-label="View WeChat QR code">
           <img src="homepic/wechat.png" alt="" loading="lazy" class="w-full h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity" />
@@ -361,6 +357,18 @@
         </button>
         <a href="https://b23.tv/8ENLYNL" target="_blank" rel="noopener noreferrer" class="block mt-4 text-xs font-medium text-[var(--m-text-muted)] hover:text-[var(--m-accent)] tracking-wide">Bilibili</a>
       </div>
+
+      <!-- YouTube -->
+      <div class="group text-center">
+        <a href="http://www.youtube.com/@shukuseitokyo" target="_blank" rel="noopener noreferrer" class="block mx-auto w-24 h-24 md:w-32 md:h-32 bg-white rounded-2xl flex items-center justify-center p-4 shadow-sm group-hover:shadow-xl group-hover:scale-105 transition-smooth border border-gray-100" aria-label="Visit YouTube channel">
+          <svg viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg" class="w-full h-full opacity-80 group-hover:opacity-100 transition-opacity">
+            <rect width="90" height="90" rx="18" fill="#FF0000"/>
+            <path d="M73.5 34.2c-.7-2.6-2.8-4.6-5.4-5.3C63.3 27.5 45 27.5 45 27.5s-18.3 0-23.1 1.4c-2.6.7-4.7 2.7-5.4 5.3C15 39 15 49 15 49s0 10 1.5 14.8c.7 2.6 2.8 4.6 5.4 5.3C26.7 70.5 45 70.5 45 70.5s18.3 0 23.1-1.4c2.6-.7 4.7-2.7 5.4-5.3C75 59 75 49 75 49s0-10-1.5-14.8z" fill="white"/>
+            <polygon points="39,40 39,58 56,49" fill="#FF0000"/>
+          </svg>
+        </a>
+        <a href="http://www.youtube.com/@shukuseitokyo" target="_blank" rel="noopener noreferrer" class="block mt-4 text-xs font-medium text-[var(--m-text-muted)] hover:text-[var(--m-accent)] tracking-wide">YouTube</a>
+      </div>
     </div>
   </section>
 
@@ -378,7 +386,7 @@
             </div>
             <div class="flex items-center gap-3">
                <svg class="w-5 h-5 text-[var(--m-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-               <a href="tel:+81-70-9235-7133" class="hover:text-[var(--m-accent)] transition-colors">070-9235-7133</a>
+               <span>070-9235-***</span>
             </div>
             <div class="flex items-center gap-3">
                <svg class="w-5 h-5 text-[var(--m-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -412,7 +420,6 @@
     </div>
   </section>
 
-<!--  -->
 <footer class="border-t border-gray-200 pt-8 text-center md:text-left">
   <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
     <div>
@@ -517,7 +524,6 @@
       }
     });
 
-    // 修复：表单提交处理
     const form = document.getElementById('contactForm');
     const submitBtn = document.getElementById('submitBtn');
     
