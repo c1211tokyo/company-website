@@ -25,6 +25,10 @@
     #mobile-menu.open{max-height:300px;opacity:1}
     .menu-icon line{transition:all 0.3s ease;transform-origin:center}
     .menu-open .line-1{transform:rotate(45deg) translateY(6px)}.menu-open .line-2{opacity:0}.menu-open .line-3{transform:rotate(-45deg) translateY(-6px)}
+    .lang-switch{display:flex;align-items:center;gap:0.25rem;padding:0.25rem;border:1px solid rgba(125,157,156,0.28);border-radius:999px;background:rgba(255,255,255,0.72)}
+    .lang-switch button{padding:0.35rem 0.7rem;border-radius:999px;font-size:0.72rem;font-weight:600;color:var(--m-text-muted);transition:all 0.25s ease}
+    .lang-switch button.active{background:var(--m-accent);color:white;box-shadow:0 6px 16px rgba(125,157,156,0.2)}
+    .license-card{background:rgba(255,255,255,0.84);border:1px solid rgba(125,157,156,0.22);border-radius:1.5rem;padding:1.5rem}
     ::selection{background:var(--m-accent);color:white}
     button:focus-visible,a:focus-visible{outline:2px solid var(--m-accent);outline-offset:2px}
     .timeline-item{position:relative;padding-left:2.5rem}
@@ -44,11 +48,16 @@
       </div>
     </a>
     <nav class="hidden md:flex text-sm font-medium tracking-wide space-x-8 text-[var(--m-text-main)]">
-      <a href="index.html" class="hover:text-[var(--m-accent)] transition-colors">Home</a>
-      <a href="index.html#services" class="hover:text-[var(--m-accent)] transition-colors">More</a>
-      <a href="about.html" class="text-[var(--m-accent)] font-semibold relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-[var(--m-accent)] after:left-0 after:-bottom-1">About</a>
-      <a href="index.html#contact" class="hover:text-[var(--m-accent)] transition-colors">Contact</a>
+      <a href="index.html" data-i18n="nav.home" class="hover:text-[var(--m-accent)] transition-colors">Home</a>
+      <a href="index.html#services" data-i18n="nav.services" class="hover:text-[var(--m-accent)] transition-colors">Services</a>
+      <a href="about.html" data-i18n="nav.about" class="text-[var(--m-accent)] font-semibold relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-[var(--m-accent)] after:left-0 after:-bottom-1">About</a>
+      <a href="index.html#trust" data-i18n="nav.trust" class="hover:text-[var(--m-accent)] transition-colors">Trust</a>
+      <a href="index.html#contact" data-i18n="nav.contact" class="hover:text-[var(--m-accent)] transition-colors">Contact</a>
     </nav>
+    <div class="hidden md:flex lang-switch" aria-label="Language selector">
+      <button type="button" data-lang="ja" class="active">日本語</button>
+      <button type="button" data-lang="zh">中文</button>
+    </div>
     <button id="menu-btn" class="md:hidden p-2 text-[var(--m-text-main)] focus:outline-none menu-icon" aria-label="Toggle menu" aria-expanded="false">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <line class="line-1" x1="4" y1="6" x2="20" y2="6" stroke-width="2" stroke-linecap="round"/>
@@ -59,28 +68,33 @@
   </div>
   <nav id="mobile-menu" class="md:hidden bg-[var(--m-bg)] border-b border-gray-100 shadow-inner">
     <div class="flex flex-col text-center py-4 space-y-4 text-sm font-medium text-[var(--m-text-main)]">
-      <a href="index.html" class="mobile-link hover:text-[var(--m-accent)]">Home</a>
-      <a href="index.html#services" class="mobile-link hover:text-[var(--m-accent)]">More</a>
-      <a href="about.html" class="mobile-link text-[var(--m-accent)]">About</a>
-      <a href="index.html#contact" class="mobile-link hover:text-[var(--m-accent)]">Contact</a>
-      <a href="http://book.1211.world" target="_blank" rel="noopener noreferrer" class="mobile-link text-[var(--m-accent)]">Book Stay</a>
+      <div class="lang-switch mx-auto" aria-label="Language selector">
+        <button type="button" data-lang="ja" class="active">日本語</button>
+        <button type="button" data-lang="zh">中文</button>
+      </div>
+      <a href="index.html" data-i18n="nav.home" class="mobile-link hover:text-[var(--m-accent)]">Home</a>
+      <a href="index.html#services" data-i18n="nav.services" class="mobile-link hover:text-[var(--m-accent)]">Services</a>
+      <a href="about.html" data-i18n="nav.about" class="mobile-link text-[var(--m-accent)]">About</a>
+      <a href="index.html#trust" data-i18n="nav.trust" class="mobile-link hover:text-[var(--m-accent)]">Trust</a>
+      <a href="index.html#contact" data-i18n="nav.contact" class="mobile-link hover:text-[var(--m-accent)]">Contact</a>
+      <a href="https://book.1211.world" target="_blank" rel="noopener noreferrer" data-i18n="nav.bookStay" class="mobile-link text-[var(--m-accent)]">Book Stay</a>
     </div>
   </nav>
 </header>
 <main class="max-w-7xl mx-auto px-6 pb-20 pt-28">
   <section class="text-center mb-16 reveal">
-    <span class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-widest text-[var(--m-accent)] bg-[rgba(125,157,156,0.1)] rounded-full uppercase">About Us</span>
-    <h1 class="text-4xl md:text-5xl font-bold text-[var(--m-text-main)] mb-4 en-font">会社概要</h1>
-    <p class="text-lg text-[var(--m-text-muted)] max-w-2xl mx-auto">東京での旅をデザインする。宿栖東京ブランドを通じて、世界中の旅人に「第二の我が家」を提供します。</p>
+    <span data-i18n="hero.badge" class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-widest text-[var(--m-accent)] bg-[rgba(125,157,156,0.1)] rounded-full uppercase">About Us</span>
+    <h1 data-i18n="hero.title" class="text-4xl md:text-5xl font-bold text-[var(--m-text-main)] mb-4 en-font">会社概要</h1>
+    <p data-i18n="hero.copy" class="text-lg text-[var(--m-text-muted)] max-w-2xl mx-auto">東京での旅をデザインする。宿栖東京ブランドを通じて、世界中の旅人に「第二の我が家」を提供します。</p>
   </section>
   <section class="mb-20 reveal">
     <div class="glass rounded-3xl p-8 md:p-12 soft-shadow">
-      <h2 class="text-2xl md:text-3xl font-semibold text-[var(--m-text-main)] mb-6 en-font">Brand Story</h2>
+      <h2 data-i18n="story.title" class="text-2xl md:text-3xl font-semibold text-[var(--m-text-main)] mb-6 en-font">Brand Story</h2>
       <div class="prose prose-lg max-w-none text-[var(--m-text-main)] leading-relaxed space-y-4">
-        <p>2018年の創業以来、<strong class="text-[var(--m-accent)]">宿栖東京</strong>は実用性と美観のバランスを堅持し、サービス基準の継続的な最適化に努めてまいりました。</p>
-        <p>現在、当社の物件は<strong>新宿、渋谷、台東、墨田</strong>など東京の中心エリアに集中し、繁華街から伝統的な風情まで多様な地域をカバーしています。</p>
-        <p>プロジェクトのコストパフォーマンスを重視し、すべてのパートナー様に最適な投資収益率を提供することに尽力しております。</p>
-        <p class="text-[var(--m-text-muted)] text-sm mt-8 pt-6 border-t border-gray-200">宿栖東京は、東京での旅における素朴な願いから始まり、東京滞在サービスのリーディングブランドへと成長しました。東京の中心部から出発点とし、「快適さ、細やかさ、多様性」という理念をすべての客室に反映させ、世界中の旅人にとっての「第二の我が家」を心を込めて創り上げています。</p>
+        <p data-i18n="story.p1">2018年の創業以来、<strong class="text-[var(--m-accent)]">宿栖東京</strong>は実用性と美観のバランスを堅持し、サービス基準の継続的な最適化に努めてまいりました。</p>
+        <p data-i18n="story.p2">現在、当社の物件は<strong>新宿、渋谷、台東、墨田</strong>など東京の中心エリアに集中し、繁華街から伝統的な風情まで多様な地域をカバーしています。</p>
+        <p data-i18n="story.p3">プロジェクトのコストパフォーマンスを重視し、すべてのパートナー様に最適な投資収益率を提供することに尽力しております。</p>
+        <p data-i18n="story.p4" class="text-[var(--m-text-muted)] text-sm mt-8 pt-6 border-t border-gray-200">宿栖東京は、東京での旅における素朴な願いから始まり、東京滞在サービスのリーディングブランドへと成長しました。東京の中心部から出発点とし、「快適さ、細やかさ、多様性」という理念をすべての客室に反映させ、世界中の旅人にとっての「第二の我が家」を心を込めて創り上げています。</p>
       </div>
     </div>
   </section>
@@ -89,34 +103,56 @@
       <div class="glass rounded-3xl p-8 soft-shadow">
         <h3 class="text-xl font-semibold text-[var(--m-text-main)] mb-6 flex items-center gap-3">
           <svg class="w-6 h-6 text-[var(--m-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-          会社情報
+          <span data-i18n="company.title">会社情報</span>
         </h3>
         <div class="space-y-3 text-sm text-[var(--m-text-main)]">
-          <div class="flex justify-between py-2 border-b border-gray-100"><span class="text-[var(--m-text-muted)]">会社名</span><span class="font-medium">株式会社一二一一</span></div>
-          <div class="flex justify-between py-2 border-b border-gray-100"><span class="text-[var(--m-text-muted)]">英文名</span><span class="font-medium en-font">1211 Co., Ltd.</span></div>
-          <div class="flex justify-between py-2 border-b border-gray-100"><span class="text-[var(--m-text-muted)]">設立</span><span class="font-medium">2018年</span></div>
-          <div class="flex justify-between py-2 border-b border-gray-100"><span class="text-[var(--m-text-muted)]">本社</span><span class="font-medium text-right">東京都墨田区</span></div>
-          <div class="flex justify-between py-2"><span class="text-[var(--m-text-muted)]">ブランド</span><span class="font-medium text-[var(--m-accent)]">宿栖東京</span></div>
+          <div class="flex justify-between py-2 border-b border-gray-100"><span data-i18n="company.nameLabel" class="text-[var(--m-text-muted)]">会社名</span><span class="font-medium">株式会社一二一一</span></div>
+          <div class="flex justify-between py-2 border-b border-gray-100"><span data-i18n="company.enLabel" class="text-[var(--m-text-muted)]">英文名</span><span class="font-medium en-font">1211 Co., Ltd.</span></div>
+          <div class="flex justify-between py-2 border-b border-gray-100"><span data-i18n="company.foundedLabel" class="text-[var(--m-text-muted)]">設立</span><span class="font-medium">2018年</span></div>
+          <div class="flex justify-between py-2 border-b border-gray-100"><span data-i18n="company.officeLabel" class="text-[var(--m-text-muted)]">本社</span><span data-i18n="company.office" class="font-medium text-right">東京都墨田区</span></div>
+          <div class="flex justify-between py-2"><span data-i18n="company.brandLabel" class="text-[var(--m-text-muted)]">ブランド</span><span class="font-medium text-[var(--m-accent)]">宿栖東京</span></div>
         </div>
       </div>
       <div class="glass rounded-3xl p-8 soft-shadow">
         <h3 class="text-xl font-semibold text-[var(--m-text-main)] mb-6 flex items-center gap-3">
           <svg class="w-6 h-6 text-[var(--m-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          事業内容
+          <span data-i18n="business.title">事業内容</span>
         </h3>
         <ul class="space-y-3 text-sm text-[var(--m-text-main)]">
-          <li class="flex items-start gap-3"><span class="text-[var(--m-accent)] mt-1">●</span><span>民宿・旅館の運営管理</span></li>
-          <li class="flex items-start gap-3"><span class="text-[var(--m-accent)] mt-1">●</span><span>投資移民コンサルティング</span></li>
-          <li class="flex items-start gap-3"><span class="text-[var(--m-accent)] mt-1">●</span><span>自媒体運営（SNS・コンテンツマーケティング）</span></li>
-          <li class="flex items-start gap-3"><span class="text-[var(--m-accent)] mt-1">●</span><span>旅行関連サービス全般</span></li>
-          <li class="flex items-start gap-3"><span class="text-[var(--m-accent)] mt-1">●</span><span>オーダーメイド旅程企画</span></li>
-          <li class="flex items-start gap-3"><span class="text-[var(--m-accent)] mt-1">●</span><span>プロフェッショナル撮影サービス</span></li>
+          <li class="flex items-start gap-3"><span class="text-[var(--m-accent)] mt-1">●</span><span data-i18n="business.item1">民宿・旅館の運営管理</span></li>
+          <li class="flex items-start gap-3"><span class="text-[var(--m-accent)] mt-1">●</span><span data-i18n="business.item2">投資移民コンサルティング</span></li>
+          <li class="flex items-start gap-3"><span class="text-[var(--m-accent)] mt-1">●</span><span data-i18n="business.item3">自媒体運営（SNS・コンテンツマーケティング）</span></li>
+          <li class="flex items-start gap-3"><span class="text-[var(--m-accent)] mt-1">●</span><span data-i18n="business.item4">旅行関連サービス全般</span></li>
+          <li class="flex items-start gap-3"><span class="text-[var(--m-accent)] mt-1">●</span><span data-i18n="business.item5">オーダーメイド旅程企画</span></li>
+          <li class="flex items-start gap-3"><span class="text-[var(--m-accent)] mt-1">●</span><span data-i18n="business.item6">プロフェッショナル撮影サービス</span></li>
         </ul>
       </div>
     </div>
   </section>
   <section class="mb-20 reveal">
-    <h2 class="text-2xl md:text-3xl font-semibold text-[var(--m-text-main)] mb-10 text-center en-font">Our Journey</h2>
+    <div class="glass rounded-3xl p-8 md:p-12 soft-shadow">
+      <div class="text-center mb-8">
+        <h2 data-i18n="licenses.title" class="text-2xl md:text-3xl font-semibold text-[var(--m-text-main)] en-font">施設ごとの許認可</h2>
+        <p data-i18n="licenses.copy" class="mt-3 text-sm md:text-base text-[var(--m-text-muted)] max-w-3xl mx-auto leading-relaxed">旅館業営業許可や住宅宿泊事業届出は施設単位の情報を含むため、会社トップページでは一覧化せず、必要に応じて施設ごとに確認できる形で管理します。</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="license-card">
+          <h3 data-i18n="licenses.card1Title" class="font-bold text-[var(--m-text-main)] mb-3">トップページの掲載範囲</h3>
+          <p data-i18n="licenses.card1Body" class="text-sm text-[var(--m-text-muted)] leading-relaxed">トップページでは会社級・管理級の信頼情報を中心に掲載し、施設単位の証明書を過度に並べません。</p>
+        </article>
+        <article class="license-card">
+          <h3 data-i18n="licenses.card2Title" class="font-bold text-[var(--m-text-main)] mb-3">施設単位の管理</h3>
+          <p data-i18n="licenses.card2Body" class="text-sm text-[var(--m-text-muted)] leading-relaxed">許可種別、発行機関、番号、状態などは施設ごとに分けて管理します。</p>
+        </article>
+        <article class="license-card">
+          <h3 data-i18n="licenses.card3Title" class="font-bold text-[var(--m-text-main)] mb-3">公開情報の保護</h3>
+          <p data-i18n="licenses.card3Body" class="text-sm text-[var(--m-text-muted)] leading-relaxed">公開ページでは必要な情報に絞り、番号や証明書画像は必要に応じてマスク・圧縮して表示します。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="mb-20 reveal">
+    <h2 data-i18n="journey.title" class="text-2xl md:text-3xl font-semibold text-[var(--m-text-main)] mb-10 text-center en-font">Our Journey</h2>
     <div class="glass rounded-3xl p-8 md:p-12 soft-shadow max-w-3xl mx-auto">
       <div class="space-y-8">
         <div class="timeline-item"><h3 class="text-lg font-semibold text-[var(--m-text-main)] mb-2">2018年 — 創業</h3><p class="text-sm text-[var(--m-text-muted)]">東京での新しい宿泊体験の提供を目指し、株式会社一二一一を設立。</p></div>
@@ -128,7 +164,7 @@
     </div>
   </section>
   <section class="mb-20 reveal">
-    <h2 class="text-2xl md:text-3xl font-semibold text-[var(--m-text-main)] mb-10 text-center en-font">Core Values</h2>
+    <h2 data-i18n="values.title" class="text-2xl md:text-3xl font-semibold text-[var(--m-text-main)] mb-10 text-center en-font">Core Values</h2>
     <div class="grid md:grid-cols-3 gap-8">
       <div class="text-center p-8 rounded-3xl bg-white soft-shadow">
         <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-[rgba(125,157,156,0.1)] flex items-center justify-center"><svg class="w-8 h-8 text-[var(--m-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg></div>
@@ -149,11 +185,11 @@
   </section>
   <section class="text-center reveal">
     <div class="glass rounded-3xl p-12 md:p-16 soft-shadow">
-      <h2 class="text-2xl md:text-3xl font-bold text-[var(--m-text-main)] mb-4 en-font">Ready to Experience Tokyo?</h2>
-      <p class="text-[var(--m-text-muted)] mb-8 max-w-2xl mx-auto">私たちと一緒に、あなただけの東京体験を創りましょう。ご質問・ご予約はお気軽にお問い合わせください。</p>
+      <h2 data-i18n="cta.title" class="text-2xl md:text-3xl font-bold text-[var(--m-text-main)] mb-4 en-font">Ready to Experience Tokyo?</h2>
+      <p data-i18n="cta.copy" class="text-[var(--m-text-muted)] mb-8 max-w-2xl mx-auto">私たちと一緒に、あなただけの東京体験を創りましょう。ご質問・ご予約はお気軽にお問い合わせください。</p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="index.html#contact" class="px-8 py-3.5 rounded-full bg-[var(--m-text-main)] text-white font-medium shadow-lg hover:bg-[var(--m-accent)] hover:shadow-[var(--m-accent)]/30 hover:-translate-y-1 transition-all duration-300">Contact Us</a>
-        <a href="index.html" class="px-8 py-3.5 rounded-full border border-gray-300 text-[var(--m-text-main)] hover:border-[var(--m-accent)] hover:text-[var(--m-accent)] hover:bg-white transition-all duration-300">Back to Home</a>
+        <a href="index.html#contact" data-i18n="cta.contact" class="px-8 py-3.5 rounded-full bg-[var(--m-text-main)] text-white font-medium shadow-lg hover:bg-[var(--m-accent)] hover:shadow-[var(--m-accent)]/30 hover:-translate-y-1 transition-all duration-300">Contact Us</a>
+        <a href="index.html" data-i18n="cta.back" class="px-8 py-3.5 rounded-full border border-gray-300 text-[var(--m-text-main)] hover:border-[var(--m-accent)] hover:text-[var(--m-accent)] hover:bg-white transition-all duration-300">Back to Home</a>
       </div>
     </div>
   </section>
@@ -161,17 +197,41 @@
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
       <div>
         <p class="font-bold text-[var(--m-text-main)]">株式会社一二一一</p>
-        <p class="text-xs text-[var(--m-text-muted)] mt-1">© 2025 1211 Co., Ltd. All Rights Reserved.</p>
+        <p class="text-xs text-[var(--m-text-muted)] mt-1">© <span id="currentYear">2026</span> 1211 Co., Ltd. All Rights Reserved.</p>
       </div>
       <div class="flex gap-4 text-xs text-[var(--m-text-muted)]"><span>Designed for Tokyo</span></div>
     </div>
   </footer>
 </main>
 <script>
+  const translations={
+    ja:{
+      "nav.home":"Home","nav.services":"Services","nav.about":"About","nav.trust":"Trust","nav.contact":"Contact","nav.bookStay":"Book Stay",
+      "hero.badge":"About Us","hero.title":"会社概要","hero.copy":"東京での旅をデザインする。宿栖東京ブランドを通じて、世界中の旅人に「第二の我が家」を提供します。",
+      "story.title":"Brand Story","story.p1":"2018年の創業以来、<strong class=\"text-[var(--m-accent)]\">宿栖東京</strong>は実用性と美観のバランスを堅持し、サービス基準の継続的な最適化に努めてまいりました。","story.p2":"現在、当社の物件は<strong>新宿、渋谷、台東、墨田</strong>など東京の中心エリアに集中し、繁華街から伝統的な風情まで多様な地域をカバーしています。","story.p3":"プロジェクトのコストパフォーマンスを重視し、すべてのパートナー様に最適な投資収益率を提供することに尽力しております。","story.p4":"宿栖東京は、東京での旅における素朴な願いから始まり、東京滞在サービスのリーディングブランドへと成長しました。東京の中心部から出発点とし、「快適さ、細やかさ、多様性」という理念をすべての客室に反映させ、世界中の旅人にとっての「第二の我が家」を心を込めて創り上げています。",
+      "company.title":"会社情報","company.nameLabel":"会社名","company.enLabel":"英文名","company.foundedLabel":"設立","company.officeLabel":"本社","company.office":"東京都墨田区","company.brandLabel":"ブランド",
+      "business.title":"事業内容","business.item1":"民宿・旅館の運営管理","business.item2":"投資移民コンサルティング","business.item3":"自媒体運営（SNS・コンテンツマーケティング）","business.item4":"旅行関連サービス全般","business.item5":"オーダーメイド旅程企画","business.item6":"プロフェッショナル撮影サービス",
+      "licenses.title":"施設ごとの許認可","licenses.copy":"旅館業営業許可や住宅宿泊事業届出は施設単位の情報を含むため、会社トップページでは一覧化せず、必要に応じて施設ごとに確認できる形で管理します。","licenses.card1Title":"トップページの掲載範囲","licenses.card1Body":"トップページでは会社級・管理級の信頼情報を中心に掲載し、施設単位の証明書を過度に並べません。","licenses.card2Title":"施設単位の管理","licenses.card2Body":"許可種別、発行機関、番号、状態などは施設ごとに分けて管理します。","licenses.card3Title":"公開情報の保護","licenses.card3Body":"公開ページでは必要な情報に絞り、番号や証明書画像は必要に応じてマスク・圧縮して表示します。",
+      "journey.title":"Our Journey","values.title":"Core Values","cta.title":"Ready to Experience Tokyo?","cta.copy":"私たちと一緒に、あなただけの東京体験を創りましょう。ご質問・ご予約はお気軽にお問い合わせください。","cta.contact":"Contact Us","cta.back":"Back to Home"
+    },
+    zh:{
+      "nav.home":"首页","nav.services":"服务","nav.about":"关于我们","nav.trust":"资质可信","nav.contact":"联系","nav.bookStay":"住宿预订",
+      "hero.badge":"About Us","hero.title":"公司概要","hero.copy":"我们通过宿栖东京品牌，为来自世界各地的旅客设计东京停留体验，并提供安心舒适的第二个家。",
+      "story.title":"品牌故事","story.p1":"自2018年创业以来，<strong class=\"text-[var(--m-accent)]\">宿栖东京</strong>持续在实用性和美观之间取得平衡，不断优化住宿与服务标准。","story.p2":"目前，公司运营与管理的项目集中在<strong>新宿、涩谷、台东、墨田</strong>等东京核心区域，覆盖繁华商业区与传统街区。","story.p3":"我们重视项目性价比和长期运营质量，努力为合作伙伴提供更稳定的投资回报。","story.p4":"宿栖东京从旅客在东京停留时最真实的需求出发，逐步成长为东京住宿服务品牌。我们把舒适、细致和多样性落实到空间与服务细节中。",
+      "company.title":"公司信息","company.nameLabel":"公司名","company.enLabel":"英文名","company.foundedLabel":"成立","company.officeLabel":"总部","company.office":"东京都墨田区","company.brandLabel":"品牌",
+      "business.title":"业务内容","business.item1":"民宿与旅馆运营管理","business.item2":"投资移民咨询","business.item3":"自媒体运营（SNS 与内容营销）","business.item4":"旅行相关综合服务","business.item5":"定制行程策划","business.item6":"专业摄影服务",
+      "licenses.title":"各设施许可说明","licenses.copy":"旅馆业营业许可、住宅宿泊事业届出等通常包含具体设施信息，因此公司首页不集中堆放所有单房源证件，而是在需要时按设施分别确认和展示。","licenses.card1Title":"首页展示边界","licenses.card1Body":"首页展示公司级/管理级资质，不把所有单房源证件堆在主视觉或资质区。","licenses.card2Title":"按设施管理","licenses.card2Body":"每个设施的许可类型、发证机关、编号和状态按房源分别维护。","licenses.card3Title":"公开信息保护","licenses.card3Body":"公开页面只放必要信息，编号和证件图按需要打码或压缩展示。",
+      "journey.title":"发展历程","values.title":"核心价值","cta.title":"准备好体验东京了吗？","cta.copy":"和我们一起设计属于您的东京体验。预订、咨询或合作需求，欢迎联系。","cta.contact":"联系我们","cta.back":"返回首页"
+    }
+  };
+  function applyLanguage(lang){const pack=translations[lang]||translations.ja;document.documentElement.lang=lang==='zh'?'zh-Hans':'ja';document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;if(pack[key])el.innerHTML=pack[key]});document.querySelectorAll('[data-lang]').forEach(btn=>btn.classList.toggle('active',btn.dataset.lang===lang));localStorage.setItem('siteLanguage',lang)}
   const revealObserver=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('active')})},{threshold:0.1});
   document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
   document.addEventListener("DOMContentLoaded",function(){
     const menuBtn=document.getElementById("menu-btn");const mobileMenu=document.getElementById("mobile-menu");
+    applyLanguage(localStorage.getItem('siteLanguage')||'ja');
+    document.querySelectorAll('[data-lang]').forEach(btn=>btn.addEventListener('click',()=>applyLanguage(btn.dataset.lang)));
+    document.getElementById('currentYear').textContent=new Date().getFullYear();
     menuBtn.addEventListener("click",()=>{const isOpen=mobileMenu.classList.contains('open');mobileMenu.classList.toggle("open");menuBtn.classList.toggle("menu-open");menuBtn.setAttribute('aria-expanded',!isOpen)});
     document.querySelectorAll('.mobile-link').forEach(link=>{link.addEventListener('click',()=>{mobileMenu.classList.remove("open");menuBtn.classList.remove("menu-open");menuBtn.setAttribute('aria-expanded','false')})});
     window.addEventListener('scroll',()=>{const nav=document.getElementById('navbar');if(window.scrollY>50){nav.classList.add('shadow-sm')}else{nav.classList.remove('shadow-sm')}});
