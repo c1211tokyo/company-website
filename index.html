@@ -49,8 +49,6 @@
     .lang-switch{display:flex;align-items:center;gap:0.25rem;padding:0.25rem;border:1px solid rgba(125,157,156,0.28);border-radius:999px;background:rgba(255,255,255,0.72)}
     .lang-switch button{padding:0.35rem 0.7rem;border-radius:999px;font-size:0.72rem;font-weight:600;color:var(--m-text-muted);transition:all 0.25s ease}
     .lang-switch button.active{background:var(--m-accent);color:white;box-shadow:0 6px 16px rgba(125,157,156,0.2)}
-    .trust-card{background:rgba(255,255,255,0.82);border:1px solid rgba(125,157,156,0.22);border-radius:1.5rem;padding:1.5rem;box-shadow:0 12px 32px -18px rgba(0,0,0,0.14)}
-    .trust-badge{display:inline-flex;align-items:center;border-radius:999px;background:rgba(125,157,156,0.12);color:var(--m-accent-dark);font-size:0.72rem;font-weight:700;letter-spacing:0.08em;padding:0.35rem 0.7rem;text-transform:uppercase}
     ::selection{background:var(--m-accent);color:white}
     button:focus-visible,a:focus-visible{outline:2px solid var(--m-accent);outline-offset:2px}
   </style>
@@ -69,7 +67,7 @@
     <nav class="hidden md:flex text-sm font-medium tracking-wide space-x-8 text-[var(--m-text-main)]">
       <a href="#services" data-i18n="nav.services" class="hover:text-[var(--m-accent)] transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-[var(--m-accent)] after:left-0 after:-bottom-1 after:transition-all hover:after:w-full">Services</a>
       <a href="about.html" data-i18n="nav.about" class="hover:text-[var(--m-accent)] transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-[var(--m-accent)] after:left-0 after:-bottom-1 after:transition-all hover:after:w-full">About</a>
-      <a href="#trust" data-i18n="nav.trust" class="hover:text-[var(--m-accent)] transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-[var(--m-accent)] after:left-0 after:-bottom-1 after:transition-all hover:after:w-full">Trust</a>
+      <a href="about.html#trust" data-i18n="nav.trust" class="hover:text-[var(--m-accent)] transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-[var(--m-accent)] after:left-0 after:-bottom-1 after:transition-all hover:after:w-full">Trust</a>
       <a href="#contact" data-i18n="nav.contact" class="hover:text-[var(--m-accent)] transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-[var(--m-accent)] after:left-0 after:-bottom-1 after:transition-all hover:after:w-full">Contact</a>
       <a href="https://book.1211.world" data-i18n="nav.book" class="hover:text-[var(--m-accent)] transition-colors relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bg-[var(--m-accent)] after:left-0 after:-bottom-1 after:transition-all hover:after:w-full">Book</a>
     </nav>
@@ -93,7 +91,7 @@
       </div>
       <a href="#services" data-i18n="nav.services" class="mobile-link hover:text-[var(--m-accent)]">Services</a>
       <a href="about.html" data-i18n="nav.about" class="mobile-link hover:text-[var(--m-accent)]">About</a>
-      <a href="#trust" data-i18n="nav.trust" class="mobile-link hover:text-[var(--m-accent)]">Trust</a>
+      <a href="about.html#trust" data-i18n="nav.trust" class="mobile-link hover:text-[var(--m-accent)]">Trust</a>
       <a href="#contact" data-i18n="nav.contact" class="mobile-link hover:text-[var(--m-accent)]">Contact</a>
       <a href="https://book.1211.world" data-i18n="nav.bookStay" class="mobile-link hover:text-[var(--m-accent)]">Book Stay</a>
     </div>
@@ -130,32 +128,6 @@
         <div class="absolute top-4 left-6 text-8xl text-[var(--m-accent)] opacity-10 font-serif" aria-hidden="true">"</div>
         <p data-i18n="about.copy">宿栖東京は、東京での旅における素朴な願いから始まり、東京滞在サービスのリーディングブランドへと成長しました。東京の中心部から出発点とし、「快適さ、細やかさ、多様性」という理念をすべての客室に反映させ、世界中の旅人にとっての「第二の我が家」を心を込めて創り上げています。</p>
         <div data-i18n="about.fields" class="mt-6 pt-6 border-t border-gray-200/50 text-[var(--m-text-muted)] text-xs md:text-sm">主な事業分野: 民宿・旅館の運営管理 / 投資移民コンサルティング / 自媒体運営 / 旅行関連サービス</div>
-      </div>
-    </div>
-  </section>
-  <section id="trust" class="mt-24 reveal">
-    <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-10">
-        <span data-i18n="trust.badge" class="trust-badge">Trust</span>
-        <h2 data-i18n="trust.title" class="mt-4 text-2xl md:text-3xl font-semibold text-[var(--m-text-main)] en-font">会社信頼情報</h2>
-        <p data-i18n="trust.copy" class="mt-3 text-sm md:text-base text-[var(--m-text-muted)] leading-relaxed">会社としての登録・会員情報と、施設ごとの許認可確認方針を明確にしています。</p>
-      </div>
-      <div class="grid md:grid-cols-3 gap-6">
-        <article class="trust-card">
-          <p data-i18n="trust.card1Label" class="text-xs font-semibold tracking-widest text-[var(--m-accent)] uppercase mb-3">Registration</p>
-          <h3 data-i18n="trust.card1Title" class="text-lg font-bold text-[var(--m-text-main)] mb-3">住宅宿泊管理業者登録</h3>
-          <p data-i18n="trust.card1Body" class="text-sm leading-relaxed text-[var(--m-text-muted)]">登録番号は必要範囲のみ開示し、公開ページでは一部をマスクして表示します。登録有効期日は令和13年6月9日まで。</p>
-        </article>
-        <article class="trust-card">
-          <p data-i18n="trust.card2Label" class="text-xs font-semibold tracking-widest text-[var(--m-accent)] uppercase mb-3">Membership</p>
-          <h3 data-i18n="trust.card2Title" class="text-lg font-bold text-[var(--m-text-main)] mb-3">東京商工会議所 2026年度会員</h3>
-          <p data-i18n="trust.card2Body" class="text-sm leading-relaxed text-[var(--m-text-muted)]">会員番号等は一部マスクで管理し、会社の信用情報として必要な範囲で掲載します。会籍期間は2027年3月まで。</p>
-        </article>
-        <article class="trust-card">
-          <p data-i18n="trust.card3Label" class="text-xs font-semibold tracking-widest text-[var(--m-accent)] uppercase mb-3">Facility Licenses</p>
-          <h3 data-i18n="trust.card3Title" class="text-lg font-bold text-[var(--m-text-main)] mb-3">施設ごとの許認可確認</h3>
-          <p data-i18n="trust.card3Body" class="text-sm leading-relaxed text-[var(--m-text-muted)]">当社が運営・管理する各施設は、施設ごとに必要な旅館業営業許可または住宅宿泊事業届出等を取得・確認しています。</p>
-        </article>
       </div>
     </div>
   </section>
@@ -286,7 +258,6 @@
       "nav.services":"Services","nav.about":"About","nav.trust":"Trust","nav.contact":"Contact","nav.book":"Book","nav.bookStay":"Book Stay",
       "hero.badge":"Established in Tokyo","hero.line1":"東京を、","hero.line2":"もっと自由にもっと特別に","hero.copy":"Discover a new way to experience Tokyo. オーダーメイドの旅程、多彩な宿泊施設。私たちは、あなたの滞在を「快適」で「忘れられない」思い出に変えます。","hero.ctaContact":"Contact Us","hero.ctaServices":"View Services",
       "about.title":"Brand Philosophy","about.eyebrow":"宿栖東京 ブランド紹介","about.copy":"宿栖東京は、東京での旅における素朴な願いから始まり、東京滞在サービスのリーディングブランドへと成長しました。東京の中心部から出発点とし、「快適さ、細やかさ、多様性」という理念をすべての客室に反映させ、世界中の旅人にとっての「第二の我が家」を心を込めて創り上げています。","about.fields":"主な事業分野: 民宿・旅館の運営管理 / 投資移民コンサルティング / 自媒体運営 / 旅行関連サービス",
-      "trust.badge":"Trust","trust.title":"会社信頼情報","trust.copy":"会社としての登録・会員情報と、施設ごとの許認可確認方針を明確にしています。","trust.card1Label":"Registration","trust.card1Title":"住宅宿泊管理業者登録","trust.card1Body":"登録番号は必要範囲のみ開示し、公開ページでは一部をマスクして表示します。登録有効期日は令和13年6月9日まで。","trust.card2Label":"Membership","trust.card2Title":"東京商工会議所 2026年度会員","trust.card2Body":"会員番号等は一部マスクで管理し、会社の信用情報として必要な範囲で掲載します。会籍期間は2027年3月まで。","trust.card3Label":"Facility Licenses","trust.card3Title":"施設ごとの許認可確認","trust.card3Body":"当社が運営・管理する各施設は、施設ごとに必要な旅館業営業許可または住宅宿泊事業届出等を取得・確認しています。",
       "services.title":"Our Services","services.copy":"多角的なアプローチで、東京体験をサポート","services.card1Title":"Custom Itineraries","services.card1Body":"食文化や隠れスポットを含むオーダーメイドプラン。プロカメラマンによる撮影も提供。","services.card2Title":"Lodgings & Inns","services.card2Body":"新宿・渋谷・台東・墨田などで多様な宿泊体験を提案。長短期どちらも対応可能。","services.card3Title":"Media & Marketing","services.card3Body":"自社メディアと多チャンネル連動でプロモーションを最適化します。",
       "social.title":"Social Media","contact.title":"Contact Us","contact.copy":"ご予約・ご質問・メディア取材など。<br>下記フォームまたはメールにてお気軽にご連絡ください。","form.name":"お名前 / Your name","form.email":"メール / Email","form.message":"メッセージ / Message","form.submit":"送信する / Send Message","form.sending":"送信中... / Sending...","toast.copy":"メールアドレスをコピーしました","toast.success":"メッセージを送信しました！ / Message sent successfully!","toast.error":"送信に失敗しました。もう一度お試しください。"
     },
@@ -294,7 +265,6 @@
       "nav.services":"服务","nav.about":"关于我们","nav.trust":"资质可信","nav.contact":"联系","nav.book":"预订","nav.bookStay":"住宿预订",
       "hero.badge":"东京本地公司","hero.line1":"让东京之旅，","hero.line2":"更自由也更特别","hero.copy":"我们提供定制行程、多样住宿与东京在地服务，把您的停留变成舒适、安心、值得记住的体验。","hero.ctaContact":"联系我们","hero.ctaServices":"查看服务",
       "about.title":"品牌理念","about.eyebrow":"宿栖东京 品牌介绍","about.copy":"宿栖东京从旅客在东京停留时最真实的需求出发，持续打磨住宿、行程和在地服务。我们把舒适、细致和多样性落实到每一处空间与服务细节，为来自世界各地的旅客打造在东京的第二个家。","about.fields":"主要业务: 民宿与旅馆运营管理 / 投资移民咨询 / 自媒体运营 / 旅行相关服务",
-      "trust.badge":"Trust","trust.title":"公司资质与可信信息","trust.copy":"我们公开公司层面的登记和会员信息，并说明每个设施的许可确认原则。","trust.card1Label":"登记信息","trust.card1Title":"住宅宿泊管理业者登记","trust.card1Body":"登记编号仅在必要范围内展示，公开页面使用部分打码。登记有效期至令和13年6月9日。","trust.card2Label":"会员信息","trust.card2Title":"东京商工会议所 2026年度会员","trust.card2Body":"会员编号等信息以部分打码方式管理，并在必要范围内作为公司信用信息展示。会籍期间至2027年3月。","trust.card3Label":"单房源许可","trust.card3Title":"各设施许可确认","trust.card3Body":"本公司运营或管理的各设施，均按设施分别取得或确认所需的旅馆业营业许可、住宅宿泊事业届出等。",
       "services.title":"我们的服务","services.copy":"以多角度服务支持您的东京体验","services.card1Title":"定制行程","services.card1Body":"结合饮食文化、隐藏景点与旅拍需求，为不同旅客设计东京行程。","services.card2Title":"住宿与旅馆","services.card2Body":"围绕新宿、涩谷、台东、墨田等东京核心区域，提供多样住宿体验，支持短期和长期需求。","services.card3Title":"媒体与推广","services.card3Body":"结合自有媒体和多平台渠道，为品牌与项目提供内容传播支持。",
       "social.title":"社交媒体","contact.title":"联系我们","contact.copy":"预订、咨询、媒体采访等需求，欢迎通过表单或邮件联系。","form.name":"姓名 / Your name","form.email":"邮箱 / Email","form.message":"留言 / Message","form.submit":"发送 / Send Message","form.sending":"发送中... / Sending...","toast.copy":"邮箱地址已复制","toast.success":"消息已发送！ / Message sent successfully!","toast.error":"发送失败，请稍后再试。"
     }

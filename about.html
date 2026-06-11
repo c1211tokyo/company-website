@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>About Us — 株式会社一二一一 | 1211 Co., Ltd.</title>
-  <meta name="description" content="株式会社一二一一の企業情報、ブランド理念、サービス内容をご紹介します。2018年創業以来、東京での宿泊体験をデザインし続けています。" />
+  <meta name="description" content="株式会社一二一一の企業情報、会社信頼情報、住宅宿泊管理業者登録、東京商工会議所会員情報、ブランド理念、サービス内容をご紹介します。" />
   <meta name="keywords" content="一二一一,1211,宿栖東京,会社概要,企業情報,About" />
   <link rel="canonical" href="https://1211.world/about.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,11 @@
     .lang-switch{display:flex;align-items:center;gap:0.25rem;padding:0.25rem;border:1px solid rgba(125,157,156,0.28);border-radius:999px;background:rgba(255,255,255,0.72)}
     .lang-switch button{padding:0.35rem 0.7rem;border-radius:999px;font-size:0.72rem;font-weight:600;color:var(--m-text-muted);transition:all 0.25s ease}
     .lang-switch button.active{background:var(--m-accent);color:white;box-shadow:0 6px 16px rgba(125,157,156,0.2)}
-    .license-card{background:rgba(255,255,255,0.84);border:1px solid rgba(125,157,156,0.22);border-radius:1.5rem;padding:1.5rem}
+    .trust-card{background:rgba(255,255,255,0.84);border:1px solid rgba(125,157,156,0.22);border-radius:1.5rem;padding:1.5rem;box-shadow:0 12px 32px -18px rgba(0,0,0,0.14)}
+    .trust-badge{display:inline-flex;align-items:center;border-radius:999px;background:rgba(125,157,156,0.12);color:var(--m-accent-dark);font-size:0.72rem;font-weight:700;letter-spacing:0.08em;padding:0.35rem 0.7rem;text-transform:uppercase}
+    .credential-thumb{display:block;width:100%;margin-top:1.25rem;border-radius:1rem;overflow:hidden;border:1px solid rgba(125,157,156,0.2);background:white;transition:all 0.25s ease}
+    .credential-thumb:hover{transform:translateY(-2px);box-shadow:0 16px 32px -20px rgba(0,0,0,0.28)}
+    .credential-thumb img{width:100%;height:10rem;object-fit:cover;object-position:center}
     ::selection{background:var(--m-accent);color:white}
     button:focus-visible,a:focus-visible{outline:2px solid var(--m-accent);outline-offset:2px}
     .timeline-item{position:relative;padding-left:2.5rem}
@@ -51,7 +55,7 @@
       <a href="index.html" data-i18n="nav.home" class="hover:text-[var(--m-accent)] transition-colors">Home</a>
       <a href="index.html#services" data-i18n="nav.services" class="hover:text-[var(--m-accent)] transition-colors">Services</a>
       <a href="about.html" data-i18n="nav.about" class="text-[var(--m-accent)] font-semibold relative after:content-[''] after:absolute after:w-full after:h-0.5 after:bg-[var(--m-accent)] after:left-0 after:-bottom-1">About</a>
-      <a href="index.html#trust" data-i18n="nav.trust" class="hover:text-[var(--m-accent)] transition-colors">Trust</a>
+      <a href="#trust" data-i18n="nav.trust" class="hover:text-[var(--m-accent)] transition-colors">Trust</a>
       <a href="index.html#contact" data-i18n="nav.contact" class="hover:text-[var(--m-accent)] transition-colors">Contact</a>
     </nav>
     <div class="hidden md:flex lang-switch" aria-label="Language selector">
@@ -75,7 +79,7 @@
       <a href="index.html" data-i18n="nav.home" class="mobile-link hover:text-[var(--m-accent)]">Home</a>
       <a href="index.html#services" data-i18n="nav.services" class="mobile-link hover:text-[var(--m-accent)]">Services</a>
       <a href="about.html" data-i18n="nav.about" class="mobile-link text-[var(--m-accent)]">About</a>
-      <a href="index.html#trust" data-i18n="nav.trust" class="mobile-link hover:text-[var(--m-accent)]">Trust</a>
+      <a href="#trust" data-i18n="nav.trust" class="mobile-link hover:text-[var(--m-accent)]">Trust</a>
       <a href="index.html#contact" data-i18n="nav.contact" class="mobile-link hover:text-[var(--m-accent)]">Contact</a>
       <a href="https://book.1211.world" target="_blank" rel="noopener noreferrer" data-i18n="nav.bookStay" class="mobile-link text-[var(--m-accent)]">Book Stay</a>
     </div>
@@ -129,27 +133,53 @@
       </div>
     </div>
   </section>
-  <section class="mb-20 reveal">
+  <section id="trust" class="mb-20 reveal scroll-mt-28">
     <div class="glass rounded-3xl p-8 md:p-12 soft-shadow">
-      <div class="text-center mb-8">
-        <h2 data-i18n="licenses.title" class="text-2xl md:text-3xl font-semibold text-[var(--m-text-main)] en-font">施設ごとの許認可</h2>
-        <p data-i18n="licenses.copy" class="mt-3 text-sm md:text-base text-[var(--m-text-muted)] max-w-3xl mx-auto leading-relaxed">旅館業営業許可や住宅宿泊事業届出は施設単位の情報を含むため、会社トップページでは一覧化せず、必要に応じて施設ごとに確認できる形で管理します。</p>
+      <div class="text-center mb-10">
+        <span data-i18n="trust.badge" class="trust-badge">Trust & Licenses</span>
+        <h2 data-i18n="trust.title" class="mt-4 text-2xl md:text-3xl font-semibold text-[var(--m-text-main)] en-font">会社信頼情報</h2>
+        <p data-i18n="trust.copy" class="mt-3 text-sm md:text-base text-[var(--m-text-muted)] max-w-3xl mx-auto leading-relaxed">会社としての登録・会員情報と、施設ごとの許認可確認方針を明確にしています。公開ページでは必要な範囲に絞り、番号や証明画像は一部をマスクして掲載します。</p>
       </div>
-      <div class="grid md:grid-cols-3 gap-6">
-        <article class="license-card">
-          <h3 data-i18n="licenses.card1Title" class="font-bold text-[var(--m-text-main)] mb-3">トップページの掲載範囲</h3>
-          <p data-i18n="licenses.card1Body" class="text-sm text-[var(--m-text-muted)] leading-relaxed">トップページでは会社級・管理級の信頼情報を中心に掲載し、施設単位の証明書を過度に並べません。</p>
+      <div class="grid lg:grid-cols-2 gap-6">
+        <article class="trust-card">
+          <p data-i18n="trust.registrationLabel" class="text-xs font-semibold tracking-widest text-[var(--m-accent)] uppercase mb-3">Registration</p>
+          <h3 data-i18n="trust.registrationTitle" class="text-xl font-bold text-[var(--m-text-main)] mb-3">住宅宿泊管理業者登録</h3>
+          <p data-i18n="trust.registrationBody" class="text-sm text-[var(--m-text-muted)] leading-relaxed mb-5">当社は住宅宿泊管理業者として登録されており、公開ページでは登録番号の一部をマスクして表示しています。</p>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between gap-4 border-b border-gray-100 pb-2"><span data-i18n="trust.registrationNumberLabel" class="text-[var(--m-text-muted)]">登録番号</span><span data-i18n="trust.registrationNumber" class="font-medium text-right">国土交通大臣（01）第 F06***号</span></div>
+            <div class="flex justify-between gap-4 border-b border-gray-100 pb-2"><span data-i18n="trust.registrationDateLabel" class="text-[var(--m-text-muted)]">登録年月日</span><span data-i18n="trust.registrationDate" class="font-medium text-right">令和8年6月9日</span></div>
+            <div class="flex justify-between gap-4"><span data-i18n="trust.registrationValidityLabel" class="text-[var(--m-text-muted)]">登録の有効期間</span><span data-i18n="trust.registrationValidity" class="font-medium text-right">令和8年6月10日から令和13年6月9日まで</span></div>
+          </div>
+          <button type="button" class="credential-thumb" onclick="openCredentialLightbox('homepic/credentials/housing-registration-masked.jpg','住宅宿泊管理業者登録票')" aria-label="住宅宿泊管理業者登録票のマスク済み画像を表示">
+            <img src="homepic/credentials/housing-registration-masked.jpg" alt="住宅宿泊管理業者登録票のマスク済み縮略画像" loading="lazy" />
+          </button>
+          <p data-i18n="trust.viewImage" class="mt-3 text-xs text-[var(--m-text-muted)] text-center">マスク済み証明画像を確認</p>
         </article>
-        <article class="license-card">
-          <h3 data-i18n="licenses.card2Title" class="font-bold text-[var(--m-text-main)] mb-3">施設単位の管理</h3>
-          <p data-i18n="licenses.card2Body" class="text-sm text-[var(--m-text-muted)] leading-relaxed">許可種別、発行機関、番号、状態などは施設ごとに分けて管理します。</p>
-        </article>
-        <article class="license-card">
-          <h3 data-i18n="licenses.card3Title" class="font-bold text-[var(--m-text-main)] mb-3">公開情報の保護</h3>
-          <p data-i18n="licenses.card3Body" class="text-sm text-[var(--m-text-muted)] leading-relaxed">公開ページでは必要な情報に絞り、番号や証明書画像は必要に応じてマスク・圧縮して表示します。</p>
+        <article class="trust-card">
+          <p data-i18n="trust.cciLabel" class="text-xs font-semibold tracking-widest text-[var(--m-accent)] uppercase mb-3">Membership</p>
+          <h3 data-i18n="trust.cciTitle" class="text-xl font-bold text-[var(--m-text-main)] mb-3">東京商工会議所 2026年度会員</h3>
+          <p data-i18n="trust.cciBody" class="text-sm text-[var(--m-text-muted)] leading-relaxed mb-5">東京商工会議所の2026年度会員として、会社の信用情報を必要な範囲で掲載しています。</p>
+          <div class="space-y-3 text-sm">
+            <div class="flex justify-between gap-4 border-b border-gray-100 pb-2"><span data-i18n="trust.cciNumberLabel" class="text-[var(--m-text-muted)]">会員番号</span><span data-i18n="trust.cciNumber" class="font-medium text-right">C320****</span></div>
+            <div class="flex justify-between gap-4"><span data-i18n="trust.cciValidityLabel" class="text-[var(--m-text-muted)]">会籍期間</span><span data-i18n="trust.cciValidity" class="font-medium text-right">2027年3月まで</span></div>
+          </div>
+          <button type="button" class="credential-thumb" onclick="openCredentialLightbox('homepic/credentials/tokyo-cci-member-masked.jpg','東京商工会議所 2026年度会員証')" aria-label="東京商工会議所会員証のマスク済み画像を表示">
+            <img src="homepic/credentials/tokyo-cci-member-masked.jpg" alt="東京商工会議所2026年度会員証のマスク済み縮略画像" loading="lazy" />
+          </button>
+          <p data-i18n="trust.viewImage" class="mt-3 text-xs text-[var(--m-text-muted)] text-center">マスク済み証明画像を確認</p>
         </article>
       </div>
-    </div>
+      <article class="trust-card mt-6">
+        <p data-i18n="trust.facilityLabel" class="text-xs font-semibold tracking-widest text-[var(--m-accent)] uppercase mb-3">Facility Licenses</p>
+        <h3 data-i18n="trust.facilityTitle" class="text-xl font-bold text-[var(--m-text-main)] mb-3">施設ごとの許認可確認</h3>
+        <p data-i18n="trust.facilityBody" class="text-sm text-[var(--m-text-muted)] leading-relaxed">当社が運営・管理する各施設は、施設ごとに必要な旅館業営業許可または住宅宿泊事業届出等を取得・確認しています。施設単位の情報を含むため、会社トップページでは一覧化せず、必要に応じて施設ごとに確認できる形で管理します。</p>
+        <div class="grid md:grid-cols-3 gap-4 mt-6 text-sm text-[var(--m-text-muted)]">
+          <div data-i18n="trust.facilityPoint1" class="rounded-2xl bg-white/70 border border-gray-100 p-4">会社トップページでは施設単位の証明書を一覧化しません。</div>
+          <div data-i18n="trust.facilityPoint2" class="rounded-2xl bg-white/70 border border-gray-100 p-4">許可種別、発行機関、番号、状態は施設ごとに管理します。</div>
+          <div data-i18n="trust.facilityPoint3" class="rounded-2xl bg-white/70 border border-gray-100 p-4">公開時は必要情報に絞り、番号や画像はマスク・圧縮します。</div>
+        </div>
+      </article>
+      </div>
   </section>
   <section class="mb-20 reveal">
     <h2 data-i18n="journey.title" class="text-2xl md:text-3xl font-semibold text-[var(--m-text-main)] mb-10 text-center en-font">Our Journey</h2>
@@ -203,6 +233,10 @@
     </div>
   </footer>
 </main>
+<div id="credentialLightbox" class="fixed inset-0 bg-black/90 backdrop-blur-sm hidden items-center justify-center z-[60]" onclick="closeCredentialLightbox()">
+  <button class="absolute top-6 right-8 text-white/70 hover:text-white text-4xl transition focus:outline-none" onclick="closeCredentialLightbox()" aria-label="Close credential image">&times;</button>
+  <img id="credentialLightboxImg" src="" alt="" class="max-w-[88%] max-h-[86%] rounded-lg shadow-2xl border-4 border-white/10 transform scale-95 transition-transform duration-300 bg-white" onclick="event.stopPropagation()" />
+</div>
 <script>
   const translations={
     ja:{
@@ -211,7 +245,7 @@
       "story.title":"Brand Story","story.p1":"2018年の創業以来、<strong class=\"text-[var(--m-accent)]\">宿栖東京</strong>は実用性と美観のバランスを堅持し、サービス基準の継続的な最適化に努めてまいりました。","story.p2":"現在、当社の物件は<strong>新宿、渋谷、台東、墨田</strong>など東京の中心エリアに集中し、繁華街から伝統的な風情まで多様な地域をカバーしています。","story.p3":"プロジェクトのコストパフォーマンスを重視し、すべてのパートナー様に最適な投資収益率を提供することに尽力しております。","story.p4":"宿栖東京は、東京での旅における素朴な願いから始まり、東京滞在サービスのリーディングブランドへと成長しました。東京の中心部から出発点とし、「快適さ、細やかさ、多様性」という理念をすべての客室に反映させ、世界中の旅人にとっての「第二の我が家」を心を込めて創り上げています。",
       "company.title":"会社情報","company.nameLabel":"会社名","company.enLabel":"英文名","company.foundedLabel":"設立","company.officeLabel":"本社","company.office":"東京都墨田区","company.brandLabel":"ブランド",
       "business.title":"事業内容","business.item1":"民宿・旅館の運営管理","business.item2":"投資移民コンサルティング","business.item3":"自媒体運営（SNS・コンテンツマーケティング）","business.item4":"旅行関連サービス全般","business.item5":"オーダーメイド旅程企画","business.item6":"プロフェッショナル撮影サービス",
-      "licenses.title":"施設ごとの許認可","licenses.copy":"旅館業営業許可や住宅宿泊事業届出は施設単位の情報を含むため、会社トップページでは一覧化せず、必要に応じて施設ごとに確認できる形で管理します。","licenses.card1Title":"トップページの掲載範囲","licenses.card1Body":"トップページでは会社級・管理級の信頼情報を中心に掲載し、施設単位の証明書を過度に並べません。","licenses.card2Title":"施設単位の管理","licenses.card2Body":"許可種別、発行機関、番号、状態などは施設ごとに分けて管理します。","licenses.card3Title":"公開情報の保護","licenses.card3Body":"公開ページでは必要な情報に絞り、番号や証明書画像は必要に応じてマスク・圧縮して表示します。",
+      "trust.badge":"Trust & Licenses","trust.title":"会社信頼情報","trust.copy":"会社としての登録・会員情報と、施設ごとの許認可確認方針を明確にしています。公開ページでは必要な範囲に絞り、番号や証明画像は一部をマスクして掲載します。","trust.registrationLabel":"Registration","trust.registrationTitle":"住宅宿泊管理業者登録","trust.registrationBody":"当社は住宅宿泊管理業者として登録されており、公開ページでは登録番号の一部をマスクして表示しています。","trust.registrationNumberLabel":"登録番号","trust.registrationNumber":"国土交通大臣（01）第 F06***号","trust.registrationDateLabel":"登録年月日","trust.registrationDate":"令和8年6月9日","trust.registrationValidityLabel":"登録の有効期間","trust.registrationValidity":"令和8年6月10日から令和13年6月9日まで","trust.cciLabel":"Membership","trust.cciTitle":"東京商工会議所 2026年度会員","trust.cciBody":"東京商工会議所の2026年度会員として、会社の信用情報を必要な範囲で掲載しています。","trust.cciNumberLabel":"会員番号","trust.cciNumber":"C320****","trust.cciValidityLabel":"会籍期間","trust.cciValidity":"2027年3月まで","trust.viewImage":"マスク済み証明画像を確認","trust.facilityLabel":"Facility Licenses","trust.facilityTitle":"施設ごとの許認可確認","trust.facilityBody":"当社が運営・管理する各施設は、施設ごとに必要な旅館業営業許可または住宅宿泊事業届出等を取得・確認しています。施設単位の情報を含むため、会社トップページでは一覧化せず、必要に応じて施設ごとに確認できる形で管理します。","trust.facilityPoint1":"会社トップページでは施設単位の証明書を一覧化しません。","trust.facilityPoint2":"許可種別、発行機関、番号、状態は施設ごとに管理します。","trust.facilityPoint3":"公開時は必要情報に絞り、番号や画像はマスク・圧縮します。",
       "journey.title":"Our Journey","values.title":"Core Values","cta.title":"Ready to Experience Tokyo?","cta.copy":"私たちと一緒に、あなただけの東京体験を創りましょう。ご質問・ご予約はお気軽にお問い合わせください。","cta.contact":"Contact Us","cta.back":"Back to Home"
     },
     zh:{
@@ -220,10 +254,12 @@
       "story.title":"品牌故事","story.p1":"自2018年创业以来，<strong class=\"text-[var(--m-accent)]\">宿栖东京</strong>持续在实用性和美观之间取得平衡，不断优化住宿与服务标准。","story.p2":"目前，公司运营与管理的项目集中在<strong>新宿、涩谷、台东、墨田</strong>等东京核心区域，覆盖繁华商业区与传统街区。","story.p3":"我们重视项目性价比和长期运营质量，努力为合作伙伴提供更稳定的投资回报。","story.p4":"宿栖东京从旅客在东京停留时最真实的需求出发，逐步成长为东京住宿服务品牌。我们把舒适、细致和多样性落实到空间与服务细节中。",
       "company.title":"公司信息","company.nameLabel":"公司名","company.enLabel":"英文名","company.foundedLabel":"成立","company.officeLabel":"总部","company.office":"东京都墨田区","company.brandLabel":"品牌",
       "business.title":"业务内容","business.item1":"民宿与旅馆运营管理","business.item2":"投资移民咨询","business.item3":"自媒体运营（SNS 与内容营销）","business.item4":"旅行相关综合服务","business.item5":"定制行程策划","business.item6":"专业摄影服务",
-      "licenses.title":"各设施许可说明","licenses.copy":"旅馆业营业许可、住宅宿泊事业届出等通常包含具体设施信息，因此公司首页不集中堆放所有单房源证件，而是在需要时按设施分别确认和展示。","licenses.card1Title":"首页展示边界","licenses.card1Body":"首页展示公司级/管理级资质，不把所有单房源证件堆在主视觉或资质区。","licenses.card2Title":"按设施管理","licenses.card2Body":"每个设施的许可类型、发证机关、编号和状态按房源分别维护。","licenses.card3Title":"公开信息保护","licenses.card3Body":"公开页面只放必要信息，编号和证件图按需要打码或压缩展示。",
+      "trust.badge":"Trust & Licenses","trust.title":"公司资质与可信信息","trust.copy":"我们公开公司层面的登记和会员信息，并说明每个设施的许可确认原则。公开页面只展示必要范围，编号和证件图片均做部分打码。","trust.registrationLabel":"登记信息","trust.registrationTitle":"住宅宿泊管理业者登记","trust.registrationBody":"本公司已取得住宅宿泊管理业者登记，公开页面中仅以部分打码方式展示登记编号。","trust.registrationNumberLabel":"登记编号","trust.registrationNumber":"国土交通大臣（01）第 F06***号","trust.registrationDateLabel":"登记日期","trust.registrationDate":"令和8年6月9日","trust.registrationValidityLabel":"有效期间","trust.registrationValidity":"令和8年6月10日至令和13年6月9日","trust.cciLabel":"会员信息","trust.cciTitle":"东京商工会议所 2026年度会员","trust.cciBody":"作为东京商工会议所2026年度会员，我们在必要范围内展示公司信用信息。","trust.cciNumberLabel":"会员编号","trust.cciNumber":"C320****","trust.cciValidityLabel":"会籍期间","trust.cciValidity":"至2027年3月","trust.viewImage":"查看已打码证件图","trust.facilityLabel":"单房源许可","trust.facilityTitle":"各设施许可确认","trust.facilityBody":"本公司运营或管理的各设施，均按设施分别取得或确认所需的旅馆业营业许可、住宅宿泊事业届出等。由于这些信息通常包含具体设施内容，公司首页不集中堆放所有单房源证件，而是在需要时按设施分别确认和展示。","trust.facilityPoint1":"公司首页不集中展示所有单房源证件。","trust.facilityPoint2":"每个设施的许可类型、发证机关、编号和状态按房源分别维护。","trust.facilityPoint3":"公开时只放必要信息，编号和图片会打码、压缩展示。",
       "journey.title":"发展历程","values.title":"核心价值","cta.title":"准备好体验东京了吗？","cta.copy":"和我们一起设计属于您的东京体验。预订、咨询或合作需求，欢迎联系。","cta.contact":"联系我们","cta.back":"返回首页"
     }
   };
+  function openCredentialLightbox(src,alt){const lb=document.getElementById('credentialLightbox');const img=document.getElementById('credentialLightboxImg');img.src=src;img.alt=alt||'';lb.classList.remove('hidden');lb.classList.add('flex');setTimeout(()=>{img.classList.remove('scale-95');img.classList.add('scale-100')},50)}
+  function closeCredentialLightbox(){const lb=document.getElementById('credentialLightbox');const img=document.getElementById('credentialLightboxImg');if(!lb||lb.classList.contains('hidden'))return;img.classList.remove('scale-100');img.classList.add('scale-95');setTimeout(()=>{lb.classList.add('hidden');lb.classList.remove('flex');img.src=''},200)}
   function applyLanguage(lang){const pack=translations[lang]||translations.ja;document.documentElement.lang=lang==='zh'?'zh-Hans':'ja';document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;if(pack[key])el.innerHTML=pack[key]});document.querySelectorAll('[data-lang]').forEach(btn=>btn.classList.toggle('active',btn.dataset.lang===lang));localStorage.setItem('siteLanguage',lang)}
   const revealObserver=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('active')})},{threshold:0.1});
   document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
@@ -236,6 +272,7 @@
     document.querySelectorAll('.mobile-link').forEach(link=>{link.addEventListener('click',()=>{mobileMenu.classList.remove("open");menuBtn.classList.remove("menu-open");menuBtn.setAttribute('aria-expanded','false')})});
     window.addEventListener('scroll',()=>{const nav=document.getElementById('navbar');if(window.scrollY>50){nav.classList.add('shadow-sm')}else{nav.classList.remove('shadow-sm')}});
   });
+  document.addEventListener('keydown',(e)=>{if(e.key==='Escape')closeCredentialLightbox()});
 </script>
 </body>
 </html>
