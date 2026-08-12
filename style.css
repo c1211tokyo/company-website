@@ -349,6 +349,13 @@ html.js .reveal.active {
   list-style: disc;
 }
 
+@media (max-width: 767px) {
+  html[lang="ja"] [data-i18n="hero.line2"] {
+    font-size: clamp(1.45rem, 7.2vw, 1.875rem);
+    white-space: nowrap;
+  }
+}
+
 @media (max-width: 639px) {
   .toast {
     top: auto;
