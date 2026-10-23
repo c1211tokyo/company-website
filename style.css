@@ -184,7 +184,9 @@ html.js .reveal.active {
 
 .hero-logo-panel {
   box-shadow: 0 34px 70px -34px rgba(52, 57, 56, 0.58);
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(8px);
 }
 
 .trust-card {
@@ -392,3 +394,35 @@ html.js .reveal.active {
     transform: none;
   }
 }
+
+/* Preserve the source logo alpha and full-strength lettering. */
+.hero-logo-image { opacity: 1; }
+#navbar > div > a { min-width: 0; }
+#navbar > div > a > span:last-child { min-width: 0; }
+@media (max-width: 374px) {
+  #navbar > div { padding-inline: 1rem; }
+  #navbar > div > a { gap: 0.5rem; }
+  #navbar > div > a > span:last-child > span:first-child { font-size: 1rem; }
+}
+
+.brand-mark {
+  display: flex;
+  width: 3rem;
+  height: 3rem;
+  flex: 0 0 3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  background: var(--m-accent);
+  box-shadow: 0 4px 6px -1px rgba(52, 57, 56, 0.12);
+}
+.brand-mark img { display: block; width: 100%; height: 100%; object-fit: contain; }
+/* The component display rule must not override Tailwind's mobile visibility. */
+#navbar .lang-switch.hidden { display: none; }
+#navbar > div > a > span:last-child { white-space: nowrap; }
+#menu-btn { flex-shrink: 0; }
+@media (min-width: 1024px) {
+  #navbar .lang-switch.hidden { display: flex; }
+}
+#contact address > p:last-child { flex-wrap: wrap; }
+#contact [data-copy-target] { white-space: normal; text-align: left; }

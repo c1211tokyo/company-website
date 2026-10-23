@@ -24,30 +24,30 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css?v=20260812-2" />
-  <script src="site.js?v=20260812-2" defer></script>
+  <link rel="stylesheet" href="style.css?v=20261023-1" />
+  <script src="site.js?v=20261023-1" defer></script>
 </head>
 <body data-page="privacy" class="overflow-x-hidden antialiased">
   <a href="#main-content" class="skip-link" data-i18n="a11y.skip">本文へ移動</a>
 
   <header id="navbar" class="glass fixed top-0 z-40 w-full transition-smooth">
     <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-6">
-      <a href="index.html" class="group flex items-center gap-3" aria-label="1211 Co., Ltd. Home">
-        <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-[var(--m-accent)] text-lg font-bold tracking-tighter text-white shadow-md transition-transform duration-300 group-hover:rotate-6" aria-hidden="true">宿</span>
-        <span><span class="block text-lg font-bold tracking-wide text-[var(--m-text-main)] transition-colors group-hover:text-[var(--m-accent)]">1211 Co., Ltd.</span><span class="block text-[10px] uppercase tracking-widest text-[var(--m-text-muted)]">Design Your Tokyo</span></span>
+      <a href="index.html" class="group flex items-center gap-3" data-i18n-aria="a11y.home" aria-label="株式会社一二一一 ホーム">
+        <span class="brand-mark" aria-hidden="true"><img src="homepic/shukusei-logo-original.png?v=20261023-1" width="598" height="598" alt="" decoding="async" /></span>
+        <span><span class="block text-lg font-bold tracking-wide text-[var(--m-text-main)] transition-colors group-hover:text-[var(--m-accent)]" data-i18n="brand.company">株式会社一二一一</span><span class="block text-[10px] uppercase tracking-widest text-[var(--m-text-muted)]" data-i18n="brand.tagline">あなたらしい東京の滞在を</span></span>
       </a>
-      <nav class="hidden items-center gap-7 text-sm font-medium tracking-wide text-[var(--m-text-main)] lg:flex" aria-label="Primary navigation">
-        <a href="index.html" data-i18n="nav.home" class="transition-colors hover:text-[var(--m-accent)]">Home</a><a href="index.html#services" data-i18n="nav.services" class="transition-colors hover:text-[var(--m-accent)]">Services</a><a href="about.html" data-i18n="nav.about" class="transition-colors hover:text-[var(--m-accent)]">About</a><a href="index.html#contact" data-i18n="nav.contact" class="transition-colors hover:text-[var(--m-accent)]">Contact</a><a href="https://book.1211.world/" data-i18n="nav.book" class="rounded-full bg-[var(--m-text-main)] px-5 py-2.5 text-white transition-colors hover:bg-[var(--m-accent)]">Book</a>
+      <nav class="hidden items-center gap-7 text-sm font-medium tracking-wide text-[var(--m-text-main)] lg:flex" data-i18n-aria="a11y.primaryNav" aria-label="メインナビゲーション">
+        <a href="index.html" data-i18n="nav.home" class="transition-colors hover:text-[var(--m-accent)]">ホーム</a><a href="index.html#services" data-i18n="nav.services" class="transition-colors hover:text-[var(--m-accent)]">サービス</a><a href="about.html" data-i18n="nav.about" class="transition-colors hover:text-[var(--m-accent)]">会社概要</a><a href="index.html#contact" data-i18n="nav.contact" class="transition-colors hover:text-[var(--m-accent)]">お問い合わせ</a><a href="https://book.1211.world/" data-i18n="nav.book" class="rounded-full bg-[var(--m-text-main)] px-5 py-2.5 text-white transition-colors hover:bg-[var(--m-accent)]">宿泊予約</a>
       </nav>
       <div class="hidden lang-switch lg:flex" data-i18n-aria="a11y.language" aria-label="言語を選択"><button type="button" data-lang="ja" aria-pressed="true">日本語</button><button type="button" data-lang="zh" aria-pressed="false">中文</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
       <button id="menu-btn" type="button" class="menu-icon p-2 text-[var(--m-text-main)] lg:hidden" aria-controls="mobile-menu" aria-expanded="false" data-i18n-aria="a11y.menu" aria-label="メニューを開閉"><svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><line class="line-1" x1="4" y1="6" x2="20" y2="6" stroke-width="2" stroke-linecap="round" /><line class="line-2" x1="4" y1="12" x2="20" y2="12" stroke-width="2" stroke-linecap="round" /><line class="line-3" x1="4" y1="18" x2="20" y2="18" stroke-width="2" stroke-linecap="round" /></svg></button>
     </div>
-    <nav id="mobile-menu" class="border-b border-gray-100 bg-[var(--m-bg)] shadow-inner lg:hidden" aria-label="Mobile navigation"><div class="flex flex-col items-center gap-4 px-6 py-5 text-sm font-medium text-[var(--m-text-main)]"><div class="lang-switch" data-i18n-aria="a11y.language" aria-label="言語を選択"><button type="button" data-lang="ja" aria-pressed="true">日本語</button><button type="button" data-lang="zh" aria-pressed="false">中文</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div><a href="index.html" data-i18n="nav.home" class="hover:text-[var(--m-accent)]">Home</a><a href="index.html#services" data-i18n="nav.services" class="hover:text-[var(--m-accent)]">Services</a><a href="about.html" data-i18n="nav.about" class="hover:text-[var(--m-accent)]">About</a><a href="index.html#contact" data-i18n="nav.contact" class="hover:text-[var(--m-accent)]">Contact</a><a href="https://book.1211.world/" data-i18n="nav.book" class="rounded-full bg-[var(--m-text-main)] px-7 py-2.5 text-white">Book</a></div></nav>
+    <nav id="mobile-menu" class="border-b border-gray-100 bg-[var(--m-bg)] shadow-inner lg:hidden" data-i18n-aria="a11y.mobileNav" aria-label="モバイルナビゲーション"><div class="flex flex-col items-center gap-4 px-6 py-5 text-sm font-medium text-[var(--m-text-main)]"><div class="lang-switch" data-i18n-aria="a11y.language" aria-label="言語を選択"><button type="button" data-lang="ja" aria-pressed="true">日本語</button><button type="button" data-lang="zh" aria-pressed="false">中文</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div><a href="index.html" data-i18n="nav.home" class="hover:text-[var(--m-accent)]">ホーム</a><a href="index.html#services" data-i18n="nav.services" class="hover:text-[var(--m-accent)]">サービス</a><a href="about.html" data-i18n="nav.about" class="hover:text-[var(--m-accent)]">会社概要</a><a href="index.html#contact" data-i18n="nav.contact" class="hover:text-[var(--m-accent)]">お問い合わせ</a><a href="https://book.1211.world/" data-i18n="nav.book" class="rounded-full bg-[var(--m-text-main)] px-7 py-2.5 text-white">宿泊予約</a></div></nav>
   </header>
 
   <main id="main-content" tabindex="-1" class="mx-auto max-w-5xl px-5 pb-20 pt-32 md:px-6">
     <section class="reveal text-center">
-      <span data-i18n="privacy.badge" class="mb-4 inline-block rounded-full bg-[rgba(86,118,116,0.12)] px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[var(--m-accent-dark)]">Privacy</span>
+      <span data-i18n="privacy.badge" class="mb-4 inline-block rounded-full bg-[rgba(86,118,116,0.12)] px-3 py-1 text-xs font-semibold uppercase tracking-widest text-[var(--m-accent-dark)]">個人情報の取扱い</span>
       <h1 data-i18n="privacy.title" class="en-font text-4xl font-bold text-[var(--m-text-main)] md:text-5xl">プライバシーポリシー</h1>
       <p data-i18n="privacy.lead" class="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-[var(--m-text-muted)] md:text-lg">株式会社一二一一は、当ウェブサイトとお問い合わせフォームで取得する個人情報を、以下の方針に基づいて取り扱います。</p>
       <p class="mt-4 text-xs text-[var(--m-text-muted)]"><span data-i18n="privacy.updatedLabel">制定・最終更新</span>：<time datetime="2026-08-12" data-i18n="privacy.updated">2026年8月12日</time></p>
@@ -66,7 +66,7 @@
       <section><h2 data-i18n="privacy.s10Title">10. 方針の変更</h2><p data-i18n="privacy.s10Body">法令、サービス内容または取扱状況の変更に応じて本方針を見直すことがあります。重要な変更がある場合は、本ページでお知らせします。</p></section>
     </article>
 
-    <footer class="mt-20 border-t border-gray-200 pt-8 text-center md:text-left"><div class="mx-auto flex flex-col items-center justify-between gap-4 md:flex-row"><div><p class="font-bold text-[var(--m-text-main)]">株式会社一二一一</p><p class="mt-1 text-xs text-[var(--m-text-muted)]">© <span data-current-year>2026</span> 1211 Co., Ltd. All Rights Reserved.</p></div><div class="flex items-center gap-4 text-xs text-[var(--m-text-muted)]"><a href="privacy.html" aria-current="page" data-i18n="footer.privacy" class="font-semibold text-[var(--m-accent-dark)]">プライバシーポリシー</a><span data-i18n="footer.designed">Designed for Tokyo</span></div></div></footer>
+    <footer class="mt-20 border-t border-gray-200 pt-8 text-center md:text-left"><div class="mx-auto flex flex-col items-center justify-between gap-4 md:flex-row"><div><p class="font-bold text-[var(--m-text-main)]" data-i18n="brand.company">株式会社一二一一</p><p class="mt-1 text-xs text-[var(--m-text-muted)]">© <span data-current-year>2026</span> <span data-i18n="brand.company">株式会社一二一一</span> <span data-i18n="footer.rights">すべての権利を保有します。</span></p></div><div class="flex items-center gap-4 text-xs text-[var(--m-text-muted)]"><a href="privacy.html" aria-current="page" data-i18n="footer.privacy" class="font-semibold text-[var(--m-accent-dark)]">プライバシーポリシー</a><span data-i18n="footer.designed">東京での滞在をデザイン</span></div></div></footer>
   </main>
 </body>
 </html>
