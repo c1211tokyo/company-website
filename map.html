@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>エリアマップ | 株式会社一二一一</title>
+  <meta name="description" content="東京のエリアと宿泊施設周辺を地図でご覧いただけます。" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://1211.world/map.html" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="homepic/apple-touch-icon.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="エリアマップ | 株式会社一二一一" />
+  <meta property="og:description" content="東京のエリアと宿泊施設周辺を地図でご覧いただけます。" />
+  <meta property="og:url" content="https://1211.world/map.html" />
+  <meta property="og:site_name" content="株式会社一二一一 | 1211 Co., Ltd." />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:image" content="https://1211.world/homepic/og-1211.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://1211.world/homepic/og-1211.jpg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css?v=20261025-map-1" />
+  <script src="site.js?v=20261025-map-1" defer></script>
+</head>
+<body data-page="map" class="overflow-x-hidden antialiased">
+  <a href="#main-content" class="skip-link" data-i18n="a11y.skip">本文へ移動</a>
+
+  <header id="navbar" class="glass fixed top-0 z-40 w-full transition-smooth">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-6">
+      <a href="index.html" class="group flex items-center gap-3" data-i18n-aria="a11y.home" aria-label="株式会社一二一一 ホーム">
+        <span class="brand-mark" aria-hidden="true"><img src="homepic/shukusei-logo-original.png?v=20261023-1" width="598" height="598" alt="" decoding="async" /></span>
+        <span><span class="block text-lg font-bold tracking-wide text-[var(--m-text-main)] transition-colors group-hover:text-[var(--m-accent)]" data-i18n="brand.company">株式会社一二一一</span><span class="block text-[10px] uppercase tracking-widest text-[var(--m-text-muted)]" data-i18n="brand.tagline">あなたらしい東京の滞在を</span></span>
+      </a>
+      <nav class="hidden items-center gap-7 text-sm font-medium tracking-wide text-[var(--m-text-main)] lg:flex" data-i18n-aria="a11y.primaryNav" aria-label="メインナビゲーション">
+        <a href="index.html" data-i18n="nav.home" class="transition-colors hover:text-[var(--m-accent)]">ホーム</a><a href="index.html#services" data-i18n="nav.services" class="transition-colors hover:text-[var(--m-accent)]">サービス</a><a href="about.html" data-i18n="nav.about" class="transition-colors hover:text-[var(--m-accent)]">会社概要</a><a href="map.html" aria-current="page" data-i18n="nav.map" class="transition-colors hover:text-[var(--m-accent)]">エリアマップ</a><a href="index.html#contact" data-i18n="nav.contact" class="transition-colors hover:text-[var(--m-accent)]">お問い合わせ</a><a href="https://book.1211.world/" data-i18n="nav.book" class="rounded-full bg-[var(--m-text-main)] px-5 py-2.5 text-white transition-colors hover:bg-[var(--m-accent)]">宿泊予約</a>
+      </nav>
+      <div class="hidden lang-switch lg:flex" data-i18n-aria="a11y.language" aria-label="言語を選択"><button type="button" data-lang="ja" aria-pressed="true">日本語</button><button type="button" data-lang="zh" aria-pressed="false">中文</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+      <button id="menu-btn" type="button" class="menu-icon p-2 text-[var(--m-text-main)] lg:hidden" aria-controls="mobile-menu" aria-expanded="false" data-i18n-aria="a11y.menu" aria-label="メニューを開閉"><svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><line class="line-1" x1="4" y1="6" x2="20" y2="6" stroke-width="2" stroke-linecap="round" /><line class="line-2" x1="4" y1="12" x2="20" y2="12" stroke-width="2" stroke-linecap="round" /><line class="line-3" x1="4" y1="18" x2="20" y2="18" stroke-width="2" stroke-linecap="round" /></svg></button>
+    </div>
+    <nav id="mobile-menu" class="border-b border-gray-100 bg-[var(--m-bg)] shadow-inner lg:hidden" data-i18n-aria="a11y.mobileNav" aria-label="モバイルナビゲーション"><div class="flex flex-col items-center gap-4 px-6 py-5 text-sm font-medium text-[var(--m-text-main)]"><div class="lang-switch" data-i18n-aria="a11y.language" aria-label="言語を選択"><button type="button" data-lang="ja" aria-pressed="true">日本語</button><button type="button" data-lang="zh" aria-pressed="false">中文</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div><a href="index.html" data-i18n="nav.home" class="hover:text-[var(--m-accent)]">ホーム</a><a href="index.html#services" data-i18n="nav.services" class="hover:text-[var(--m-accent)]">サービス</a><a href="about.html" data-i18n="nav.about" class="hover:text-[var(--m-accent)]">会社概要</a><a href="map.html" aria-current="page" data-i18n="nav.map" class="transition-colors hover:text-[var(--m-accent)]">エリアマップ</a><a href="index.html#contact" data-i18n="nav.contact" class="hover:text-[var(--m-accent)]">お問い合わせ</a><a href="https://book.1211.world/" data-i18n="nav.book" class="rounded-full bg-[var(--m-text-main)] px-7 py-2.5 text-white">宿泊予約</a></div></nav>
+  </header>
+
+  <main id="main-content" tabindex="-1" class="map-page">
+    <section aria-labelledby="map-heading">
+      <div class="map-toolbar">
+        <h1 id="map-heading" data-i18n="map.title">エリアマップ</h1>
+        <a data-map-link href="https://map.1211.world/?lang=ja" target="_blank" rel="noopener noreferrer" data-i18n="map.open">別ウィンドウで開く ↗</a>
+      </div>
+      <iframe id="area-map" data-map-frame title="エリアマップ" aria-label="エリアマップ" data-i18n-aria="map.title" referrerpolicy="strict-origin-when-cross-origin" allow="fullscreen" allowfullscreen></iframe>
+      <p class="map-help" data-i18n="map.help">地図が表示されない場合は、別ウィンドウで開いてください。</p>
+      <noscript><p><a href="https://map.1211.world/?lang=ja" target="_blank" rel="noopener noreferrer">地図を開く / 打开地图 / Open map ↗</a></p></noscript>
+    </section>
+  </main>
+</body>
+</html>

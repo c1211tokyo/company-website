@@ -6,6 +6,13 @@
 
   const translations = {
     ja: {
+      "nav.map": "エリアマップ",
+      "meta.map.title": "エリアマップ | 株式会社一二一一",
+      "meta.map.description": "東京のエリアと宿泊施設周辺を地図でご覧いただけます。",
+      "map.title": "エリアマップ",
+      "map.open": "別ウィンドウで開く ↗",
+      "map.help": "地図が表示されない場合は、別ウィンドウで開いてください。",
+
       "meta.home.title": "株式会社一二一一 | 宿栖東京 — 東京の宿泊運営・旅行サービス",
       "meta.home.description": "株式会社一二一一は、宿栖東京ブランドを通じて、東京の宿泊施設運営、ゲスト・旅行支援、メディア・事業支援を行っています。",
       "meta.about.title": "会社概要 | 株式会社一二一一 — 宿栖東京",
@@ -201,6 +208,13 @@
       "a11y.mobileNav": "モバイルナビゲーション"
     },
     zh: {
+      "nav.map": "地图",
+      "meta.map.title": "地图 | 株式会社一二一一",
+      "meta.map.description": "通过地图浏览东京区域与住宿周边。",
+      "map.title": "地图",
+      "map.open": "在新窗口打开 ↗",
+      "map.help": "如地图无法显示，请在新窗口打开。",
+
       "meta.home.title": "株式会社一二一一 | 宿栖东京 — 东京住宿运营与旅行服务",
       "meta.home.description": "株式会社一二一一通过宿栖东京品牌，提供东京住宿设施运营、旅客与旅行支持，以及媒体和商务协作服务。",
       "meta.about.title": "公司概要 | 株式会社一二一一 — 宿栖东京",
@@ -396,6 +410,13 @@
       "a11y.mobileNav": "手机导航"
     },
     en: {
+      "nav.map": "Map",
+      "meta.map.title": "Map | 1211 Co., Ltd.",
+      "meta.map.description": "Explore Tokyo areas and the surroundings of our accommodation on the map.",
+      "map.title": "Map",
+      "map.open": "Open in new window ↗",
+      "map.help": "If the map does not appear, open it in a new window.",
+
       "meta.home.title": "1211 Co., Ltd. | Shukusei Tokyo — Stays and Travel Services",
       "meta.home.description": "1211 Co., Ltd. operates Shukusei Tokyo, supporting accommodation operations, guest travel, media, and business collaboration across Tokyo.",
       "meta.about.title": "About | 1211 Co., Ltd. — Shukusei Tokyo",
@@ -660,6 +681,21 @@
     });
     document.querySelector('meta[property="og:locale"]')?.setAttribute("content", { ja: "ja_JP", zh: "zh_CN", en: "en_US" }[lang]);
 
+    // Only the dedicated map page has a frame; other pages never request the map.
+    document.querySelectorAll('[data-i18n="nav.map"]').forEach((link) => {
+      link.setAttribute("href", `map.html?lang=${lang}`);
+    });
+    const mapFrame = document.querySelector("[data-map-frame]");
+    if (mapFrame) {
+      const mapUrl = `https://map.1211.world/?lang=${lang}`;
+      mapFrame.title = getTranslation("map.title", lang);
+      if (mapFrame.getAttribute("src") !== mapUrl) mapFrame.src = mapUrl;
+      document.querySelectorAll("[data-map-link]").forEach((link) => { link.href = mapUrl; });
+      const pageUrl = new URL(window.location.href);
+      pageUrl.searchParams.set("lang", lang);
+      window.history.replaceState(null, "", pageUrl);
+    }
+
     if (options.persist !== false) {
       try {
         localStorage.setItem(LANGUAGE_KEY, lang);
@@ -873,7 +909,8 @@
 
   document.documentElement.classList.add("js");
   document.addEventListener("DOMContentLoaded", () => {
-    applyLanguage(getStoredLanguage(), { persist: false });
+    const mapLanguage = document.body.dataset.page === "map" ? new URLSearchParams(window.location.search).get("lang") : null;
+    applyLanguage(SUPPORTED_LANGUAGES.includes(mapLanguage) ? mapLanguage : getStoredLanguage());
     setupLanguageSwitches();
     setupMenu();
     setupNavbar();
